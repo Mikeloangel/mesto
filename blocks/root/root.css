@@ -6,24 +6,11 @@
     --coloron-primary: #fff;
     --coloron-primary-low: #545454;
 
-    /* ##  control colors */    
-
-    /* ### button */
-    --color-btn-active: #000;
-    --color-btn-hover: #000; /*now uses opacity .8 */
-    --color-btn-disabled: #000; /*now undefined in project*/
-
-    /* ### input */
-    --color-input-bg: #fff;
-    --color-input-border: #000; /* opacity .2  */
-    --color-input-typo: #000;
-    --color-input-typo-placeholder: #000; /* some gray */
-    --color-input-border-focused: #000; /* probably some gray too  */ 
-
-    /* other global variables */
+    /* ## other global variables */
     --hover-transition: all ease 500ms;
 
     background-color: var(--color-primary);
+    
     width: 100%;
     min-height: 100vh;
     margin: 0;

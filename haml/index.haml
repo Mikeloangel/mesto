@@ -27,9 +27,8 @@
           %img.section-bio__upic{:src => "./images/upic-#{uinfo['uid']}.jpg", :alt => "#{uinfo['uname']}"}
           .section-bio__uinfo
             .section-bio__uname-container 
-              %h1.section-bio__uname
-                #{uinfo['uname']}              
-              %img.btn__edit.section-bio__edit{:src => "./images/btn-edit.svg", :alt => "Редактировать профиль"}
+              %h1.section-bio__uname #{uinfo['uname']}              
+              %img.btn-edit.section-bio__edit{:src => "./images/btn-edit.svg", :alt => "Редактировать профиль"}
             %p.section-bio__udescription #{uinfo['description']}
           .section-bio__uactions
             .btn-plus
@@ -58,4 +57,4 @@
               %input.popup__form-input{:id => "form__name", :value => "", :placeholder => "Представься, путешественник" }
               %input.popup__form-input{:id => "form__desctiption", :value => "", :placeholder => "Что влечет тебя к движению?" }
               %button.popup__form-submit{:type => "submit"} Сохранить
-  %script(src="./app.js")
+    %script(src="./index.js")
