@@ -4,8 +4,10 @@
 
 * Figma
 * Картинки
-* HAML для генерации семантического HTML
+* HTML
+    * HAML
 * CSS
+    * CSS variables
 
 **Figma**
 

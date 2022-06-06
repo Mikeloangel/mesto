@@ -19,7 +19,14 @@
 @import url(../blocks/place/__title/place__title.css);
 @import url(../blocks/place/__actions/place__actions.css);
 
-
+@import url(../blocks/popup/poopup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__content/popup__content.css);
+@import url(../blocks/popup/__btn-close/popup__btn-close.css);
+@import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__form/popup__form.css);
+@import url(../blocks/popup/__form-input/popup__form-input.css);
+@import url(../blocks/popup/__submit/popup__submit.css);
 
  /* 3.0 Sections css files */
  /*  SECTION: HEADER  */

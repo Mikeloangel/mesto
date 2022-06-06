@@ -1,0 +1,23 @@
+.popup__form-submit{
+    --text-color: var(--coloron-primary, #456);
+    --bg-color: var(--color-primary, #111);
+
+    width: 100%;
+    padding: 14px 0 14px 0;
+    box-sizing: border-box;
+    border: none;
+    margin: 0;
+    margin-top: 48px;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    font-size: 18px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+@media screen and (max-width:555px) {
+    .popup__form-submit{
+        margin-top: 44px;
+        font-size: 14px;
+    }    
+}
