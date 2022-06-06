@@ -36,9 +36,14 @@
 @import url(../blocks/section-bio/__uname-container/section-bio__uname-container.css);
 @import url(../blocks/section-bio/__edit/section-bio__edit.css);
 
+/*   SECTION: USER GALLERY*/
 @import url(../blocks/section-gallery/section-gallery.css);
 @import url(../blocks/section-gallery/__grid/section-gallery__grid.css);
 
+
+/*   SECTION: FOOTER*/
+@import url(../blocks/section-footer/section-footer.css);
+@import url(../blocks/section-footer/__copyright/section-footer__copyright.css);
 
 
 /* *{box-shadow: inset 0 0 2px #a66;} */
