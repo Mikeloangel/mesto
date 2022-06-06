@@ -1,0 +1,12 @@
+.section-bio__upic{
+    max-width: 120px;
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 425px) {
+    .section-bio__upic{
+        margin-bottom: 26px;
+    }
+}

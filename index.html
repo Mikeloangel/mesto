@@ -18,13 +18,15 @@
       <section class='section section-bio'>
         <img alt='Жак-Ив Кусто' class='section-bio__upic' src='./images/upic-1.jpg'>
         <div class='section-bio__uinfo'>
-          <h1 class='section-bio__uname'>
-            Жак-Ив Кусто
-            <img alt='Редактировать профиль' class='btn__edit' src='./images/btn-edit.svg'>
-          </h1>
+          <div class='section-bio__uname-container'>
+            <h1 class='section-bio__uname'>
+              Жак-Ив Кусто
+            </h1>
+            <img alt='Редактировать профиль' class='btn__edit section-bio__edit' src='./images/btn-edit.svg'>
+          </div>
           <p class='section-bio__udescription'>Исследователь океана</p>
         </div>
-        <div class='section-bio__ubtnaddpost'>
+        <div class='section-bio__uactions'>
           <div class='btn-plus'></div>
         </div>
       </section>
@@ -115,7 +117,7 @@
       <p class='section-footer__copyright'>&copy; 2022 Mesto Russia X Варушичев Михаил</p>
     </footer>
   </div>
-  <!-- <div class='popup'>
+  <div class='popup'>
     <div class='popup__close'>
       <div class='btn-close'>
         <div class='btn-close__bar'></div>
@@ -130,7 +132,7 @@
         <button class='form__submit' type='submit'>Сохранить</button>
       </div>
     </div>
-  </div> -->
+  </div>
 </body>
 <script src='./app.js'></script>
 

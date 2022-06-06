@@ -1,0 +1,43 @@
+.btn-plus{
+    --border-color: var(--coloron-primary, #555);
+    --transition: var(--hover-transition, all ease 1s);
+
+    display: inline-block;    
+    width: 100%;    
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    height: 50px;
+    border: 2px solid var(--border-color);
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+}
+
+.btn-plus:hover{
+    opacity: .6;
+}
+
+.btn-plus::before{
+    --border-color: var(--coloron-primary-low, #555);
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 22px;
+    height: 1px;
+    background-color: var(--border-color);
+}
+
+.btn-plus::after{
+    --border-color: var(--coloron-primary-low, #555);
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) rotate(90deg);
+    width: 22px;
+    height: 1px;
+    background-color: var(--border-color);
+}

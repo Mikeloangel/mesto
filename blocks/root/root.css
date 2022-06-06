@@ -25,6 +25,8 @@
     --color-input-typo-placeholder: #000; /* some gray */
     --color-input-border-focused: #000; /* probably some gray too  */ 
 
+    /* other global variables */
+    --hover-transition: all ease 500ms;
 
     background-color: var(--color-primary);
     width: 100%;
@@ -32,4 +34,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
 }

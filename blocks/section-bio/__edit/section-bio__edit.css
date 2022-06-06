@@ -1,0 +1,11 @@
+.section-bio__edit{
+    padding-top: 12px;
+    align-self: flex-start;
+}
+
+@media screen and (max-width: 425px) {
+    .section-bio__edit{
+        width: 18px;
+        padding-top: 6px;
+    }    
+}

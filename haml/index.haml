@@ -26,11 +26,12 @@
         %section.section.section-bio
           %img.section-bio__upic{:src => "./images/upic-#{uinfo['uid']}.jpg", :alt => "#{uinfo['uname']}"}
           .section-bio__uinfo
-            %h1.section-bio__uname
-              #{uinfo['uname']}              
-              %img.btn__edit{:src => "./images/btn-edit.svg", :alt => "Редактировать профиль"}
+            .section-bio__uname-container 
+              %h1.section-bio__uname
+                #{uinfo['uname']}              
+              %img.btn__edit.section-bio__edit{:src => "./images/btn-edit.svg", :alt => "Редактировать профиль"}
             %p.section-bio__udescription #{uinfo['description']}
-          .section-bio__ubtnaddpost
+          .section-bio__uactions
             .btn-plus
         %section.section.section-gallery
           %ul.section-gallery-grid
