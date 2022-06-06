@@ -9,7 +9,8 @@
     font-size: 42px;
     line-height: 1.15;
     
-    max-width:12ch;
+    /* max-width:12ch; */
+    width:  fit-content;
     text-overflow:ellipsis; 
     overflow: hidden;
     /* white-space: nowrap; */
