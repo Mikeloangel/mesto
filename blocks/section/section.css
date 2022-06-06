@@ -4,17 +4,22 @@
     padding: 0;
     box-sizing: border-box;
 }
-   
+/*   
+@media screen and (max-width: 1279px) {
+    .section{
+        width: calc(100% - 23vw);
+    }        
+} */
 
 @media screen and (max-width: 1024px) {
     .section{
-        width: calc(100% - 30vw);
+        width: calc(100% - 20vw);
     }        
 }
 
 @media screen and (max-width: 760px) {
     .section{
-        width: calc(100% - 20vw);
+        width: calc(100% - 15vw);
     }        
 }
 

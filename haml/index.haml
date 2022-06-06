@@ -34,9 +34,9 @@
           .section-bio__uactions
             .btn-plus
         %section.section.section-gallery
-          %ul.section-gallery-grid
+          %ul.section-gallery__grid
             - places.each do |item|
-              %li.section-gallery-item
+              %li.section-gallery__item
                 %article.place
                   %figure.place__figure
                     %img.place__img{:src => "./images/ugallery-#{item['id']}.jpg", :alt => "#{item['text']}"}
@@ -44,9 +44,9 @@
                     %h2.place__title #{item['text']}
                     .place__actions
                       - if item['rating'] == 0
-                        .btn-like
+                        %img.btn-like{:src => "./images/btn-like.svg", :alt => "Лайк!"}
                       - else
-                        .btn-like.btn-like-active
+                        %img.btn-like.btn-like-active{:src => "./images/btn-like-active.svg", :alt => "Уже нравится!"}
       %footer.section.section-footer
         %p.section-footer__copyright &copy; 2022 Mesto Russia X Варушичев Михаил
     .popup

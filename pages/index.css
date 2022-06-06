@@ -10,6 +10,15 @@
 @import url(../blocks/btn-edit/btn-edit.css);
 @import url(../blocks/btn-plus/btn-plus.css);
 
+@import url(../blocks/btn-like/btn-like.css);
+
+@import url(../blocks/place/place.css);
+@import url(../blocks/place/__figure/place__figure.css);
+@import url(../blocks/place/__img/place__img.css);
+@import url(../blocks/place/__body/place__body.css);
+@import url(../blocks/place/__title/place__title.css);
+@import url(../blocks/place/__actions/place__actions.css);
+
 
 
  /* 3.0 Sections css files */
@@ -26,6 +35,9 @@
 @import url(../blocks/section-bio/__uactions/section-bio__uactions.css);
 @import url(../blocks/section-bio/__uname-container/section-bio__uname-container.css);
 @import url(../blocks/section-bio/__edit/section-bio__edit.css);
+
+@import url(../blocks/section-gallery/section-gallery.css);
+@import url(../blocks/section-gallery/__grid/section-gallery__grid.css);
 
 
 

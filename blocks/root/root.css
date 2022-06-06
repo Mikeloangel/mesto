@@ -7,11 +7,6 @@
     --coloron-primary-low: #545454;
 
     /* ##  control colors */    
-    /* ### like */
-    /* probably needs to be removed */
-    --color-like-normal: #000;
-    --color-like-hover: #000; /*now uses opacity .5 */
-    --color-like-active: #000;
 
     /* ### button */
     --color-btn-active: #000;

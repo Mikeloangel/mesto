@@ -19,5 +19,6 @@
 @media screen and (max-width: 425px) {
     .section-bio{
         gap: 0;
+        padding: 40px 0 30px 0;
     }
 }

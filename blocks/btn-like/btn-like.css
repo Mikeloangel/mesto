@@ -1,0 +1,14 @@
+.btn-like{
+    --transition: var(--hover-transition, 'all 1s linear');
+
+    padding: 0;
+    margin: 0;
+    max-width:22px;
+    height: auto;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-like:hover{
+    opacity: .5;
+}
