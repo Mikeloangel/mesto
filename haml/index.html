@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang='ru'>
+<head>
+<meta charset='UTF-8'>
+<meta content='IE=edge' http='X-UA-Compatible'>
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<link href='./pages/index.css' rel='stylesheet'>
+<title>Mesto Russia</title>
+</head>
+<body>
+<div class='page'>
+<header class='section section-header'>
+<div class='header__logo'></div>
+</header>
+<main class='main'>
+<section class='section section-bio'>
+<img alt='Жак-Ив Кусто' class='section-bio__upic' src='./images/upic-.jpg'>
+<div class='section-bio__uinfo'>
+<h1 class='section-bio__uname'>
+Жак-Ив Кусто
+<img alt='Редактировать профиль' class='btn__edit' src='./images/btn-edit.svg'>
+</h1>
+<p class='section-bio__udescription'>Исследователь океана</p>
+</div>
+<div class='section-bio__ubtnaddpost'>
+<div class='btn-plus animate-increase' onClick='OpenPopUp(&#39;PostAdd&#39;)'>
+<div class='btn-plus__element'></div>
+<div class='btn-plus__element-rotate'></div>
+</div>
+</div>
+</section>
+<section class='section section-gallery'>
+<ul class='section-gallery-grid'>
+<li class='section-gallery-item'>
+<article class='place animate-increase'>
+<figure class='place__figure'>
+<img alt='Карачаевск' class='place__img' src='./images/ugallery-1.jpg'>
+</figure>
+<div class='place__body'>
+<h2 class='place__title'>Карачаевск</h2>
+<div class='place__actions'>
+<div class='btn-like animate-increase'></div>
+</div>
+</div>
+</article>
+</li>
+<li class='section-gallery-item'>
+<article class='place animate-increase'>
+<figure class='place__figure'>
+<img alt='Гора Эльбрус' class='place__img' src='./images/ugallery-2.jpg'>
+</figure>
+<div class='place__body'>
+<h2 class='place__title'>Гора Эльбрус</h2>
+<div class='place__actions'>
+<div class='btn-like animate-increase'></div>
+</div>
+</div>
+</article>
+</li>
+<li class='section-gallery-item'>
+<article class='place animate-increase'>
+<figure class='place__figure'>
+<img alt='Домбай' class='place__img' src='./images/ugallery-3.jpg'>
+</figure>
+<div class='place__body'>
+<h2 class='place__title'>Домбай</h2>
+<div class='place__actions'>
+<div class='btn-like animate-increase'></div>
+</div>
+</div>
+</article>
+</li>
+<li class='section-gallery-item'>
+<article class='place animate-increase'>
+<figure class='place__figure'>
+<img alt='Гора Эльбрус' class='place__img' src='./images/ugallery-4.jpg'>
+</figure>
+<div class='place__body'>
+<h2 class='place__title'>Гора Эльбрус</h2>
+<div class='place__actions'>
+<div class='btn-like btn-like-active animate-increase'></div>
+</div>
+</div>
+</article>
+</li>
+<li class='section-gallery-item'>
+<article class='place animate-increase'>
+<figure class='place__figure'>
+<img alt='Домбай' class='place__img' src='./images/ugallery-5.jpg'>
+</figure>
+<div class='place__body'>
+<h2 class='place__title'>Домбай</h2>
+<div class='place__actions'>
+<div class='btn-like btn-like-active animate-increase'></div>
+</div>
+</div>
+</article>
+</li>
+<li class='section-gallery-item'>
+<article class='place animate-increase'>
+<figure class='place__figure'>
+<img alt='Карачаево-Черкесск' class='place__img' src='./images/ugallery-6.jpg'>
+</figure>
+<div class='place__body'>
+<h2 class='place__title'>Карачаево-Черкесск</h2>
+<div class='place__actions'>
+<div class='btn-like animate-increase'></div>
+</div>
+</div>
+</article>
+</li>
+</ul>
+</section>
+</main>
+<footer class='section section-footer'>
+<p class='section-footer__copyright'>&copy; 2022 Mesto Russia X Варушичев Михаил</p>
+</footer>
+</div>
+<div class='popup'>
+<div class='popup__close'>
+<div class='btn-close animate-disapear'>
+<div class='btn-close__bar animate-rotate'></div>
+<div class='btn-close__bar_reverse animate-rotate_reverse'></div>
+</div>
+</div>
+<div class='popup__content'>
+<div action='UserUpdate()' class='form-uedit' method='GET'>
+<input class='form__input' id='form__name' placeholder='Представься, путешественник' value='Жак-Ив Кусто'>
+<input class='form__input' id='form__desctiption' placeholder='Что влечет тебя?' value='Жак-Ив Кусто'>
+<button class='form__submit animate-increase' type='submit'>Сохранить</button>
+</div>
+</div>
+</div>
+</body>
+<script src='./script.js'></script>
+</html>

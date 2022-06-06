@@ -1,0 +1,61 @@
+:ruby
+  uinfo = {'uid' => 1, 'uname' => 'Жак-Ив Кусто', 'description' => 'Исследователь океана'}
+
+  places = [
+    {'id' => '1', 'text' => 'Карачаевск', 'rating' => 0},
+    {'id' => '2', 'text' => 'Гора Эльбрус', 'rating' => 0},
+    {'id' => '3', 'text' => 'Домбай', 'rating' => 0},
+    {'id' => '4', 'text' => 'Гора Эльбрус', 'rating' => 1},
+    {'id' => '5', 'text' => 'Домбай', 'rating' => 1},
+    {'id' => '6', 'text' => 'Карачаево-Черкесск', 'rating' => 0},
+  ]
+
+!!!5
+%html(lang="ru")
+  %head
+    %meta(charset="UTF-8")
+    %meta{:http-equiv => "X-UA-Compatible", :content => "IE=edge"}
+    %meta{:name =>"viewport", :content => "width=device-width, initial-scale=1.0"}
+    %link{:rel => "stylesheet", :href => "./pages/index.css"}
+    %title Mesto Russia
+  %body
+    .root
+      %header.section.section-header
+        .section-header__logo
+      %main.main
+        %section.section.section-bio
+          %img.section-bio__upic{:src => "./images/upic-#{uinfo['uid']}.jpg", :alt => "#{uinfo['uname']}"}
+          .section-bio__uinfo
+            %h1.section-bio__uname
+              #{uinfo['uname']}              
+              %img.btn__edit{:src => "./images/btn-edit.svg", :alt => "Редактировать профиль"}
+            %p.section-bio__udescription #{uinfo['description']}
+          .section-bio__ubtnaddpost
+            .btn-plus
+        %section.section.section-gallery
+          %ul.section-gallery-grid
+            - places.each do |item|
+              %li.section-gallery-item
+                %article.place
+                  %figure.place__figure
+                    %img.place__img{:src => "./images/ugallery-#{item['id']}.jpg", :alt => "#{item['text']}"}
+                  .place__body
+                    %h2.place__title #{item['text']}
+                    .place__actions
+                      - if item['rating'] == 0
+                        .btn-like
+                      - else
+                        .btn-like.btn-like-active
+      %footer.section.section-footer
+        %p.section-footer__copyright &copy; 2022 Mesto Russia X Варушичев Михаил
+    .popup
+      .popup__close
+        .btn-close
+          .btn-close__bar
+          .btn-close__bar_reverse
+      .popup__content
+        .form-uedit
+          %input.form__input{:id => "form__name", :value => "#{uinfo['uname']}", :placeholder => "Представься, путешественник" }
+          %input.form__input{:id => "form__desctiption", :value => "#{uinfo['uname']}", :placeholder => "Что влечет тебя к движению?" }
+          %button.form__submit{:type => "submit"} Сохранить
+  %script(src="./app.js")
