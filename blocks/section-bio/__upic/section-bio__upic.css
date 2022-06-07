@@ -3,6 +3,7 @@
     height: auto;
     aspect-ratio: 1;
     border-radius: 50%;
+    object-fit: contain;
 }
 
 @media screen and (max-width: 425px) {

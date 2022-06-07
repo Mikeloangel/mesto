@@ -1,15 +1,9 @@
 .section{
-    width: min(880px, calc(100% - 400px));    
+    width: min(880px, calc(100% - 400px));
     margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
 }
-/*   
-@media screen and (max-width: 1279px) {
-    .section{
-        width: calc(100% - 23vw);
-    }        
-} */
 
 @media screen and (max-width: 1024px) {
     .section{

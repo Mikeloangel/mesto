@@ -1,8 +1,10 @@
 
 .section-header{
+    --border-color: var(--coloron-primary-low, #000);
+
     padding-top: 45px;
     padding-bottom: 41px;
-    border-bottom: 1px solid #545454;
+    border-bottom: 1px solid var(--border-color);
 }
 
 @media screen and (max-width:760px) {
