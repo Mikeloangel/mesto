@@ -32,7 +32,7 @@
             %p.section-bio__udescription #{uinfo['description']}
           .section-bio__uactions
             .btn-plus
-        %section.section.section-gallery
+        %section.section.section-gallery{:aria-label => "Фотографии из путешествий!"}
           %ul.section-gallery__grid
             - places.each do |item|
               %li.section-gallery__item

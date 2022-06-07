@@ -11,9 +11,9 @@
     line-height: 1.15;
     
     width:  80%;
-    max-width:12ch;     
+    max-width:12ch;
 
-    text-overflow:ellipsis; 
+    text-overflow:ellipsis;
     overflow: hidden;
     /* white-space: nowrap; */
     /* ヾ(-_- )ゞ In case of extremely long name was inserted ヾ(-_- )ゞ  */
