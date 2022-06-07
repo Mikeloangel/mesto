@@ -12,13 +12,12 @@
 
 @import url(../blocks/btn-plus/btn-plus.css);
 
-@import url(../blocks/btn-like/btn-like.css);
-
 @import url(../blocks/place/place.css);
 @import url(../blocks/place/__img/place__img.css);
 @import url(../blocks/place/__body/place__body.css);
 @import url(../blocks/place/__title/place__title.css);
 @import url(../blocks/place/__actions/place__actions.css);
+@import url(../blocks/place/__like/place__like.css);
 
 @import url(../blocks/popup/poopup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);

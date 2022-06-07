@@ -1,4 +1,4 @@
-.btn-like{
+.place__like{
     --transition: var(--hover-transition, 'all 1s linear');
 
     padding: 0;
@@ -9,6 +9,6 @@
     transition: var(--transition);
 }
 
-.btn-like:hover{
+.place__like:hover{
     opacity: .5;
 }
