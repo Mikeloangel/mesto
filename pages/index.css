@@ -3,17 +3,18 @@
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts.css);
 
-/* 2.0 Common block css files */
+/* 2.0 Common blocks css files */
 @import url(../blocks/root/root.css);
 @import url(../blocks/section/section.css);
 
 @import url(../blocks/btn-edit/btn-edit.css);
+@import url(../blocks/btn-edit/__img/btn-edit__img.css);
+
 @import url(../blocks/btn-plus/btn-plus.css);
 
 @import url(../blocks/btn-like/btn-like.css);
 
 @import url(../blocks/place/place.css);
-@import url(../blocks/place/__figure/place__figure.css);
 @import url(../blocks/place/__img/place__img.css);
 @import url(../blocks/place/__body/place__body.css);
 @import url(../blocks/place/__title/place__title.css);
@@ -23,25 +24,28 @@
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__content/popup__content.css);
 @import url(../blocks/popup/__btn-close/popup__btn-close.css);
+@import url(../blocks/popup/__btn-close-img/popup__btn-close-img.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__form-input/popup__form-input.css);
 @import url(../blocks/popup/__submit/popup__submit.css);
+
 
  /* 3.0 Sections css files */
  /*  SECTION: HEADER  */
 @import url(../blocks/section-header/section-header.css);
 @import url(../blocks/section-header/__logo/section-header__logo.css);
 
-/*   SECTION: USER BIO*/
-@import url(../blocks/section-bio/section-bio.css);
-@import url(../blocks/section-bio/__upic/section-bio__upic.css);
-@import url(../blocks/section-bio/__uinfo/section-bio__uinfo.css);
-@import url(../blocks/section-bio/__uname/section-bio__uname.css);
-@import url(../blocks/section-bio/__udescription/section-bio__udescription.css);
-@import url(../blocks/section-bio/__uactions/section-bio__uactions.css);
-@import url(../blocks/section-bio/__uname-container/section-bio__uname-container.css);
-@import url(../blocks/section-bio/__edit/section-bio__edit.css);
+/*   SECTION: USER INFO*/
+@import url(../blocks/section-user/section-user.css);
+@import url(../blocks/section-user/__pic/section-user__pic.css);
+@import url(../blocks/section-user/__info/section-user__info.css);
+@import url(../blocks/section-user/__container/section-user__container.css);
+@import url(../blocks/section-user/__name/section-user__name.css);
+@import url(../blocks/section-user/__edit/section-user__edit.css);
+@import url(../blocks/section-user/__description/section-user__description.css);
+@import url(../blocks/section-user/__edit-btn/section-user__edit-btn.css);
+@import url(../blocks/section-user/__addpost/section-user__addpost.css);
 
 /*   SECTION: USER GALLERY*/
 @import url(../blocks/section-gallery/section-gallery.css);
@@ -54,5 +58,3 @@
 
 
 /* *{box-shadow: inset 0 0 2px #a66;} */
-/* .section-bio, .section-bio * {box-shadow: inset 0 0 2px #a66;}  */
-

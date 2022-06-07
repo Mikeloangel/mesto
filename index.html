@@ -15,69 +15,62 @@
             <div class='section-header__logo'></div>
         </header>
         <main class='main'>
-            <section class='section section-bio'>
-                <img alt='Жак-Ив Кусто' class='section-bio__upic' src='./images/upic-1.jpg'>
-                <div class='section-bio__uinfo'>
-                    <div class='section-bio__uname-container'>
-                        <h1 class='section-bio__uname'>Жак-Ив Кусто</h1>
-                        <img alt='Редактировать профиль' class='btn-edit section-bio__edit' src='./images/btn-edit.svg'>
+            <!--А с виду такой простой блок =) -->
+            <section class='section section-user'>
+                <img alt='Жак-Ив Кусто' class='section-user__pic' src='./images/upic-1.jpg'>
+                <div class='section-user__info'>
+                    <div class='section-user__container'>
+                        <h1 class='section-user__name'>Жак-Ив Кусто</h1>
+                        <button class='btn-edit section-user__edit' title="Редактировать профиль">
+                            <img alt='Редактировать профиль' class='btn-edit__img section-user__edit-btn' src='./images/btn-edit.svg'>
+                        </button>
                     </div>
-                    <p class='section-bio__udescription'>Исследователь океана</p>
+                    <p class='section-user__description'>Исследователь океана</p>
                 </div>
-                <div class='section-bio__uactions'>
-                    <div class='btn-plus'></div>
-                </div>
+                <button class='section-user__addpost btn-plus' title="Добавить пост"></button>
             </section>
-            <section class='section section-gallery' aria-label="Фотографии из путешествий!">
+            <section aria-label='Фотографии из путешествий!' class='section section-gallery'>
                 <ul class='section-gallery__grid'>
                     <li class='section-gallery__item'>
                         <article class='place'>
-                            <figure class='place__figure'>
-                                <img alt='Карачаевск' class='place__img' src='./images/ugallery-1.jpg'>
-                            </figure>
+                            <img alt='Карачаевск' class='place__img' src='./images/ugallery-1.jpg'>
                             <div class='place__body'>
                                 <h2 class='place__title'>Карачаевск</h2>
                                 <div class='place__actions'>
-                                    <img alt='Лайк!' class='btn-like' src='./images/btn-like.svg'>
+                                    <img alt='Лайк!' class='btn-like place__like' src='./images/btn-like.svg'>
                                 </div>
                             </div>
                         </article>
                     </li>
                     <li class='section-gallery__item'>
                         <article class='place'>
-                            <figure class='place__figure'>
-                                <img alt='Гора Эльбрус' class='place__img' src='./images/ugallery-2.jpg'>
-                            </figure>
+                            <img alt='Гора Эльбрус' class='place__img' src='./images/ugallery-2.jpg'>
                             <div class='place__body'>
                                 <h2 class='place__title'>Гора Эльбрус</h2>
                                 <div class='place__actions'>
-                                    <img alt='Лайк!' class='btn-like' src='./images/btn-like.svg'>
+                                    <img alt='Лайк!' class='btn-like place__like' src='./images/btn-like.svg'>
                                 </div>
                             </div>
                         </article>
                     </li>
                     <li class='section-gallery__item'>
                         <article class='place'>
-                            <figure class='place__figure'>
-                                <img alt='Домбай' class='place__img' src='./images/ugallery-3.jpg'>
-                            </figure>
+                            <img alt='Домбай' class='place__img' src='./images/ugallery-3.jpg'>
                             <div class='place__body'>
                                 <h2 class='place__title'>Домбай</h2>
                                 <div class='place__actions'>
-                                    <img alt='Лайк!' class='btn-like' src='./images/btn-like.svg'>
+                                    <img alt='Лайк!' class='btn-like place__like' src='./images/btn-like.svg'>
                                 </div>
                             </div>
                         </article>
                     </li>
                     <li class='section-gallery__item'>
                         <article class='place'>
-                            <figure class='place__figure'>
-                                <img alt='Гора Эльбрус' class='place__img' src='./images/ugallery-4.jpg'>
-                            </figure>
+                            <img alt='Гора Эльбрус' class='place__img' src='./images/ugallery-4.jpg'>
                             <div class='place__body'>
                                 <h2 class='place__title'>Гора Эльбрус</h2>
                                 <div class='place__actions'>
-                                    <img alt='Уже нравится!' class='btn-like btn-like-active'
+                                    <img alt='Уже нравится!' class='btn-like btn-like-active place__like_active'
                                         src='./images/btn-like-active.svg'>
                                 </div>
                             </div>
@@ -85,13 +78,11 @@
                     </li>
                     <li class='section-gallery__item'>
                         <article class='place'>
-                            <figure class='place__figure'>
-                                <img alt='Домбай' class='place__img' src='./images/ugallery-5.jpg'>
-                            </figure>
+                            <img alt='Домбай' class='place__img' src='./images/ugallery-5.jpg'>
                             <div class='place__body'>
                                 <h2 class='place__title'>Домбай</h2>
                                 <div class='place__actions'>
-                                    <img alt='Уже нравится!' class='btn-like btn-like-active'
+                                    <img alt='Уже нравится!' class='btn-like btn-like-active place__like_active'
                                         src='./images/btn-like-active.svg'>
                                 </div>
                             </div>
@@ -99,13 +90,11 @@
                     </li>
                     <li class='section-gallery__item'>
                         <article class='place'>
-                            <figure class='place__figure'>
-                                <img alt='Карачаево-Черкесск' class='place__img' src='./images/ugallery-6.jpg'>
-                            </figure>
+                            <img alt='Карачаево-Черкесск' class='place__img' src='./images/ugallery-6.jpg'>
                             <div class='place__body'>
                                 <h2 class='place__title'>Карачаево-Черкесск</h2>
                                 <div class='place__actions'>
-                                    <img alt='Лайк!' class='btn-like' src='./images/btn-like.svg'>
+                                    <img alt='Лайк!' class='btn-like place__like' src='./images/btn-like.svg'>
                                 </div>
                             </div>
                         </article>
@@ -114,25 +103,25 @@
             </section>
         </main>
         <footer class='section section-footer'>
-            <small class='section-footer__copyright'>&copy;&nbsp;2022 Mesto&nbsp;Russia X Варушичев&nbsp;Михаил</small>
+            <p class='section-footer__copyright'>&copy;&nbsp;2022 Mesto&nbsp;Russia X Варушичев&nbsp;Михаил</p>
         </footer>
-        <div class='popup popup_opened'>
-            <div class='popup__close'>
-                <div class='popup__content'>
-                    <img alt='Закрыть' class='popup__btn-close' src='./images/btn-close.svg'>
-                    <h2 class='popup__title'>Редактировать профиль</h2>
-                    <form class='popup__form'>
-                        <input class='popup__form-input' id='form__name' placeholder='Представься, путешественник'
-                            value=''>
-                        <input class='popup__form-input' id='form__desctiption'
-                            placeholder='Что влечет тебя к движению?' value=''>
-                        <button class='popup__form-submit' type='submit'>Сохранить</button>
-                    </form>
-                </div>
+        <div class='popup'>
+            <div class='popup__content'>
+                <button class='popup__btn-close' title="Закрыть форму">
+                    <img alt='Закрыть' class='popup__btn-close-img' src='./images/btn-close.svg'>
+                </button>
+                <h2 class='popup__title'>Редактировать профиль</h2>
+                <form class='popup__form' name='popup__form'>
+                    <input class='popup__form-input' id='form__name' name='popup__name'
+                        placeholder='Представься, путешественник'>
+                    <input class='popup__form-input' id='form__desctiption' name='popup__description'
+                        placeholder='Что влечет тебя к движению?'>
+                    <button class='popup__submit' type='submit'>Сохранить</button>
+                </form>
             </div>
         </div>
     </div>
-    <script src='./index.js'></script>
+    <script src='./pages/index.js'></script>
 </body>
 
 </html>

@@ -1,0 +1,9 @@
+.section-user__pic{
+    max-width:120px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+    flex: 0 0 120px;
+}

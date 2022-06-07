@@ -1,16 +1,24 @@
 .popup__btn-close{
     --transition: var(--hover-transition, 'all 1s ease');
+
     position: absolute;
     right:0;
     top:0;
     transform: translate(120%, -120%);
+
+    width: min-content;
+    height: min-content;
+    box-sizing: border-box;
+
     cursor: pointer;
     transition: var(--transition);
+    background-color: transparent;
+    border:none;    
 }
 
 @media screen and (max-width:555px) {
     .popup__btn-close{
-        transform: translate(0, -120%);
+        transform: translate(7%, -140%);
     }
     
 }
