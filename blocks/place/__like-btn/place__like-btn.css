@@ -1,0 +1,19 @@
+.place__like-btn{
+    --transition: var(--hover-transition, 'all 1s linear');
+
+    border: none;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+
+    width: min-content;
+    height: min-content;
+
+    cursor: pointer;
+    background-color: transparent;
+    transition: var(--transition);
+}
+
+.place__like-btn:hover{
+    opacity: .5;
+}

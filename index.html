@@ -15,20 +15,21 @@
             <div class='section-header__logo'></div>
         </header>
         <main class='main'>
-            <!--А с виду такой простой блок =) -->
+           
             <section class='section section-user'>
                 <img alt='Жак-Ив Кусто' class='section-user__pic' src='./images/upic-1.jpg'>
                 <div class='section-user__info'>
                     <div class='section-user__container'>
                         <h1 class='section-user__name'>Жак-Ив Кусто</h1>
-                        <button class='btn-edit section-user__edit' title="Редактировать профиль">
+                        <button class='btn-edit section-user__edit' title="Редактировать профиль" name="section-user__edit-btn" type="button">
                             <img alt='Редактировать профиль' class='btn-edit__img section-user__edit-btn' src='./images/btn-edit.svg'>
                         </button>
                     </div>
                     <p class='section-user__description'>Исследователь океана</p>
                 </div>
-                <button class='section-user__addpost btn-plus' title="Добавить пост"></button>
+                <button class='section-user__addpost btn-plus' title="Добавить пост" type="button"></button>
             </section>
+
             <section aria-label='Фотографии из путешествий!' class='section section-gallery'>
                 <ul class='section-gallery__grid'>
                     <li class='section-gallery__item'>
@@ -36,9 +37,9 @@
                             <img alt='Карачаевск' class='place__img' src='./images/ugallery-1.jpg'>
                             <div class='place__body'>
                                 <h2 class='place__title'>Карачаевск</h2>
-                                <div class='place__actions'>
-                                    <img alt='Лайк!' class='place__like' src='./images/btn-like.svg'>
-                                </div>
+                                <button class="place__like-btn" title="Лайк!" type="button">                                        
+                                    <img alt='Лайк!' class='place__like-img' src='./images/btn-like.svg'>
+                                </button>                                                                        
                             </div>
                         </article>
                     </li>
@@ -47,9 +48,9 @@
                             <img alt='Гора Эльбрус' class='place__img' src='./images/ugallery-2.jpg'>
                             <div class='place__body'>
                                 <h2 class='place__title'>Гора Эльбрус</h2>
-                                <div class='place__actions'>
-                                    <img alt='Лайк!' class='place__like' src='./images/btn-like.svg'>
-                                </div>
+                                <button class="place__like-btn" title="Лайк!" type="button">
+                                    <img alt='Лайк!' class='place__like-img' src='./images/btn-like.svg'>
+                                </button>                                      
                             </div>
                         </article>
                     </li>
@@ -58,9 +59,9 @@
                             <img alt='Домбай' class='place__img' src='./images/ugallery-3.jpg'>
                             <div class='place__body'>
                                 <h2 class='place__title'>Домбай</h2>
-                                <div class='place__actions'>
-                                    <img alt='Лайк!' class='place__like' src='./images/btn-like.svg'>
-                                </div>
+                                <button class="place__like-btn" title="Лайк!" type="button">
+                                    <img alt='Лайк!' class='place__like-img' src='./images/btn-like-active.svg'>
+                                </button>   
                             </div>
                         </article>
                     </li>
@@ -69,9 +70,9 @@
                             <img alt='Гора Эльбрус' class='place__img' src='./images/ugallery-4.jpg'>
                             <div class='place__body'>
                                 <h2 class='place__title'>Гора Эльбрус</h2>
-                                <div class='place__actions'>
-                                    <img alt='Уже нравится!' class='place__like place__like_active' src='./images/btn-like-active.svg'>
-                                </div>
+                                <button class="place__like-btn" title="Лайк!" type="button">
+                                    <img alt='Лайк!' class='place__like-img' src='./images/btn-like.svg'>
+                                </button>   
                             </div>
                         </article>
                     </li>
@@ -80,9 +81,9 @@
                             <img alt='Домбай' class='place__img' src='./images/ugallery-5.jpg'>
                             <div class='place__body'>
                                 <h2 class='place__title'>Домбай</h2>
-                                <div class='place__actions'>
-                                    <img alt='Уже нравится!' class='place__like place__like_active' src='./images/btn-like-active.svg'>
-                                </div>
+                                <button class="place__like-btn" title="Лайк!" type="button">
+                                    <img alt='Лайк!' class='place__like-img' src='./images/btn-like.svg'>
+                                </button>   
                             </div>
                         </article>
                     </li>
@@ -91,9 +92,9 @@
                             <img alt='Карачаево-Черкесск' class='place__img' src='./images/ugallery-6.jpg'>
                             <div class='place__body'>
                                 <h2 class='place__title'>Карачаево-Черкесск</h2>
-                                <div class='place__actions'>
-                                    <img alt='Лайк!' class='place__like' src='./images/btn-like.svg'>
-                                </div>
+                                <button class="place__like-btn" title="Лайк!" type="button">
+                                    <img alt='Лайк!' class='place__like-img' src='./images/btn-like.svg'>
+                                </button>   
                             </div>
                         </article>
                     </li>
@@ -105,7 +106,7 @@
         </footer>
         <div class='popup'>
             <div class='popup__content'>
-                <button class='popup__btn-close' title="Закрыть форму">
+                <button class='popup__btn-close' title="Закрыть форму" type="button">
                     <img alt='Закрыть' class='popup__btn-close-img' src='./images/btn-close.svg'>
                 </button>
                 <h2 class='popup__title'>Редактировать профиль</h2>
@@ -117,7 +118,7 @@
             </div>
         </div>
     </div>
-    <script src='./pages/index.js'></script>
+    <script src='./scripts/index.js'></script>
 </body>
 
 </html>
