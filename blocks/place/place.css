@@ -1,4 +1,4 @@
-.place{
+.place {
     --bg-color: var(--coloron-primary, #555);
 
     padding: 0;
@@ -7,5 +7,7 @@
     overflow: hidden;
     /* max-height: 361px; */
     max-width: 282px;
-    background-color: var(--bg-color);    
+    background-color: var(--bg-color);
+
+    position: relative;
 }

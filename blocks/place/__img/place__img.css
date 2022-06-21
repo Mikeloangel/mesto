@@ -1,5 +1,8 @@
 .place__img{
     width:100%;
-    height: auto;
+    /* height: auto; */
+    /* aspect-ratio: 1; */
+    height: 282px;
     object-fit: cover;
+    cursor: pointer;
 }

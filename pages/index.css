@@ -13,11 +13,12 @@
 @import url(../blocks/btn-plus/btn-plus.css);
 
 @import url(../blocks/place/place.css);
+@import url(../blocks/place/__trash/place__trash.css);
 @import url(../blocks/place/__img/place__img.css);
 @import url(../blocks/place/__body/place__body.css);
 @import url(../blocks/place/__title/place__title.css);
-@import url(../blocks/place/__like-btn/place__like-btn.css);
-@import url(../blocks/place/__like-img/place__like-img.css);
+@import url(../blocks/place/__like/place__like.css);
+@import url(../blocks/place/__like/_acive/place__like_active.css);
 
 @import url(../blocks/popup/poopup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
@@ -28,10 +29,14 @@
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__form-input/popup__form-input.css);
 @import url(../blocks/popup/__submit/popup__submit.css);
+@import url(../blocks/popup/__content/_viewplace/popup__content_viewplace.css);
+@import url(../blocks/popup/__fig/popup__fig.css);
+@import url(../blocks/popup/__fig-img/popup__fig-img.css);
+@import url(../blocks/popup/__fig-caption/popup__fig-caption.css);
 
 
- /* 3.0 Sections css files */
- /*  SECTION: HEADER  */
+/* 3.0 Sections css files */
+/*  SECTION: HEADER  */
 @import url(../blocks/section-header/section-header.css);
 @import url(../blocks/section-header/__logo/section-header__logo.css);
 
