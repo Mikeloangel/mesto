@@ -1,0 +1,9 @@
+.popup__content_viewplace {
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: unset;
+    max-width: 75vw;
+    max-height: 75vh;
+    padding: 0;
+    margin: 0 auto;
+}

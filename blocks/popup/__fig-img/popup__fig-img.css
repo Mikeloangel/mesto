@@ -1,0 +1,9 @@
+.popup__fig-img {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+    max-width: 75vw;
+    max-height: 75vh;
+    object-fit: contain;
+}
