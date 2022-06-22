@@ -66,7 +66,7 @@ function createPlace(obj) {
     newPlace.querySelector('.place__title').textContent = obj.name;
     
     newPlace.querySelector('.place__like').addEventListener('click', e => toggleLike(e.target));    
-    newPlace.querySelector('.place__trash').addEventListener('click', e => apendPlace(e.target.closest('.section-gallery__item')));
+    newPlace.querySelector('.place__trash').addEventListener('click', e => removePlace(e.target.closest('.section-gallery__item')));
     newPlace.addEventListener('click', e => {    
         if(e.target.classList.contains('place__img')){openPopupPlaceView(e);}
     });
