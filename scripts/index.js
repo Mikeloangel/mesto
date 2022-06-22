@@ -43,13 +43,13 @@ const popupPlaceViewBtnClose = popupPlaceView.querySelector('.popup__btn-close')
 /**********************/
 
 //open popup by it's ID
-function openPopup(popupID){
-    popupID.classList.add(popupOpenedClasName);
+function openPopup(popup){
+    popup.classList.add(popupOpenedClasName);
 }
 
 //close popup by it's id
-function closePopup(popupID){
-    popupID.classList.remove(popupOpenedClasName);
+function closePopup(popup){
+    popup.classList.remove(popupOpenedClasName);
 }
 
 
@@ -65,8 +65,8 @@ function createPlace(obj) {
     newPlace.querySelector('.place__img').alt = obj.name;
     newPlace.querySelector('.place__title').textContent = obj.name;
     
-    newPlace.querySelector('.place__like').addEventListener('click', e => elementLikeToggle(e.target));    
-    newPlace.querySelector('.place__trash').addEventListener('click', e => elementPlaceRemove(e.target.closest('.section-gallery__item')));
+    newPlace.querySelector('.place__like').addEventListener('click', e => toggleLike(e.target));    
+    newPlace.querySelector('.place__trash').addEventListener('click', e => apendPlace(e.target.closest('.section-gallery__item')));
     newPlace.addEventListener('click', e => {    
         if(e.target.classList.contains('place__img')){openPopupPlaceView(e);}
     });
@@ -77,17 +77,17 @@ function createPlace(obj) {
 }
 
 // toggle my heart 
-function elementLikeToggle (heartElement, className = 'place__like_active'){
+function toggleLike (heartElement, className = 'place__like_active'){
     heartElement.classList.toggle(className);
 }
 
 // delete that place
-function elementPlaceRemove(placeElement){
+function removePlace(placeElement){
     placeElement.remove();
 }
 
 // add this beautifull place like a charm
-function elementPlaceApend(newPlace){
+function apendPlace(newPlace){
     placesContainer.prepend(newPlace);
 }
 
@@ -152,7 +152,7 @@ function submitPopupNewPlace(e) {
         return;
     }
 
-   elementPlaceApend( createPlace({
+    apendPlace( createPlace({
         name: popupNewPlaceInputName.value,
         link: popupNewPlaceInputUrl.value
     }));
@@ -167,12 +167,12 @@ function submitPopupNewPlace(e) {
 /*PLACE VIEW POPUP*/
 /******************/
 
-function openPopupPlaceView(e){    
-    openPopup(popupPlaceView);
-
+function openPopupPlaceView(e){     
     popupPlaceViewImg.src = e.target.src;
     popupPlaceViewImg.alt = e.target.alt;
     popupPlaceViewCaption.textContent = e.target.alt;
+
+    openPopup(popupPlaceView);
 }
 
 function closePopupPlaceView(){
@@ -204,4 +204,4 @@ popupPlaceViewBtnClose.addEventListener('click', closePopupPlaceView);
 /*******************/
 
 // populating initial data for places
-initialCards.forEach(obj => elementPlaceApend(createPlace(obj)));
+initialCards.forEach(obj => apendPlace(createPlace(obj)));
