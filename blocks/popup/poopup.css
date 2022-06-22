@@ -1,11 +1,14 @@
 .popup{
+    --back-color: var(--color-overlay-500, #555);
+
     position: fixed;
     top:0;
     left: 0;
     width: 100%;
     height: 100%;
     
-    background-color: rgba(0,0,0,.9);
+    background-color: var(--back-color);
+
 
     display: flex;
     align-items: center;
@@ -15,6 +18,6 @@
     visibility: hidden;
     opacity: 0;
 
-    transition: visibility 500ms, opacity 100ms linear;
+    transition: visibility 200ms, opacity 200ms linear;
 }
 

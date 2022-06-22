@@ -8,6 +8,8 @@
 
     /* ## other global variables */
     --hover-transition: all ease 500ms;
+    --color-overlay-500: rgba(0,0,0,.5);
+    --color-overlay-900: rgba(0,0,0,.9);
 
     background-color: var(--color-primary);
     

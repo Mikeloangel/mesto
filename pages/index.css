@@ -33,6 +33,7 @@
 @import url(../blocks/popup/__fig/popup__fig.css);
 @import url(../blocks/popup/__fig-img/popup__fig-img.css);
 @import url(../blocks/popup/__fig-caption/popup__fig-caption.css);
+@import url(../blocks/popup/_viewplace/popup_viewplace.css);
 
 
 /* 3.0 Sections css files */

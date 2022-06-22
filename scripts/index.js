@@ -1,161 +1,207 @@
-/*************************/
-/* INITIAL TEMPLATE DATA */
-/*************************/
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
+/*********************/
+/* Usefull Variables */
+/*********************/
 
-/*****************/
-/* ADDING PLACES */
-/*****************/
+// global consts 
+const popupOpenedClasName = 'popup_opened';
 
-// place grid
-const places = document.querySelector(".section-gallery__grid");
+// UL for appending items
+const placesContainer = document.querySelector(".section-gallery__grid");
 const placeTemplate = document.querySelector('#place').content;
 
+// UI btns const
+const userBtnEdit = document.querySelector('.section-user__edit');
+const placeBtnNew = document.querySelector('.section-user__addpost');
+
+// user const
+const userName = document.querySelector('.section-user__name');
+const userDescription = document.querySelector('.section-user__description');
+
+// popup edit user consts
+const popupUser = document.querySelector('.popup_edituser');
+const popupUserBtnClose = document.querySelector('.popup__btn-close');
+const popupUserForm = document.querySelector('.popup__form');
+const popupUserInputName = document.querySelector('#form__name');
+const popupUserInputDescription = document.querySelector('#form__desctiption');
+
+// popup new place consts
+const popupNewPlace = document.querySelector('.popup_newplace');
+const popupNewPlaceForm = document.querySelector('.popup__form_newplace');
+const popupNewPlaceInputName = document.querySelector('.popup__place-name');
+const popupNewPlaceInputUrl = document.querySelector('.popup__place-url');
+const popupNewPlaceBtnClose = popupNewPlace.querySelector('.popup__btn-close');
+
+//popup view place
+const popupPlaceView = document.querySelector('.popup_viewplace');
+const popupPlaceViewImg = popupPlaceView.querySelector('.popup__fig-img');
+const popupPlaceViewCaption = popupPlaceView.querySelector('.popup__fig-caption');
+const popupPlaceViewBtnClose = popupPlaceView.querySelector('.popup__btn-close');
+
+
+/**********************/
+/* ABSTRACT FUNCTIONS */
+/**********************/
+
+//open popup by it's ID
+function openPopup(popupID){
+    popupID.classList.add(popupOpenedClasName);
+}
+
+//close popup by it's id
+function closePopup(popupID){
+    popupID.classList.remove(popupOpenedClasName);
+}
+
+
+/************************/
+/* PLACE ITEMS FUNCTIONS */
+/************************/
+
+// Creating Place
 function createPlace(obj) {
     const newPlace = placeTemplate.querySelector('.section-gallery__item').cloneNode(true);
 
     newPlace.querySelector('.place__img').src = obj.link;
     newPlace.querySelector('.place__img').alt = obj.name;
     newPlace.querySelector('.place__title').textContent = obj.name;
-    newPlace.querySelector('.place__like').addEventListener('click', e => e.target.classList.toggle('place__like_active'));
-    newPlace.querySelector('.place__trash').addEventListener('click', e => e.target.parentElement.parentElement.remove());
+    
+    newPlace.querySelector('.place__like').addEventListener('click', e => elementLikeToggle(e.target));    
+    newPlace.querySelector('.place__trash').addEventListener('click', e => elementPlaceRemove(e.target.closest('.section-gallery__item')));
     newPlace.addEventListener('click', e => {    
-        if(e.target.classList.contains('place__img')){
-            openPopupPlaceView(e);
-        }
+        if(e.target.classList.contains('place__img')){openPopupPlaceView(e);}
     });
 
-    places.prepend(newPlace);
+    return newPlace;
+
+    // elementPlaceApend(newPlace);
 }
 
-// populating initial data for places
-initialCards.forEach(obj => createPlace(obj));
+// toggle my heart 
+function elementLikeToggle (heartElement, className = 'place__like_active'){
+    heartElement.classList.toggle(className);
+}
+
+// delete that place
+function elementPlaceRemove(placeElement){
+    placeElement.remove();
+}
+
+// add this beautifull place like a charm
+function elementPlaceApend(newPlace){
+    placesContainer.prepend(newPlace);
+}
+
 
 /*****************/
 /* USER POPUP    */
 /*****************/
 
-const popupUser = document.querySelector('.popup_edituser');
-const btnClose = document.querySelector('.popup__btn-close');
-const formSubmit = document.querySelector('.popup__form');
-const inputName = document.querySelector('#form__name');
-const inputDescription = document.querySelector('#form__desctiption');
-const btnEdit = document.querySelector('.section-user__edit');
-const userName = document.querySelector('.section-user__name');
-const userDescription = document.querySelector('.section-user__description');
-
 // OPEN POPUP user edit
-function openPopupUser(e) {
-    popupUser.classList.add('popup_opened');
+function openPopupUser() {
+    popupUserInputName.value = userName.textContent;
+    popupUserInputDescription.value = userDescription.textContent;
 
-    //swaping values to inputs from section-user
-    inputName.value = userName.textContent;
-    inputDescription.value = userDescription.textContent;
+    openPopup(popupUser);
 }
 
 // CLOSE POPUP user edit
-function closePopupUser(e) {
-    popupUser.classList.remove('popup_opened');
+function closePopupUser() {
+    closePopup(popupUser);
 }
 
-// SUBMITTING DATA : EVERYTHING IS POSSIBLE WITH JS
+// SUBMITTING POPUP form user edit
 function submitPopupUser(e) {
     e.preventDefault();
     
-    if (inputName.value.length === 0 || inputDescription.value.length === 0) return;
+    if (popupUserInputName.value.length === 0 || popupUserInputDescription.value.length === 0) {
+        alert('данные введены неверно или отсутствуют');
+        return;
+    }
 
     // swaping back from inputs to section-user fields
-    userName.textContent = inputName.value;
-    userDescription.textContent = inputDescription.value;
+    userName.textContent = popupUserInputName.value;
+    userDescription.textContent = popupUserInputDescription.value;
 
     // ʕ´⁰̈ᴥ⁰̈`ʔ на случай очень длинных параметров решил добавить более подробный текст в подсказку ʕ´⁰̈ᴥ⁰̈`ʔ
-    if (inputName.value.length > 15) userName.title = inputName.value.slice(0, 100);
-    if (inputDescription.value.length > 35) userDescription.title = inputName.value.slice(0, 180);
+    // if (popupUserInputName.value.length > 15) userName.title = popupUserInputName.value.slice(0, 100);
+    // if (popupUserInputDescription.value.length > 35) userDescription.title = popupUserInputName.value.slice(0, 180);
+    // ok, saving for later
 
     closePopupUser();
 }
 
-// POPUP user edit listeners
-btnEdit.addEventListener('click', openPopupUser);
-btnClose.addEventListener('click', closePopupUser);
-formSubmit.addEventListener('submit', submitPopupUser);
+
 
 /******************/
 /* ADD PLACE POPUP*/
 /******************/
-const btnAddPlace = document.querySelector('.section-user__addpost');
-const popupPlaceAdd = document.querySelector('.popup_newplace');
-const placeName = document.querySelector('.popup__place-name');
-const placeUrl = document.querySelector('.popup__place-url');
 
-function openPopupAddPlace(e) {
-    popupPlaceAdd.classList.add('popup_opened');
+function openPopupNewPlace() {
+    openPopup(popupNewPlace);
 }
 
-function closePopupAddPlace(e) {
-    popupPlaceAdd.classList.remove('popup_opened');
+function closePopupNewPlace() {
+    closePopup(popupNewPlace);
 }
 
-function submitPopupAddPlace(e) {
+function submitPopupNewPlace(e) {
     e.preventDefault();
+    
+    if (popupNewPlaceInputName.value.length === 0 || !RegExp(/^(http|https):\/\/[^ "]+$/).test(popupNewPlaceInputUrl.value)) {
+        alert('данные введены неверно или отсутствуют');
+        return;
+    }
 
-    if (placeName.value.length < 3 || placeUrl.value.length === 0) return;
+   elementPlaceApend( createPlace({
+        name: popupNewPlaceInputName.value,
+        link: popupNewPlaceInputUrl.value
+    }));
 
-    createPlace({
-        name: placeName.value,
-        link: placeUrl.value
-    });
-
-    closePopupAddPlace();    
+    popupNewPlaceForm.reset();
+    closePopup(popupNewPlace);
 }
 
-// POPUP add place listeners
-btnAddPlace.addEventListener('click', openPopupAddPlace);
-popupPlaceAdd.querySelector('.popup__btn-close').addEventListener('click', closePopupAddPlace);
-popupPlaceAdd.querySelector('.popup__form').addEventListener('submit', submitPopupAddPlace);
+
 
 /******************/
 /*PLACE VIEW POPUP*/
 /******************/
 
-popupPlaceView = document.querySelector('.popup_viewplace');
+function openPopupPlaceView(e){    
+    openPopup(popupPlaceView);
 
-function openPopupPlaceView(e){
-    popupPlaceView.classList.add('popup_opened');
-
-    popupPlaceView.querySelector('.popup__fig-img').src = e.target.parentElement.querySelector('.place__img').src;
-    popupPlaceView.querySelector('.popup__fig-img').alt = e.target.parentElement.querySelector('.place__img').alt;
-    popupPlaceView.querySelector('.popup__fig-caption').textContent = e.target.parentElement.querySelector('.place__img').alt;    
+    popupPlaceViewImg.src = e.target.src;
+    popupPlaceViewImg.alt = e.target.alt;
+    popupPlaceViewCaption.textContent = e.target.alt;
 }
 
-function closePopupPlaceView(e){
-    popupPlaceView.classList.remove('popup_opened');
+function closePopupPlaceView(){
+    closePopup(popupPlaceView);
 }
 
-// POPUP place view listeners
-popupPlaceView.querySelector('.popup__btn-close').addEventListener('click', closePopupPlaceView);
+
+
+/*******************/
+/*EVENT LISTENERS  */
+/*******************/
+
+// POPUP user edit listeners
+userBtnEdit.addEventListener('click', openPopupUser);
+popupUserBtnClose.addEventListener('click', closePopupUser);
+popupUserForm.addEventListener('submit', submitPopupUser);
+
+// POPUP new place listeners
+placeBtnNew.addEventListener('click', openPopupNewPlace);
+popupNewPlaceBtnClose.addEventListener('click', closePopupNewPlace);
+popupNewPlaceForm.addEventListener('submit', submitPopupNewPlace);
+
+// POPUP view place listeners
+popupPlaceViewBtnClose.addEventListener('click', closePopupPlaceView);
+
+
+/*******************/
+/*FRONTEND HARDCODE*/
+/*******************/
+
+// populating initial data for places
+initialCards.forEach(obj => elementPlaceApend(createPlace(obj)));
