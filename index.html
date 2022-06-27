@@ -33,7 +33,7 @@
             </section>
 
             <section aria-label='Фотографии из путешествий!' class='section section-gallery'>
-                <ul class='section-gallery__grid '>
+                <ul class='section-gallery__grid place__container'>
                    
                 </ul>
             </section>
@@ -46,10 +46,10 @@
                 <button class='popup__btn-close' title="Закрыть форму" type="button">
                     <img alt='Закрыть' class='popup__btn-close-img' src='./images/btn-close.svg'>
                 </button>
-                <h2 class='popup__title'>Редактировать профиль</h2>
-                <form class='popup__form' name='popup__form'>
-                    <input class='popup__form-input' id='form__name' name='popup__name' placeholder='Представься, путешественник'>
-                    <input class='popup__form-input' id='form__desctiption' name='popup__description' placeholder='Что влечет тебя к движению?'>
+                <h2 class='popup__title'>Редактировать профиль</h2>                
+                <form class='popup__form popup__form_edituser' name='popup__form_edituser'>
+                    <input class='popup__form-input popup__user-name' id='form__user-name' name='popup__user-name' placeholder='Представься, путешественник'>
+                    <input class='popup__form-input popup__user-description' id='form__user-desctiption' name='popup__user-description' placeholder='Что влечет тебя к движению?'>
                     <button class='popup__submit' type='submit'>Сохранить</button>
                 </form>
             </div>
@@ -83,7 +83,7 @@
     </div>
     
     <template id="place">
-        <li class='section-gallery__item'>
+        <li class='section-gallery__item place__item'>
             <article class='place'>
                 <button class="place__trash" title="Удалить" type="button"></button>
                 <img alt='Плэйс' class='place__img' src='#'>

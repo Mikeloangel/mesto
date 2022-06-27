@@ -3,6 +3,7 @@
     /* height: auto; */
     /* aspect-ratio: 1; */
     height: 282px;
+    
     object-fit: cover;
     cursor: pointer;
 }

@@ -1,9 +1,8 @@
-/* .section-user, .section-user * {border: 1px solid red;} */
-
 .section-user{
     padding-top: 41px;
     padding-bottom: 50px;
     box-sizing: border-box;
+
     display: flex;
     align-items: center;
 }
