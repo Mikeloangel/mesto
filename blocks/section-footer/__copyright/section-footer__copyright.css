@@ -1,10 +1,11 @@
 .section-footer__copyright{
     padding: 0;
     margin: 0;
-    color: var(--coloron-primary-low);
+
     font-weight: 400;
     font-size: 18px;
     line-height: 1.2;
+    color: var(--coloron-primary-low);
 }
 
 

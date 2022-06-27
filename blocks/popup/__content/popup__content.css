@@ -1,5 +1,6 @@
 .popup__content{
     --bg-color: var(--coloron-primary, #888);
+    
     max-width: 430px;
     padding: 34px 36px 37px 36px;
     margin: 0 auto;

@@ -1,8 +1,6 @@
-
-.place__like{
+s.place__like{
     --transition: var(--hover-transition, 'all 1s linear');
-
-    border: none;
+    
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -11,10 +9,11 @@
     min-height: 19px;
 
     cursor: pointer;
+    border: none;
     background-color: transparent;
     transition: var(--transition);
 
-    background: url(../../../images/btn-like.svg) no-repeat;
+    background: url(../../../images/btn-like.svg) center no-repeat;
     background-size: 22px auto;
 }
 

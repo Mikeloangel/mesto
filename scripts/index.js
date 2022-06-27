@@ -6,7 +6,7 @@
 const popupOpenedClasName = 'popup_opened';
 
 // UL for appending items
-const placesContainer = document.querySelector(".section-gallery__grid");
+const placesContainer = document.querySelector(".place__container");
 const placeTemplate = document.querySelector('#place').content;
 
 // UI btns const
@@ -20,9 +20,9 @@ const userDescription = document.querySelector('.section-user__description');
 // popup edit user consts
 const popupUser = document.querySelector('.popup_edituser');
 const popupUserBtnClose = document.querySelector('.popup__btn-close');
-const popupUserForm = document.querySelector('.popup__form');
-const popupUserInputName = document.querySelector('#form__name');
-const popupUserInputDescription = document.querySelector('#form__desctiption');
+const popupUserForm = document.querySelector('.popup__form_edituser');
+const popupUserInputName = document.querySelector('.popup__user-name');
+const popupUserInputDescription = document.querySelector('.popup__user-description');
 
 // popup new place consts
 const popupNewPlace = document.querySelector('.popup_newplace');
@@ -59,21 +59,17 @@ function closePopup(popup){
 
 // Creating Place
 function createPlace(obj) {
-    const newPlace = placeTemplate.querySelector('.section-gallery__item').cloneNode(true);
+    const newPlace = placeTemplate.querySelector('.place__item').cloneNode(true);
 
     newPlace.querySelector('.place__img').src = obj.link;
     newPlace.querySelector('.place__img').alt = obj.name;
     newPlace.querySelector('.place__title').textContent = obj.name;
     
     newPlace.querySelector('.place__like').addEventListener('click', e => toggleLike(e.target));    
-    newPlace.querySelector('.place__trash').addEventListener('click', e => removePlace(e.target.closest('.section-gallery__item')));
-    newPlace.addEventListener('click', e => {    
-        if(e.target.classList.contains('place__img')){openPopupPlaceView(e);}
-    });
+    newPlace.querySelector('.place__trash').addEventListener('click', e => removePlace(e.target.closest('.place__item')));    
+    newPlace.querySelector('.place__img').addEventListener('click',openPopupPlaceView);
 
     return newPlace;
-
-    // elementPlaceApend(newPlace);
 }
 
 // toggle my heart 
@@ -122,10 +118,6 @@ function submitPopupUser(e) {
     userName.textContent = popupUserInputName.value;
     userDescription.textContent = popupUserInputDescription.value;
 
-    // ʕ´⁰̈ᴥ⁰̈`ʔ на случай очень длинных параметров решил добавить более подробный текст в подсказку ʕ´⁰̈ᴥ⁰̈`ʔ
-    // if (popupUserInputName.value.length > 15) userName.title = popupUserInputName.value.slice(0, 100);
-    // if (popupUserInputDescription.value.length > 35) userDescription.title = popupUserInputName.value.slice(0, 180);
-    // ok, saving for later
 
     closePopupUser();
 }
@@ -190,7 +182,7 @@ userBtnEdit.addEventListener('click', openPopupUser);
 popupUserBtnClose.addEventListener('click', closePopupUser);
 popupUserForm.addEventListener('submit', submitPopupUser);
 
-// POPUP new place listeners
+// POPUP new place listenersform__name
 placeBtnNew.addEventListener('click', openPopupNewPlace);
 popupNewPlaceBtnClose.addEventListener('click', closePopupNewPlace);
 popupNewPlaceForm.addEventListener('submit', submitPopupNewPlace);
