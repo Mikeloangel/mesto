@@ -1,78 +1,79 @@
 <!DOCTYPE html>
-<html lang='ru'>
+<html lang="ru">
 
 <head>
-    <meta charset='UTF-8'>
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content='width=device-width, initial-scale=1.0' name='viewport'>
-    <link href='./pages/index.css' rel='stylesheet'>
-    <script src='./scripts/places.js' defer></script>
-    <script src='./scripts/index.js' defer></script>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="./pages/index.css" rel="stylesheet">
+    <script src="./scripts/places.js" defer></script>
+    <script src="./scripts/index.js" defer></script>
     <title>Mesto Russia</title>
 </head>
 
 <body>
-    <div class='root'>
-        <header class='section section-header'>
-            <div class='section-header__logo'></div>
+    <div class="root">
+        <header class="section section-header">
+            <div class="section-header__logo"></div>
         </header>
-        <main class='main'>
+        <main class="main">
            
-            <section class='section section-user'>
-                <img alt='Жак-Ив Кусто' class='section-user__pic' src='./images/upic-1.jpg'>
-                <div class='section-user__info'>
-                    <div class='section-user__container'>
-                        <h1 class='section-user__name'>Жак-Ив Кусто</h1>
-                        <button class='btn-edit section-user__edit' title="Редактировать профиль" name="section-user__edit-btn" type="button">
-                            <img alt='Редактировать профиль' class='btn-edit__img section-user__edit-btn' src='./images/btn-edit.svg'>
+            <section class="section section-user">
+                <img alt="Жак-Ив Кусто" class="section-user__pic" src="./images/upic-1.jpg">
+                <div class="section-user__info">
+                    <div class="section-user__container">
+                        <h1 class="section-user__name">Жак-Ив Кусто</h1>
+                        <button class="btn-edit section-user__edit" title="Редактировать профиль" name="section-user__edit-btn" type="button">
+                            <img alt="Редактировать профиль" class="btn-edit__img section-user__edit-btn" src="./images/btn-edit.svg">
                         </button>
                     </div>
-                    <p class='section-user__description'>Исследователь океана</p>
+                    <p class="section-user__description">Исследователь океана</p>
                 </div>
-                <button class='section-user__addpost btn-plus' title="Добавить пост" type="button"></button>
+                <button class="section-user__addpost btn-plus" title="Добавить пост" type="button"></button>
             </section>
 
-            <section aria-label='Фотографии из путешествий!' class='section section-gallery'>
-                <ul class='section-gallery__grid place__container'>
+            <section aria-label="Фотографии из путешествий!" class="section section-gallery">
+                <ul class="section-gallery__grid place__container">
                    
                 </ul>
             </section>
         </main>
-        <footer class='section section-footer'>
-            <p class='section-footer__copyright'>&copy;&nbsp;2022 Mesto&nbsp;Russia X Варушичев&nbsp;Михаил</p>
+        <footer class="section section-footer">
+            <p class="section-footer__copyright">&copy;&nbsp;2022 Mesto&nbsp;Russia X Варушичев&nbsp;Михаил</p>
         </footer>
-        <div class='popup popup_edituser'>
-            <div class='popup__content'>
-                <button class='popup__btn-close' title="Закрыть форму" type="button">
-                    <img alt='Закрыть' class='popup__btn-close-img' src='./images/btn-close.svg'>
+        
+        <div class="popup popup_edituser">
+            <div class="popup__content">
+                <button class="popup__btn-close" title="Закрыть форму" type="button">
+                    <img alt="Закрыть" class="popup__btn-close-img" src="./images/btn-close.svg">
                 </button>
-                <h2 class='popup__title'>Редактировать профиль</h2>                
-                <form class='popup__form popup__form_edituser' name='popup__form_edituser'>
-                    <input class='popup__form-input popup__user-name' id='form__user-name' name='popup__user-name' placeholder='Представься, путешественник'>
-                    <input class='popup__form-input popup__user-description' id='form__user-desctiption' name='popup__user-description' placeholder='Что влечет тебя к движению?'>
-                    <button class='popup__submit' type='submit'>Сохранить</button>
+                <h2 class="popup__title">Редактировать профиль</h2>                
+                <form class="popup__form popup__form_edituser" name="popup__form_edituser">
+                    <input class="popup__form-input popup__user-name" id="form__user-name" name="popup__user-name" placeholder="Представься, путешественник">
+                    <input class="popup__form-input popup__user-description" id="form__user-desctiption" name="popup__user-description" placeholder="Что влечет тебя к движению?">
+                    <button class="popup__submit" type="submit">Сохранить</button>
                 </form>
             </div>
         </div>
 
-        <div class='popup popup_newplace'>
-            <div class='popup__content'>
-                <button class='popup__btn-close' title="Закрыть форму" type="button">
-                    <img alt='Закрыть' class='popup__btn-close-img' src='./images/btn-close.svg'>
+        <div class="popup popup_newplace">
+            <div class="popup__content">
+                <button class="popup__btn-close" title="Закрыть форму" type="button">
+                    <img alt="Закрыть" class="popup__btn-close-img" src="./images/btn-close.svg">
                 </button>
-                <h2 class='popup__title'>Новое место</h2>
-                <form class='popup__form popup__form_newplace' name='popup__form_newplace'>
-                    <input class='popup__form-input popup__place-name' id='form__place-name' name='popup__place-name' placeholder='Какие места привлекли?'>
-                    <input class='popup__form-input popup__place-url' id='form__place-url' name='popup__place-url' placeholder='Адресок подскажите?' type="url">
-                    <button class='popup__submit' type='submit'>Сохранить</button>
+                <h2 class="popup__title">Новое место</h2>
+                <form class="popup__form popup__form_newplace" name="popup__form_newplace">
+                    <input class="popup__form-input popup__place-name" id="form__place-name" name="popup__place-name" placeholder="Какие места привлекли?">
+                    <input class="popup__form-input popup__place-url" id="form__place-url" name="popup__place-url" placeholder="Адресок подскажите?" type="url">
+                    <button class="popup__submit" type="submit">Сохранить</button>
                 </form>
             </div>
         </div>
 
-        <div class='popup popup_viewplace'>
-            <div class='popup__content popup__content_viewplace'>
-                <button class='popup__btn-close' title="Закрыть форму" type="button">
-                    <img alt='Закрыть' class='popup__btn-close-img' src='./images/btn-close.svg'>
+        <div class="popup popup_viewplace">
+            <div class="popup__content popup__content_viewplace">
+                <button class="popup__btn-close" title="Закрыть форму" type="button">
+                    <img alt="Закрыть" class="popup__btn-close-img" src="./images/btn-close.svg">
                 </button>
                 <figure class="popup__fig">
                     <img src="#" alt="пикча" class="popup__fig-img">                 
@@ -83,12 +84,12 @@
     </div>
     
     <template id="place">
-        <li class='section-gallery__item place__item'>
-            <article class='place'>
+        <li class="section-gallery__item place__item">
+            <article class="place">
                 <button class="place__trash" title="Удалить" type="button"></button>
-                <img alt='Плэйс' class='place__img' src='#'>
-                <div class='place__body'>
-                    <h2 class='place__title'></h2>
+                <img alt="Плэйс" class="place__img" src="#">
+                <div class="place__body">
+                    <h2 class="place__title"></h2>
                     <button class="place__like" title="Лайк!" type="button"></button>                                                                        
                 </div>
             </article>
