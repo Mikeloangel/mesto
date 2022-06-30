@@ -19,16 +19,16 @@ const userDescription = document.querySelector('.section-user__description');
 
 // popup edit user consts
 const popupUser = document.querySelector('.popup_edituser');
-const popupUserBtnClose = document.querySelector('.popup__btn-close');
-const popupUserForm = document.querySelector('.popup__form_edituser');
-const popupUserInputName = document.querySelector('.popup__user-name');
-const popupUserInputDescription = document.querySelector('.popup__user-description');
+const popupUserBtnClose = popupUser.querySelector('.popup__btn-close');
+const popupUserForm = popupUser.querySelector('.popup__form_edituser');
+const popupUserInputName = popupUser.querySelector('.popup__user-name');
+const popupUserInputDescription = popupUser.querySelector('.popup__user-description');
 
 // popup new place consts
 const popupNewPlace = document.querySelector('.popup_newplace');
-const popupNewPlaceForm = document.querySelector('.popup__form_newplace');
-const popupNewPlaceInputName = document.querySelector('.popup__place-name');
-const popupNewPlaceInputUrl = document.querySelector('.popup__place-url');
+const popupNewPlaceForm = popupNewPlace.querySelector('.popup__form_newplace');
+const popupNewPlaceInputName = popupNewPlace.querySelector('.popup__place-name');
+const popupNewPlaceInputUrl = popupNewPlace.querySelector('.popup__place-url');
 const popupNewPlaceBtnClose = popupNewPlace.querySelector('.popup__btn-close');
 
 //popup view place
