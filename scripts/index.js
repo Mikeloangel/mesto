@@ -13,7 +13,8 @@ const placeTemplate = document.querySelector('#place').content;
 const userBtnEdit = document.querySelector('.section-user__edit');
 const placeBtnNew = document.querySelector('.section-user__addpost');
 
-// user section const
+
+// user section const 
 const userName = document.querySelector('.section-user__name');
 const userDescription = document.querySelector('.section-user__description');
 
