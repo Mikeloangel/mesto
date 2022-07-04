@@ -5,7 +5,7 @@
 // global consts 
 const popupOpenedClasName = 'popup_opened';
 
-// UL for appending items
+// UL for appending items and card template
 const placesContainer = document.querySelector(".place__container");
 const placeTemplate = document.querySelector('#place').content;
 
@@ -13,7 +13,7 @@ const placeTemplate = document.querySelector('#place').content;
 const userBtnEdit = document.querySelector('.section-user__edit');
 const placeBtnNew = document.querySelector('.section-user__addpost');
 
-// user const
+// user section const
 const userName = document.querySelector('.section-user__name');
 const userDescription = document.querySelector('.section-user__description');
 
