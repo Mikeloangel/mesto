@@ -3,7 +3,7 @@
 /*********************/
 
 // global consts 
-const popupOpenedClasName = 'popup_opened';
+const popupOpenedClassName = 'popup_opened';
 
 // UL for appending items and card template
 const placesContainer = document.querySelector(".place__container");
@@ -43,15 +43,27 @@ const popupPlaceViewCaption = popupPlaceView.querySelector('.popup__fig-caption'
 /**********************/
 
 //open popup by it's ID
-function openPopup(popup){
-    popup.classList.add(popupOpenedClasName);
+function openPopup(popup) {
+    document.addEventListener('keydown', handlePopupClose);
+    popup.addEventListener('click',handlePopupClose);
+
+    popup.classList.add(popupOpenedClassName);
 }
 
 //close popup by it's id
-function closePopup(popup){
-    popup.classList.remove(popupOpenedClasName);
+function closePopup(popup) {
+    popup.classList.remove(popupOpenedClassName);
+
+    document.removeEventListener('keydown', handlePopupClose);
+    popup.removeEventListener('click',handlePopupClose);
 }
 
+//handling user actions for close on ESC or popup click
+function handlePopupClose(e) {
+    if (e.key === 'Escape' || (e.type === 'click' && e.target.classList.contains('popup'))) {
+        closePopup(document.querySelector(`.${popupOpenedClassName}`));
+    }
+}
 
 /************************/
 /* PLACE ITEMS FUNCTIONS */
@@ -64,26 +76,26 @@ function createPlace(obj) {
     newPlace.querySelector('.place__img').src = obj.link;
     newPlace.querySelector('.place__img').alt = obj.name;
     newPlace.querySelector('.place__title').textContent = obj.name;
-    
-    newPlace.querySelector('.place__like').addEventListener('click', e => toggleLike(e.target));    
-    newPlace.querySelector('.place__trash').addEventListener('click', e => removePlace(e.target.closest('.place__item')));    
-    newPlace.querySelector('.place__img').addEventListener('click',openPopupPlaceView);
+
+    newPlace.querySelector('.place__like').addEventListener('click', e => toggleLike(e.target));
+    newPlace.querySelector('.place__trash').addEventListener('click', e => removePlace(e.target.closest('.place__item')));
+    newPlace.querySelector('.place__img').addEventListener('click', openPopupPlaceView);
 
     return newPlace;
 }
 
 // toggle my heart 
-function toggleLike (heartElement, className = 'place__like_active'){
+function toggleLike(heartElement, className = 'place__like_active') {
     heartElement.classList.toggle(className);
 }
 
 // delete that place
-function removePlace(placeElement){
+function removePlace(placeElement) {
     placeElement.remove();
 }
 
 // add this beautifull place like a charm
-function apendPlace(newPlace){
+function apendPlace(newPlace) {
     placesContainer.prepend(newPlace);
 }
 
@@ -108,7 +120,7 @@ function closePopupUser() {
 // SUBMITTING POPUP form user edit
 function submitPopupUser(e) {
     e.preventDefault();
-    
+
     if (popupUserInputName.value.length === 0 || popupUserInputDescription.value.length === 0) {
         alert('данные введены неверно или отсутствуют');
         return;
@@ -138,13 +150,13 @@ function closePopupNewPlace() {
 
 function submitPopupNewPlace(e) {
     e.preventDefault();
-    
+
     if (popupNewPlaceInputName.value.length === 0 || !RegExp(/^(http|https):\/\/[^ "]+$/).test(popupNewPlaceInputUrl.value)) {
         alert('данные введены неверно или отсутствуют');
         return;
     }
 
-    apendPlace( createPlace({
+    apendPlace(createPlace({
         name: popupNewPlaceInputName.value,
         link: popupNewPlaceInputUrl.value
     }));
@@ -159,7 +171,7 @@ function submitPopupNewPlace(e) {
 /*PLACE VIEW POPUP*/
 /******************/
 
-function openPopupPlaceView(e){     
+function openPopupPlaceView(e) {
     popupPlaceViewImg.src = e.target.src;
     popupPlaceViewImg.alt = e.target.alt;
     popupPlaceViewCaption.textContent = e.target.alt;
@@ -167,7 +179,7 @@ function openPopupPlaceView(e){
     openPopup(popupPlaceView);
 }
 
-function closePopupPlaceView(){
+function closePopupPlaceView() {
     closePopup(popupPlaceView);
 }
 
