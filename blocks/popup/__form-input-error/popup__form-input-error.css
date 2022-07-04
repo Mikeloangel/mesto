@@ -1,0 +1,4 @@
+.popup__form-input-error{
+    --b-color: var(--color-error,pink);
+    border-bottom: 1px solid var(--b-color);
+}

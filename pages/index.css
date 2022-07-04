@@ -34,6 +34,9 @@
 @import url(../blocks/popup/__fig-img/popup__fig-img.css);
 @import url(../blocks/popup/__fig-caption/popup__fig-caption.css);
 @import url(../blocks/popup/_viewplace/popup_viewplace.css);
+@import url(../blocks/popup/__form-error/popup__form-error.css);
+@import url(../blocks/popup/__form-input-error/popup__form-input-error.css);
+
 
 
 /* 3.0 Sections css files */

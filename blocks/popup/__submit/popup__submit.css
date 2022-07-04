@@ -33,3 +33,15 @@
         font-size: 14px;
     }    
 }
+
+.popup__submit:disabled{
+    --bg-color: var(--coloron-primary, #456);
+    --text-color: var(--color-primary, #111);
+    
+    opacity: 0.2;
+    cursor: initial;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    border: 1px solid var(--text-color);
+}
+

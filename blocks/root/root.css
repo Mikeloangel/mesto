@@ -5,6 +5,7 @@
     --color-primary: #000;
     --coloron-primary: #fff;
     --coloron-primary-low: #545454;
+    --color-error: #FF0000;
     
     --color-overlay-500: rgba(0,0,0,.5);
     --color-overlay-900: rgba(0,0,0,.9);
