@@ -34,6 +34,7 @@
     }    
 }
 
+.popup__button_disabled, 
 .popup__submit:disabled{
     --bg-color: var(--coloron-primary, #456);
     --text-color: var(--color-primary, #111);
@@ -45,3 +46,6 @@
     border: 1px solid var(--text-color);
 }
 
+.popup__submit:focus{
+    outline: 2px solid rgba(25, 32, 168, 0.8);
+}

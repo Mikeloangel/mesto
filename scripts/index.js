@@ -44,8 +44,8 @@ const popupPlaceViewCaption = popupPlaceView.querySelector('.popup__fig-caption'
 
 //open popup by it's ID
 function openPopup(popup) {
-    document.addEventListener('keydown', handlePopupClose);
-    popup.addEventListener('click',handlePopupClose);
+    document.addEventListener('keydown', handlePopupCloseEvents);
+    popup.addEventListener('click',handlePopupCloseEvents);
 
     popup.classList.add(popupOpenedClassName);
 }
@@ -54,12 +54,12 @@ function openPopup(popup) {
 function closePopup(popup) {
     popup.classList.remove(popupOpenedClassName);
 
-    document.removeEventListener('keydown', handlePopupClose);
-    popup.removeEventListener('click',handlePopupClose);
+    document.removeEventListener('keydown', handlePopupCloseEvents);
+    popup.removeEventListener('click',handlePopupCloseEvents);
 }
 
 //handling user actions for close on ESC or popup click
-function handlePopupClose(e) {
+function handlePopupCloseEvents(e) {
     if (e.key === 'Escape' || (e.type === 'click' && e.target.classList.contains('popup'))) {
         closePopup(document.querySelector(`.${popupOpenedClassName}`));
     }
@@ -184,6 +184,27 @@ function closePopupPlaceView() {
 }
 
 
+/*******************/
+/*VALIDATION FORM  */
+/*******************/
+// formSelector: '.popup__form',
+// inputSelector: '.popup__input',
+// submitButtonSelector: '.popup__button',
+// inactiveButtonClass: 'popup__button_disabled',
+// inputErrorClass: 'popup__input_type_error',
+// errorClass: 'popup__error_visible'
+
+function enableValidation(fieldSet){
+    
+}
+
+function hasInvalidInput(inputList){
+
+}
+
+function toggleButtonState(inputList, buttonElement){
+
+}
 
 /*******************/
 /*EVENT LISTENERS  */
