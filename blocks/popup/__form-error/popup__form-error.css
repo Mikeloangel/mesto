@@ -1,7 +1,35 @@
-.popup__form-error{
+.popup__form-error{ /*SPAN*/
     --color: var(--color-error, pink);
+
+    display: inline-block;
+    /* margin: 0; */
+    margin: 5px 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+    min-height: 32px;
+    width: 100%;
+
     font-weight: 400;
     font-size: 12px;
     line-height: 1.25;
     color: var(--color);
+
+    /* outline: 1px solid rgba(0,0,0,.2); */
+    opacity: 0;
+    
+    
+}
+.popup__form-error-visible{
+    opacity: 1;
+    /* color: transparent; */
+    /* outline: 1px solid rgba(0,0,0,.2); */
+}
+
+
+.popup__form-field{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    width: 100%;
 }

@@ -4,6 +4,7 @@
 
 // global consts 
 const popupOpenedClassName = 'popup_opened';
+const popupFormInputClassName = 'popup__form-input';
 
 // UL for appending items and card template
 const placesContainer = document.querySelector(".place__container");
@@ -109,6 +110,15 @@ function openPopupUser() {
     popupUserInputName.value = userName.textContent;
     popupUserInputDescription.value = userDescription.textContent;
 
+    const inputList = Array.from(popupUserForm.querySelectorAll(`.${popupFormInputClassName}`));
+    toggleSumitButtonState(
+        popupUserForm.querySelector('.popup__submit'), 
+        inputList, 
+        'popup__submit_disabled');
+    inputList.forEach( inputElement => {
+        checkInputValidity(popupUserForm, inputElement, 'popup__form-error-visible');
+    });
+    
     openPopup(popupUser);
 }
 
@@ -121,8 +131,13 @@ function closePopupUser() {
 function submitPopupUser(e) {
     e.preventDefault();
 
-    if (popupUserInputName.value.length === 0 || popupUserInputDescription.value.length === 0) {
-        alert('данные введены неверно или отсутствуют');
+    // if (popupUserInputName.value.length === 0 || popupUserInputDescription.value.length === 0) {
+    //     alert('данные введены неверно или отсутствуют');
+    //     return;
+    // }
+
+    const inputList = Array.from(popupUserForm.querySelectorAll(`.${popupFormInputClassName}`));
+    if(hasInvalidInput(inputList)){
         return;
     }
 
@@ -151,8 +166,13 @@ function closePopupNewPlace() {
 function submitPopupNewPlace(e) {
     e.preventDefault();
 
-    if (popupNewPlaceInputName.value.length === 0 || !RegExp(/^(http|https):\/\/[^ "]+$/).test(popupNewPlaceInputUrl.value)) {
-        alert('данные введены неверно или отсутствуют');
+    // if (popupNewPlaceInputName.value.length === 0 || !RegExp(/^(http|https):\/\/[^ "]+$/).test(popupNewPlaceInputUrl.value)) {
+    //     alert('данные введены неверно или отсутствуют');
+    //     return;
+    // }
+
+    const inputList = Array.from(popupNewPlaceForm.querySelectorAll(`.${popupFormInputClassName}`));
+    if(hasInvalidInput(inputList)){
         return;
     }
 
@@ -187,24 +207,15 @@ function closePopupPlaceView() {
 /*******************/
 /*VALIDATION FORM  */
 /*******************/
-// formSelector: '.popup__form',
-// inputSelector: '.popup__input',
-// submitButtonSelector: '.popup__button',
-// inactiveButtonClass: 'popup__button_disabled',
-// inputErrorClass: 'popup__input_type_error',
-// errorClass: 'popup__error_visible'
 
-function enableValidation(fieldSet){
-    
-}
-
-function hasInvalidInput(inputList){
-
-}
-
-function toggleButtonState(inputList, buttonElement){
-
-}
+enableValidation({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__form-input',
+    submitButtonSelector: '.popup__submit',
+    inactiveButtonClass: 'popup__submit_disabled',
+    inputErrorClass: 'popup__form-input_type_error',
+    errorClass: 'popup__form-error-visible'
+  });
 
 /*******************/
 /*EVENT LISTENERS  */
@@ -230,3 +241,5 @@ popupPlaceViewBtnClose.addEventListener('click', closePopupPlaceView);
 
 // populating initial data for places
 initialCards.forEach(obj => apendPlace(createPlace(obj)));
+
+// openPopupNewPlace();
