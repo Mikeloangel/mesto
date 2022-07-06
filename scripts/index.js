@@ -121,7 +121,7 @@ function openPopupUser() {
         checkInputValidity(
             popupUserForm, 
             inputElement, 
-            'popup__form-error-visible');
+            'popup__form-error_visible');
     });
     
     openPopup(popupUser);
