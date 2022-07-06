@@ -5,7 +5,6 @@
     padding: 0 0 10px 0;
     margin: 0;
     box-sizing: border-box;
-    /* margin-top: 30px; */
 
     border: none;
     border-bottom: 1px solid rgba(0,0,0, .2);
@@ -14,8 +13,6 @@
     font-size: 14px;
     line-height: 1.2;
     color: var(--text-color);
-    
-    /* outline: 1px solid rgba(0,0,0,.4); */
 }
 
 .popup__form-input:invalid,

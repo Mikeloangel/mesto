@@ -1,4 +1,12 @@
-
+// FORM VALIDATION function expected params
+// enableValidation({
+//     formSelector: '.popup__form',
+//     inputSelector: '.popup__form-input',
+//     submitButtonSelector: '.popup__submit',
+//     inactiveButtonClass: 'popup__submit_disabled',
+//     inputErrorClass: 'popup__form-input_type_error',
+//     errorClass: 'popup__form-error-visible'
+//   });
 
 function enableValidation(settings){
     const formList = Array.from(document.querySelectorAll(settings.formSelector));
@@ -14,8 +22,6 @@ function enableValidation(settings){
                 checkInputValidity(formElement, inputElement, settings.errorClass);
                 toggleSumitButtonState(submitButton, inputList, settings.inactiveButtonClass );
             });
-
-
         });
     });
 
@@ -62,15 +68,3 @@ function hasInvalidInput(inputList){
         return !inputElement.validity.valid;
     });
 }
-
-
-
-// enableValidation({
-//     formSelector: '.popup__form',
-//     inputSelector: '.popup__form-input',
-//     submitButtonSelector: '.popup__submit',
-//     inactiveButtonClass: 'popup__submit_disabled',
-//     // inactiveButtonClass: false,
-//     inputErrorClass: 'popup__form-input_type_error',
-//     errorClass: 'popup__form-error_visible'
-//   });

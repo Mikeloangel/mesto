@@ -115,8 +115,12 @@ function openPopupUser() {
         popupUserForm.querySelector('.popup__submit'), 
         inputList, 
         'popup__submit_disabled');
+    
     inputList.forEach( inputElement => {
-        checkInputValidity(popupUserForm, inputElement, 'popup__form-error-visible');
+        checkInputValidity(
+            popupUserForm, 
+            inputElement, 
+            'popup__form-error-visible');
     });
     
     openPopup(popupUser);
@@ -214,7 +218,7 @@ enableValidation({
     submitButtonSelector: '.popup__submit',
     inactiveButtonClass: 'popup__submit_disabled',
     inputErrorClass: 'popup__form-input_type_error',
-    errorClass: 'popup__form-error-visible'
+    errorClass: 'popup__form-error_visible'
   });
 
 /*******************/

@@ -6,7 +6,6 @@
     width: 100%;
     padding: 14px 0 14px 0;
     margin: 0;
-    /* margin-top: 5px; */
     box-sizing: border-box;
 
     border: none;
@@ -25,13 +24,6 @@
 
 .popup__submit:hover{
     opacity: .8;
-}
-
-@media screen and (max-width:555px) {
-    .popup__submit{
-        margin-top: 24px;
-        font-size: 14px;
-    }    
 }
 
 .popup__submit:disabled,
@@ -53,4 +45,11 @@
 
 .popup__submit:focus{
     outline: 2px solid rgba(25, 32, 168, 0.8);
+}
+
+@media screen and (max-width:555px) {
+    .popup__submit{
+        margin-top: 24px;
+        font-size: 14px;
+    }    
 }
