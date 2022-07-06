@@ -6,6 +6,15 @@
 const popupOpenedClassName = 'popup_opened';
 const popupFormInputClassName = 'popup__form-input';
 
+const globalSettings = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__form-input',
+    submitButtonSelector: '.popup__submit',
+    inactiveButtonClass: 'popup__submit_disabled',
+    inputErrorClass: 'popup__form-input_type_error',
+    errorClass: 'popup__form-error_visible'
+}
+
 // UL for appending items and card template
 const placesContainer = document.querySelector(".place__container");
 const placeTemplate = document.querySelector('#place').content;
@@ -47,7 +56,7 @@ const popupPlaceViewCaption = popupPlaceView.querySelector('.popup__fig-caption'
 //open popup by it's ID
 function openPopup(popup) {
     document.addEventListener('keydown', handlePopupCloseEvents);
-    popup.addEventListener('click',handlePopupCloseEvents);
+    popup.addEventListener('click', handlePopupCloseEvents);
 
     popup.classList.add(popupOpenedClassName);
 }
@@ -57,7 +66,7 @@ function closePopup(popup) {
     popup.classList.remove(popupOpenedClassName);
 
     document.removeEventListener('keydown', handlePopupCloseEvents);
-    popup.removeEventListener('click',handlePopupCloseEvents);
+    popup.removeEventListener('click', handlePopupCloseEvents);
 }
 
 //handling user actions for close on ESC or popup click
@@ -113,17 +122,17 @@ function openPopupUser() {
 
     const inputList = Array.from(popupUserForm.querySelectorAll(`.${popupFormInputClassName}`));
     toggleSumitButtonState(
-        popupUserForm.querySelector('.popup__submit'), 
-        inputList, 
-        'popup__submit_disabled');
-    
-    inputList.forEach( inputElement => {
+        popupUserForm.querySelector(globalSettings.submitButtonSelector),
+        inputList,
+        globalSettings.inactiveButtonClass);
+
+    inputList.forEach(inputElement => {
         checkInputValidity(
-            popupUserForm, 
-            inputElement, 
-            'popup__form-error_visible');
+            popupUserForm,
+            inputElement,
+            globalSettings.errorClass);
     });
-    
+
     openPopup(popupUser);
 }
 
@@ -141,8 +150,8 @@ function submitPopupUser(e) {
     //     return;
     // }
 
-    const inputList = Array.from(popupUserForm.querySelectorAll(`.${popupFormInputClassName}`));
-    if(hasInvalidInput(inputList)){
+    const inputList = Array.from(popupUserForm.querySelectorAll(globalSettings.inputSelector));
+    if (hasInvalidInput(inputList)) {
         return;
     }
 
@@ -177,7 +186,7 @@ function submitPopupNewPlace(e) {
     // }
 
     const inputList = Array.from(popupNewPlaceForm.querySelectorAll(`.${popupFormInputClassName}`));
-    if(hasInvalidInput(inputList)){
+    if (hasInvalidInput(inputList)) {
         return;
     }
 
@@ -213,14 +222,16 @@ function closePopupPlaceView() {
 /*VALIDATION FORM  */
 /*******************/
 
-enableValidation({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__form-input',
-    submitButtonSelector: '.popup__submit',
-    inactiveButtonClass: 'popup__submit_disabled',
-    inputErrorClass: 'popup__form-input_type_error',
-    errorClass: 'popup__form-error_visible'
-  });
+// enableValidation({
+//     formSelector: '.popup__form',
+//     inputSelector: '.popup__form-input',
+//     submitButtonSelector: '.popup__submit',
+//     inactiveButtonClass: 'popup__submit_disabled',
+//     inputErrorClass: 'popup__form-input_type_error',
+//     errorClass: 'popup__form-error_visible'
+//   });
+
+enableValidation(globalSettings);
 
 /*******************/
 /*EVENT LISTENERS  */
