@@ -16,7 +16,7 @@ const globalSettings = {
 }
 
 // UL for appending items and card template
-const placesContainer = document.querySelector(".place__container");
+const placesContainer = document.querySelector(".section-gallery__grid");
 const placeTemplate = document.querySelector('#place').content;
 
 // UI btns const
