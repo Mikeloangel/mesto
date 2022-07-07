@@ -145,11 +145,6 @@ function closePopupUser() {
 function submitPopupUser(e) {
     e.preventDefault();
 
-    // if (popupUserInputName.value.length === 0 || popupUserInputDescription.value.length === 0) {
-    //     alert('данные введены неверно или отсутствуют');
-    //     return;
-    // }
-
     const inputList = Array.from(popupUserForm.querySelectorAll(globalSettings.inputSelector));
     if (hasInvalidInput(inputList)) {
         return;
@@ -170,6 +165,13 @@ function submitPopupUser(e) {
 /******************/
 
 function openPopupNewPlace() {
+
+    const inputList = Array.from(popupNewPlaceForm.querySelectorAll(`.${popupFormInputClassName}`));
+    toggleSumitButtonState(
+        popupNewPlaceForm.querySelector(globalSettings.submitButtonSelector),
+        inputList,
+        globalSettings.inactiveButtonClass);
+
     openPopup(popupNewPlace);
 }
 
@@ -180,13 +182,30 @@ function closePopupNewPlace() {
 function submitPopupNewPlace(e) {
     e.preventDefault();
 
-    // if (popupNewPlaceInputName.value.length === 0 || !RegExp(/^(http|https):\/\/[^ "]+$/).test(popupNewPlaceInputUrl.value)) {
-    //     alert('данные введены неверно или отсутствуют');
-    //     return;
-    // }
-
     const inputList = Array.from(popupNewPlaceForm.querySelectorAll(`.${popupFormInputClassName}`));
     if (hasInvalidInput(inputList)) {
+        return;
+    }
+
+    const mimeList = [
+        'image/jpeg',
+        'image/png'
+    ];
+
+    // слишком поздно понял что нужно всего лишь поменять высоту карточки
+    // в .place__img, чтобы выполнить это условие ＼（〇_ｏ）／
+    // https://skr.sh/sEnjKLa2gso когда картинка не найдена - карточка схлопывается 
+
+    if(!validateFileMimeByUrl(popupNewPlaceInputUrl.value, ...mimeList)){
+        showInputError(popupNewPlaceForm, popupNewPlaceInputUrl, globalSettings.errorClass, 'Please select an image');
+        popupNewPlaceInputUrl.value = '';
+
+        const inputList = Array.from(popupNewPlaceForm.querySelectorAll(`.${popupFormInputClassName}`));
+        toggleSumitButtonState(
+            popupNewPlace.querySelector(globalSettings.submitButtonSelector),
+            inputList,
+            globalSettings.inactiveButtonClass);
+
         return;
     }
 
