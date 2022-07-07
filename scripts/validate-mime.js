@@ -1,6 +1,6 @@
 /**
- * Validate remote file by url based on acepted mime types (sync way)
- * @param  {String}             url     remote url of validating file
+ * Validate remote file by url based on accepted mime types (sync way)
+ * @param  {String}             url     remote url for validating file
  * @param  {Array of strings}   mime    a list of mime types (e.g. image/jpeg , image/png etc)
  * @return {Boolean}            
  */
@@ -13,8 +13,8 @@ function validateFileMimeByUrl(url, ...mime){
 
 /**
  * Returns Content-Type of remote file (sync way)
- * @param  {String}     url     url of remote file
- * @return {String}     Content-Type  
+ * @param  {String}     url     url for remote file
+ * @return {String}     Content-Type  (e.g. image/jpeg , image/png etc)
  * @return {Boolean}    returns false on fail  
  */
 function getFileContentTypeByUrl(url){
