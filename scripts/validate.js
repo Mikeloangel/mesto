@@ -28,11 +28,10 @@ function enableValidation(settings){
 }
 
 function checkInputValidity(formElement, inputElement, errorClass){
-    if(!inputElement.validity.valid){
-        showInputError(formElement, inputElement, errorClass, inputElement.validationMessage);        
-    }else{
+    !inputElement.validity.valid ?
+        showInputError(formElement, inputElement, errorClass, inputElement.validationMessage) :
         hideInputError(formElement, inputElement, errorClass);
-    }
+
 }
 
 function showInputError(formElement, inputElement, errorClass, errorMessage){    
@@ -48,23 +47,17 @@ function hideInputError(formElement, inputElement, errorClass){
 }
 
 function toggleSumitButtonState( buttonElement, inputList, inactiveButtonClass = false){        
-    if(hasInvalidInput(inputList)){
-        if(inactiveButtonClass) {
-            buttonElement.classList.add(inactiveButtonClass);
-        }else{
+    if(hasInvalidInput(inputList)){   
+        inactiveButtonClass ? 
+            buttonElement.classList.add(inactiveButtonClass) :
             buttonElement.disabled = true;
-        }
     }else{
-        if(inactiveButtonClass) {            
-            buttonElement.classList.remove(inactiveButtonClass);
-        }else{
+        inactiveButtonClass ?
+            buttonElement.classList.remove(inactiveButtonClass) :
             buttonElement.disabled = false;
-        }
     }
 }
 
 function hasInvalidInput(inputList){
-    return inputList.some( (inputElement) => {
-        return !inputElement.validity.valid;
-    });
+    return inputList.some(inputElement => !inputElement.validity.valid);
 }

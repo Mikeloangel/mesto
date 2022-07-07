@@ -186,28 +186,27 @@ function submitPopupNewPlace(e) {
     if (hasInvalidInput(inputList)) {
         return;
     }
+    
+    // ладно ;-)
+    
+    // const mimeList = [
+    //     'image/jpeg',
+    //     'image/jpg',
+    //     'image/png'
+    // ];
 
-    const mimeList = [
-        'image/jpeg',
-        'image/png'
-    ];
+    // if(!validateFileMimeByUrl(popupNewPlaceInputUrl.value, ...mimeList)){
+    //     showInputError(popupNewPlaceForm, popupNewPlaceInputUrl, globalSettings.errorClass, 'Please select an image');
+    //     popupNewPlaceInputUrl.value = '';
 
-    // слишком поздно понял что нужно всего лишь поменять высоту карточки
-    // в .place__img, чтобы выполнить это условие ＼（〇_ｏ）／
-    // https://skr.sh/sEnjKLa2gso когда картинка не найдена - карточка схлопывается 
+    //     const inputList = Array.from(popupNewPlaceForm.querySelectorAll(`.${popupFormInputClassName}`));
+    //     toggleSumitButtonState(
+    //         popupNewPlace.querySelector(globalSettings.submitButtonSelector),
+    //         inputList,
+    //         globalSettings.inactiveButtonClass);
 
-    if(!validateFileMimeByUrl(popupNewPlaceInputUrl.value, ...mimeList)){
-        showInputError(popupNewPlaceForm, popupNewPlaceInputUrl, globalSettings.errorClass, 'Please select an image');
-        popupNewPlaceInputUrl.value = '';
-
-        const inputList = Array.from(popupNewPlaceForm.querySelectorAll(`.${popupFormInputClassName}`));
-        toggleSumitButtonState(
-            popupNewPlace.querySelector(globalSettings.submitButtonSelector),
-            inputList,
-            globalSettings.inactiveButtonClass);
-
-        return;
-    }
+    //     return;
+    // }
 
     apendPlace(createPlace({
         name: popupNewPlaceInputName.value,

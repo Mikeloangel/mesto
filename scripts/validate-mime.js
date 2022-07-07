@@ -8,7 +8,7 @@ function validateFileMimeByUrl(url, ...mime){
     if (!RegExp(/^(http|https):\/\/[^ "]+$/).test(url)) { return false; };
 
     const type = getFileContentTypeByUrl(url);
-    return type ? mime.some(item => item===type) : false;
+    return type ? mime.some(item => item.includes(type)) : false;
 }
 
 /**
@@ -24,12 +24,12 @@ function getFileContentTypeByUrl(url){
     try {
         xhr.send();
         if (xhr.status != 200) {
-            console.error(`Error ${xhr.status}: ${xhr.statusText}`);
+            console.warn(`Error ${xhr.status}: ${xhr.statusText}`);
         } else {            
             return xhr.getResponseHeader('Content-Type');             
         }
     } catch(err) { 
-        console.error(`Unknown error: ${err}`)
+        console.warn(`Unknown error: ${err}`)
     }
     return false;
 }
