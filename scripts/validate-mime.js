@@ -18,7 +18,7 @@ function validateFileMimeByUrl(url, ...mime){
  * @return {Boolean}    returns false on fail  
  */
 function getFileContentTypeByUrl(url){
-    let xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     xhr.open('GET', url, false);
 
     try {
