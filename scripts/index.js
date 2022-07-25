@@ -7,18 +7,21 @@ import {
     userBtnEdit, placeBtnNew, userName, userDescription, popupUser, popupUserBtnClose, popupUserForm,
     popupUserInputName, popupUserInputDescription, popupNewPlace, popupNewPlaceBtnClose, popupNewPlaceForm,
     popupNewPlaceInputName, popupNewPlaceInputUrl, popupPlaceView, popupPlaceViewBtnClose, popupPlaceViewImg,
-    popupPlaceViewCaption } from './data.js';
+    popupPlaceViewCaption } from './data.js';    
 // REFACTOR: use * as?
-import {initialCards} from './places.js';
+
 import {enableValidation,checkInputValidity,toggleSumitButtonState,hasInvalidInput} from './validate.js';
 // REFACTOR: use * as?
 // HINT: showInputError,hideInputError will be private ? 
+
+import {initialCards} from './places.js';
 import {Card} from './card.js';
+import {FormValidator} from './FormValidator.js';
 
 
 /*********************/
 /* PARENT POPUP CODE */
-/*********************/
+/*********************/ 
 
 //open popup by it's ID
 function openPopup(popup) {
