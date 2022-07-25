@@ -1,52 +1,18 @@
-/*********************/
-/* Usefull Variables */
-/*********************/
+/*****************/
+/* Import Export */
+/*****************/
 
-// global consts 
-const popupOpenedClassName = 'popup_opened';
-const popupFormInputClassName = 'popup__form-input';
-
-const globalSettings = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__form-input',
-    submitButtonSelector: '.popup__submit',
-    inactiveButtonClass: 'popup__submit_disabled',
-    inputErrorClass: 'popup__form-input_type_error',
-    errorClass: 'popup__form-error_visible'
-}
-
-// UL for appending items and card template
-const placesContainer = document.querySelector(".section-gallery__grid");
-const placeTemplate = document.querySelector('#place').content;
-
-// UI btns const
-const userBtnEdit = document.querySelector('.section-user__edit');
-const placeBtnNew = document.querySelector('.section-user__addpost');
-
-
-// user section const 
-const userName = document.querySelector('.section-user__name');
-const userDescription = document.querySelector('.section-user__description');
-
-// popup edit user consts
-const popupUser = document.querySelector('.popup_edituser');
-const popupUserBtnClose = popupUser.querySelector('.popup__btn-close');
-const popupUserForm = popupUser.querySelector('.popup__form');
-const popupUserInputName = popupUser.querySelector('.popup__user-name');
-const popupUserInputDescription = popupUser.querySelector('.popup__user-description');
-
-// popup new place consts
-const popupNewPlace = document.querySelector('.popup_newplace');
-const popupNewPlaceBtnClose = popupNewPlace.querySelector('.popup__btn-close');
-const popupNewPlaceForm = popupNewPlace.querySelector('.popup__form');
-const popupNewPlaceInputName = popupNewPlace.querySelector('.popup__place-name');
-const popupNewPlaceInputUrl = popupNewPlace.querySelector('.popup__place-url');
-
-//popup view place
-const popupPlaceView = document.querySelector('.popup_viewplace');
-const popupPlaceViewBtnClose = popupPlaceView.querySelector('.popup__btn-close');
-const popupPlaceViewImg = popupPlaceView.querySelector('.popup__fig-img');
-const popupPlaceViewCaption = popupPlaceView.querySelector('.popup__fig-caption');
+import {
+    globalSettings, popupOpenedClassName, popupFormInputClassName, placesContainer, placeTemplate,
+    userBtnEdit, placeBtnNew, userName, userDescription, popupUser, popupUserBtnClose, popupUserForm,
+    popupUserInputName, popupUserInputDescription, popupNewPlace, popupNewPlaceBtnClose, popupNewPlaceForm,
+    popupNewPlaceInputName, popupNewPlaceInputUrl, popupPlaceView, popupPlaceViewBtnClose, popupPlaceViewImg,
+    popupPlaceViewCaption } from './data.js';
+// REFACTOR: use * as?
+import {initialCards} from './places.js';
+import {enableValidation,checkInputValidity,toggleSumitButtonState,hasInvalidInput} from './validate.js';
+// REFACTOR: use * as?
+// HINT: showInputError,hideInputError will be private ? 
 
 
 /*******************/
@@ -187,27 +153,6 @@ function submitPopupNewPlace(e) {
         return;
     }
     
-    // ладно ;-)
-    
-    // const mimeList = [
-    //     'image/jpeg',
-    //     'image/jpg',
-    //     'image/png'
-    // ];
-
-    // if(!validateFileMimeByUrl(popupNewPlaceInputUrl.value, ...mimeList)){
-    //     showInputError(popupNewPlaceForm, popupNewPlaceInputUrl, globalSettings.errorClass, 'Please select an image');
-    //     popupNewPlaceInputUrl.value = '';
-
-    //     const inputList = Array.from(popupNewPlaceForm.querySelectorAll(`.${popupFormInputClassName}`));
-    //     toggleSumitButtonState(
-    //         popupNewPlace.querySelector(globalSettings.submitButtonSelector),
-    //         inputList,
-    //         globalSettings.inactiveButtonClass);
-
-    //     return;
-    // }
-
     apendPlace(createPlace({
         name: popupNewPlaceInputName.value,
         link: popupNewPlaceInputUrl.value

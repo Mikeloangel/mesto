@@ -8,7 +8,7 @@
 //     errorClass: 'popup__form-error-visible'
 //   });
 
-function enableValidation(settings){
+export function enableValidation(settings){
     const formList = Array.from(document.querySelectorAll(settings.formSelector));
     
     formList.forEach( formElement => {
@@ -27,26 +27,26 @@ function enableValidation(settings){
 
 }
 
-function checkInputValidity(formElement, inputElement, errorClass){
+export function checkInputValidity(formElement, inputElement, errorClass){
     !inputElement.validity.valid ?
         showInputError(formElement, inputElement, errorClass, inputElement.validationMessage) :
         hideInputError(formElement, inputElement, errorClass);
 
 }
 
-function showInputError(formElement, inputElement, errorClass, errorMessage){    
+export function showInputError(formElement, inputElement, errorClass, errorMessage){    
     const errorElement  = formElement.querySelector(`.${inputElement.id}-error`);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(errorClass);
 }
 
-function hideInputError(formElement, inputElement, errorClass){
+export function hideInputError(formElement, inputElement, errorClass){
     const errorElement  = formElement.querySelector(`.${inputElement.id}-error`);
     errorElement.classList.remove(errorClass);
     errorElement.textContent = '#';
 }
 
-function toggleSumitButtonState( buttonElement, inputList, inactiveButtonClass = false){        
+export function toggleSumitButtonState( buttonElement, inputList, inactiveButtonClass = false){        
     if(hasInvalidInput(inputList)){   
         inactiveButtonClass ? 
             buttonElement.classList.add(inactiveButtonClass) :
@@ -58,6 +58,6 @@ function toggleSumitButtonState( buttonElement, inputList, inactiveButtonClass =
     }
 }
 
-function hasInvalidInput(inputList){
+export function hasInvalidInput(inputList){
     return inputList.some(inputElement => !inputElement.validity.valid);
 }
