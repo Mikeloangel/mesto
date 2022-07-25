@@ -3,12 +3,15 @@
 /*****************/
 
 import {
-    globalSettings, popupOpenedClassName, placeTemplateSelector, placesContainer,
-    userBtnEdit, placeBtnNew, userName, userDescription, popupUser, popupUserBtnClose, popupUserForm,
-    popupUserInputName, popupUserInputDescription, popupNewPlace, popupNewPlaceBtnClose, popupNewPlaceForm,
-    popupNewPlaceInputName, popupNewPlaceInputUrl, popupPlaceView, popupPlaceViewBtnClose, popupPlaceViewImg,
-    popupPlaceViewCaption } from './data.js';    
-// REFACTOR: use * as?
+    globalSettings,
+    placesContainer, placeTemplateSelector,
+    userBtnEdit, placeBtnNew,
+    userName, userDescription,
+    popupOpenedClassName,
+    popupUser, popupUserBtnClose, popupUserForm, popupUserInputName, popupUserInputDescription,
+    popupNewPlace, popupNewPlaceBtnClose, popupNewPlaceForm, popupNewPlaceInputName, popupNewPlaceInputUrl,
+    popupPlaceView, popupPlaceViewBtnClose, popupPlaceViewImg, popupPlaceViewCaption
+  } from './data.js';    
 
 import {initialCards} from './places.js';
 import {Card} from './card.js';
@@ -29,7 +32,6 @@ newPlaceFormValidator.enableValidation();
 /* PARENT POPUP CODE */
 /*********************/ 
 
-//open popup by it's ID
 function openPopup(popup) {
     document.addEventListener('keydown', handlePopupCloseEvents);
     popup.addEventListener('click', handlePopupCloseEvents);
@@ -37,7 +39,6 @@ function openPopup(popup) {
     popup.classList.add(popupOpenedClassName);
 }
 
-//close popup by it's id
 function closePopup(popup) {
     popup.classList.remove(popupOpenedClassName);
 
@@ -57,7 +58,6 @@ function handlePopupCloseEvents(e) {
 /* CHILD POPUP: user */
 /*********************/
 
-// OPEN POPUP user edit
 function openPopupUser() {
     popupUserInputName.value = userName.textContent;
     popupUserInputDescription.value = userDescription.textContent;
@@ -67,12 +67,10 @@ function openPopupUser() {
     openPopup(popupUser);
 }
 
-// CLOSE POPUP user edit
 function closePopupUser() {
     closePopup(popupUser);
 }
 
-// SUBMITTING POPUP form user edit
 function submitPopupUser(e) {
     e.preventDefault();
 
@@ -161,5 +159,3 @@ popupPlaceViewBtnClose.addEventListener('click', closePopupPlaceView);
 
 // populating initial data for places
 initialCards.forEach(obj =>  apendPlace(new Card(obj,placeTemplateSelector).createPlace()));
-
-// openPopupNewPlace();

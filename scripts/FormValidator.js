@@ -1,4 +1,12 @@
+/**
+ * Class to enable form validation
+ */
 export class FormValidator{
+    /**
+     * 
+     * @param {Object} settings 
+     * @param {Object} formElement prototype from HTMLFormElement
+     */
     constructor(settings, formElement){
         this._formSelector = settings.formSelector; //       
         this._inputSelector = settings.inputSelector;

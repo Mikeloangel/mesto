@@ -2,10 +2,7 @@
 /* Usefull Variables */
 /*********************/
 
-// global consts 
-export const popupOpenedClassName = 'popup_opened';
-export const popupFormInputClassName = 'popup__form-input';
-
+// form validation settings object
 export const globalSettings = {
     formSelector: '.popup__form',
     inputSelector: '.popup__form-input',
@@ -27,6 +24,13 @@ export const placeBtnNew = document.querySelector('.section-user__addpost');
 // user section const 
 export const userName = document.querySelector('.section-user__name');
 export const userDescription = document.querySelector('.section-user__description');
+
+
+// /////////////
+// POPUP consts
+// ////////////
+export const popupOpenedClassName = 'popup_opened';
+// export const popupFormInputClassName = 'popup__form-input';
 
 // popup edit user consts
 export const popupUser = document.querySelector('.popup_edituser');
