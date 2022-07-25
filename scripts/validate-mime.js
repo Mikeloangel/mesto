@@ -47,10 +47,11 @@ function getFileContentTypeByUrl(url){
 // }
 
 
-// const clg = console.log;
+const clg = console.log;
 // let testurl = 'https://upload.wikimedia.org/wikipedia/commons/7/77/Delete_key1.jpg';
 // // testurl = 'ht:/upload.wikimedia.org/wikipedia/commons/7/77/Delete_key1.';
 // // testurl = 'https://upload.wikimedia.org/wikipedia/commons/7/77/Delete_key1.pg';
+// clg(validateMime(testurl));
 
 // const mimeList = [
 //     'image/jpeg',
@@ -59,4 +60,3 @@ function getFileContentTypeByUrl(url){
 
 // clg(validateFileMimeByUrl(testurl, 'image/jpeg'));
 // // clg(validateFileMimeByUrl(testurl, ...mimeList));
-

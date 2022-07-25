@@ -49,9 +49,9 @@ const popupPlaceViewImg = popupPlaceView.querySelector('.popup__fig-img');
 const popupPlaceViewCaption = popupPlaceView.querySelector('.popup__fig-caption');
 
 
-/**********************/
-/* ABSTRACT FUNCTIONS */
-/**********************/
+/*******************/
+/* COMON FUNCTIONS */
+/*******************/
 
 //open popup by it's ID
 function openPopup(popup) {
