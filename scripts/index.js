@@ -3,7 +3,7 @@
 /*****************/
 
 import {
-    globalSettings, popupOpenedClassName, popupFormInputClassName, placesContainer, placeTemplate,
+    globalSettings, popupOpenedClassName, popupFormInputClassName, placesContainer,
     userBtnEdit, placeBtnNew, userName, userDescription, popupUser, popupUserBtnClose, popupUserForm,
     popupUserInputName, popupUserInputDescription, popupNewPlace, popupNewPlaceBtnClose, popupNewPlaceForm,
     popupNewPlaceInputName, popupNewPlaceInputUrl, popupPlaceView, popupPlaceViewBtnClose, popupPlaceViewImg,
@@ -13,11 +13,12 @@ import {initialCards} from './places.js';
 import {enableValidation,checkInputValidity,toggleSumitButtonState,hasInvalidInput} from './validate.js';
 // REFACTOR: use * as?
 // HINT: showInputError,hideInputError will be private ? 
+import {Card} from './card.js';
 
 
-/*******************/
-/* COMON FUNCTIONS */
-/*******************/
+/*********************/
+/* PARENT POPUP CODE */
+/*********************/
 
 //open popup by it's ID
 function openPopup(popup) {
@@ -42,44 +43,10 @@ function handlePopupCloseEvents(e) {
     }
 }
 
-/************************/
-/* PLACE ITEMS FUNCTIONS */
-/************************/
 
-// Creating Place
-function createPlace(obj) {
-    const newPlace = placeTemplate.querySelector('.place__item').cloneNode(true);
-
-    newPlace.querySelector('.place__img').src = obj.link;
-    newPlace.querySelector('.place__img').alt = obj.name;
-    newPlace.querySelector('.place__title').textContent = obj.name;
-
-    newPlace.querySelector('.place__like').addEventListener('click', e => toggleLike(e.target));
-    newPlace.querySelector('.place__trash').addEventListener('click', e => removePlace(e.target.closest('.place__item')));
-    newPlace.querySelector('.place__img').addEventListener('click', openPopupPlaceView);
-
-    return newPlace;
-}
-
-// toggle my heart 
-function toggleLike(heartElement, className = 'place__like_active') {
-    heartElement.classList.toggle(className);
-}
-
-// delete that place
-function removePlace(placeElement) {
-    placeElement.remove();
-}
-
-// add this beautifull place like a charm
-function apendPlace(newPlace) {
-    placesContainer.prepend(newPlace);
-}
-
-
-/*****************/
-/* USER POPUP    */
-/*****************/
+/*********************/
+/* CHILD POPUP: user */
+/*********************/
 
 // OPEN POPUP user edit
 function openPopupUser() {
@@ -116,19 +83,16 @@ function submitPopupUser(e) {
         return;
     }
 
-    // swaping back from inputs to section-user fields
     userName.textContent = popupUserInputName.value;
     userDescription.textContent = popupUserInputDescription.value;
-
 
     closePopupUser();
 }
 
 
-
-/******************/
-/* ADD PLACE POPUP*/
-/******************/
+/*************************/
+/* CHILD POPUP: New Place*/
+/*************************/
 
 function openPopupNewPlace() {
 
@@ -153,22 +117,23 @@ function submitPopupNewPlace(e) {
         return;
     }
     
-    apendPlace(createPlace({
-        name: popupNewPlaceInputName.value,
-        link: popupNewPlaceInputUrl.value
-    }));
+    const newCard = new Card({
+            name: popupNewPlaceInputName.value,
+            link: popupNewPlaceInputUrl.value
+        },'#place');    
+
+    apendPlace(newCard.createPlace());
 
     popupNewPlaceForm.reset();
     closePopup(popupNewPlace);
 }
 
 
+/***************************/
+/* CHILD POPUP: view place */
+/***************************/
 
-/******************/
-/*PLACE VIEW POPUP*/
-/******************/
-
-function openPopupPlaceView(e) {
+export function openPopupPlaceView(e) {
     popupPlaceViewImg.src = e.target.src;
     popupPlaceViewImg.alt = e.target.alt;
     popupPlaceViewCaption.textContent = e.target.alt;
@@ -178,6 +143,16 @@ function openPopupPlaceView(e) {
 
 function closePopupPlaceView() {
     closePopup(popupPlaceView);
+}
+
+
+/************************/
+/* PLACE ITEMS FUNCTIONS */
+/************************/
+
+// add this beautifull place like a charm
+function apendPlace(newPlace) {
+    placesContainer.prepend(newPlace);
 }
 
 
@@ -205,7 +180,7 @@ userBtnEdit.addEventListener('click', openPopupUser);
 popupUserBtnClose.addEventListener('click', closePopupUser);
 popupUserForm.addEventListener('submit', submitPopupUser);
 
-// POPUP new place listenersform__name
+// POPUP new place listeners
 placeBtnNew.addEventListener('click', openPopupNewPlace);
 popupNewPlaceBtnClose.addEventListener('click', closePopupNewPlace);
 popupNewPlaceForm.addEventListener('submit', submitPopupNewPlace);
@@ -219,6 +194,6 @@ popupPlaceViewBtnClose.addEventListener('click', closePopupPlaceView);
 /*******************/
 
 // populating initial data for places
-initialCards.forEach(obj => apendPlace(createPlace(obj)));
+initialCards.forEach(obj =>  apendPlace(new Card(obj,'#place').createPlace()));
 
 // openPopupNewPlace();
