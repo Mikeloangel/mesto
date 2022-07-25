@@ -3,21 +3,27 @@
 /*****************/
 
 import {
-    globalSettings, popupOpenedClassName, popupFormInputClassName, placesContainer,
+    globalSettings, popupOpenedClassName, placeTemplateSelector, placesContainer,
     userBtnEdit, placeBtnNew, userName, userDescription, popupUser, popupUserBtnClose, popupUserForm,
     popupUserInputName, popupUserInputDescription, popupNewPlace, popupNewPlaceBtnClose, popupNewPlaceForm,
     popupNewPlaceInputName, popupNewPlaceInputUrl, popupPlaceView, popupPlaceViewBtnClose, popupPlaceViewImg,
     popupPlaceViewCaption } from './data.js';    
 // REFACTOR: use * as?
 
-import {enableValidation,checkInputValidity,toggleSumitButtonState,hasInvalidInput} from './validate.js';
-// REFACTOR: use * as?
-// HINT: showInputError,hideInputError will be private ? 
-
 import {initialCards} from './places.js';
 import {Card} from './card.js';
 import {FormValidator} from './FormValidator.js';
 
+
+/******************************/
+/* FORM VALIDATION OBJECT WAY */
+/******************************/
+
+const userFormValidator = new FormValidator(globalSettings,document.forms.popup__form_edituser);
+userFormValidator.enableValidation();
+
+const newPlaceFormValidator = new FormValidator(globalSettings, document.forms.popup__form_newplace);
+newPlaceFormValidator.enableValidation();
 
 /*********************/
 /* PARENT POPUP CODE */
@@ -55,19 +61,8 @@ function handlePopupCloseEvents(e) {
 function openPopupUser() {
     popupUserInputName.value = userName.textContent;
     popupUserInputDescription.value = userDescription.textContent;
-
-    const inputList = Array.from(popupUserForm.querySelectorAll(`.${popupFormInputClassName}`));
-    toggleSumitButtonState(
-        popupUserForm.querySelector(globalSettings.submitButtonSelector),
-        inputList,
-        globalSettings.inactiveButtonClass);
-
-    inputList.forEach(inputElement => {
-        checkInputValidity(
-            popupUserForm,
-            inputElement,
-            globalSettings.errorClass);
-    });
+  
+    userFormValidator.revalidate();
 
     openPopup(popupUser);
 }
@@ -81,11 +76,6 @@ function closePopupUser() {
 function submitPopupUser(e) {
     e.preventDefault();
 
-    const inputList = Array.from(popupUserForm.querySelectorAll(globalSettings.inputSelector));
-    if (hasInvalidInput(inputList)) {
-        return;
-    }
-
     userName.textContent = popupUserInputName.value;
     userDescription.textContent = popupUserInputDescription.value;
 
@@ -98,13 +88,6 @@ function submitPopupUser(e) {
 /*************************/
 
 function openPopupNewPlace() {
-
-    const inputList = Array.from(popupNewPlaceForm.querySelectorAll(`.${popupFormInputClassName}`));
-    toggleSumitButtonState(
-        popupNewPlaceForm.querySelector(globalSettings.submitButtonSelector),
-        inputList,
-        globalSettings.inactiveButtonClass);
-
     openPopup(popupNewPlace);
 }
 
@@ -114,23 +97,18 @@ function closePopupNewPlace() {
 
 function submitPopupNewPlace(e) {
     e.preventDefault();
-
-    const inputList = Array.from(popupNewPlaceForm.querySelectorAll(`.${popupFormInputClassName}`));
-    if (hasInvalidInput(inputList)) {
-        return;
-    }
-    
+   
     const newCard = new Card({
             name: popupNewPlaceInputName.value,
             link: popupNewPlaceInputUrl.value
-        },'#place');    
+        },placeTemplateSelector);    
 
     apendPlace(newCard.createPlace());
 
     popupNewPlaceForm.reset();
+
     closePopup(popupNewPlace);
 }
-
 
 /***************************/
 /* CHILD POPUP: view place */
@@ -160,21 +138,6 @@ function apendPlace(newPlace) {
 
 
 /*******************/
-/*VALIDATION FORM  */
-/*******************/
-
-// enableValidation({
-//     formSelector: '.popup__form',
-//     inputSelector: '.popup__form-input',
-//     submitButtonSelector: '.popup__submit',
-//     inactiveButtonClass: 'popup__submit_disabled',
-//     inputErrorClass: 'popup__form-input_type_error',
-//     errorClass: 'popup__form-error_visible'
-//   });
-
-enableValidation(globalSettings);
-
-/*******************/
 /*EVENT LISTENERS  */
 /*******************/
 
@@ -197,6 +160,6 @@ popupPlaceViewBtnClose.addEventListener('click', closePopupPlaceView);
 /*******************/
 
 // populating initial data for places
-initialCards.forEach(obj =>  apendPlace(new Card(obj,'#place').createPlace()));
+initialCards.forEach(obj =>  apendPlace(new Card(obj,placeTemplateSelector).createPlace()));
 
 // openPopupNewPlace();

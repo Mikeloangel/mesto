@@ -17,7 +17,7 @@ export const globalSettings = {
 
 // UL for appending items and card template
 export const placesContainer = document.querySelector(".section-gallery__grid");
-// export const placeTemplate = document.querySelector('#place').content;
+export const placeTemplateSelector = '#place';
 
 // UI btns const
 export const userBtnEdit = document.querySelector('.section-user__edit');
