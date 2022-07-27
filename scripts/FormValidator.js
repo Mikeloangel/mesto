@@ -65,8 +65,14 @@ export class FormValidator{
         });      
     }
 
-    revalidate(){
+    /**
+     * revalidating form or just button
+     * 
+     * @param {Boolean} validateOnlyButton 
+     */
+    revalidate(validateOnlyButton = false){        
         this._toggleSumitButtonState();
-        this._inputList.forEach(inputElement => this._checkInputValidity(inputElement));
+        if(!validateOnlyButton)
+            this._inputList.forEach(inputElement => this._checkInputValidity(inputElement));
     }
 }

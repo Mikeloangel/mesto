@@ -120,6 +120,7 @@ function submitPopupNewPlace(e) {
     }, placeTemplateSelector));
 
     popupNewPlaceForm.reset();
+    formValidators[popupNewPlaceForm.name].revalidate(true);
 
     closePopup(popupNewPlace);
 }
