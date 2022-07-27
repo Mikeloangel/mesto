@@ -12,7 +12,10 @@ export const globalSettings = {
     errorClass: 'popup__form-error_visible'
 }
 
-// UL for appending items and card template
+// list of form validators objects
+export const formValidators = {}
+
+// containers and templates
 export const placesContainer = document.querySelector(".section-gallery__grid");
 export const placeTemplateSelector = '#place';
 

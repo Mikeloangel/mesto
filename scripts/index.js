@@ -1,9 +1,24 @@
-/*****************/
-/* Import Export */
-/*****************/
+/******************/
+/**** CONTENTS ****/
+//
+// 1. Import modules
+// 2. Enabling Form Validation
+// 3. Popups code
+// // 3.1. Parent popup
+// // 3.2. CHILD POPUP: user
+// // 3.3. CHILD POPUP: New Place
+// // 3.4. CHILD POPUP: view place 
+// 4. Other app functions
+// 5. Event listeners
+// 6. Frontend hardcode
+/******************/
+
+/********************/
+/* 1. Import Export */
+/********************/
 
 import {
-    globalSettings,
+    globalSettings, formValidators,
     placesContainer, placeTemplateSelector,
     userBtnEdit, placeBtnNew,
     userName, userDescription,
@@ -19,19 +34,16 @@ import {Card} from './card.js';
 import {FormValidator} from './FormValidator.js';
 
 
-/******************************/
-/* FORM VALIDATION OBJECT WAY */
-/******************************/
+/*********************************/
+/* 2. FORM VALIDATION OBJECT WAY */
+/*********************************/
 
-const userFormValidator = new FormValidator(globalSettings,document.forms.popup__form_edituser);
-userFormValidator.enableValidation();
+// какая же теперь красота, спасибо огромное за совет! ヽ(ヅ)ノ
+enableValidation(globalSettings);
 
-const newPlaceFormValidator = new FormValidator(globalSettings, document.forms.popup__form_newplace);
-newPlaceFormValidator.enableValidation();
-
-/*********************/
-/* PARENT POPUP CODE */
-/*********************/ 
+/*************************/
+/* 3.1 PARENT POPUP CODE */
+/*************************/ 
 
 function openPopup(popup) {
     document.addEventListener('keydown', handlePopupCloseEvents);
@@ -47,7 +59,12 @@ function closePopup(popup) {
     popup.removeEventListener('click', handlePopupCloseEvents);
 }
 
-//handling user actions for close on ESC or popup click
+
+/**
+ * handling user actions for close on ESC or popup click
+ *  
+ * @param {Object} e event
+ */
 function handlePopupCloseEvents(e) {
     if (e.key === 'Escape' || (e.type === 'click' && e.target.classList.contains('popup'))) {
         closePopup(document.querySelector(`.${popupOpenedClassName}`));
@@ -55,15 +72,15 @@ function handlePopupCloseEvents(e) {
 }
 
 
-/*********************/
-/* CHILD POPUP: user */
-/*********************/
+/*************************/
+/* 3.2 CHILD POPUP: user */
+/*************************/
 
 function openPopupUser() {
     popupUserInputName.value = userName.textContent;
     popupUserInputDescription.value = userDescription.textContent;
   
-    userFormValidator.revalidate();
+    formValidators[popupUserForm.name].revalidate();
 
     openPopup(popupUser);
 }
@@ -82,9 +99,9 @@ function submitPopupUser(e) {
 }
 
 
-/*************************/
-/* CHILD POPUP: New Place*/
-/*************************/
+/*****************************/
+/* 3.3 CHILD POPUP: New Place*/
+/*****************************/
 
 function openPopupNewPlace() {
     openPopup(popupNewPlace);
@@ -100,16 +117,16 @@ function submitPopupNewPlace(e) {
     apendPlace(createPlace({
         name: popupNewPlaceInputName.value,
         link: popupNewPlaceInputUrl.value
-    }));
+    }, placeTemplateSelector));
 
     popupNewPlaceForm.reset();
 
     closePopup(popupNewPlace);
 }
 
-/***************************/
-/* CHILD POPUP: view place */
-/***************************/
+/*******************************/
+/* 3.4 CHILD POPUP: view place */
+/*******************************/
 
 export function openPopupPlaceView(e) {
     popupPlaceViewImg.src = e.target.src;
@@ -124,24 +141,55 @@ function closePopupPlaceView() {
 }
 
 
-/***********************/
-/* OTHER APP FUNCTIONS */
-/***********************/
+/**************************/
+/* 4. OTHER APP FUNCTIONS */
+/**************************/
 
-// inserting card into places container
+/**
+ * inserting card into places container
+ * @param {DOM Node} newPlace 
+ */
 function apendPlace(newPlace) {
     placesContainer.prepend(newPlace);
 }
 
-// creating card
-function createPlace(obj){
-    return new Card(obj,placeTemplateSelector).createPlace();
+/**
+ * returns initalised and filled Card object based on obj data,
+ * 
+ * @param {Object} obj contains initial value for card and passes it to Card constructor (e.g. name, link )
+ * @returns {DOM node} 
+ */
+function createPlace(obj, selector = '#place'){
+    return new Card(obj, selector).createPlace();
 }
 
 
-/*******************/
-/*EVENT LISTENERS  */
-/*******************/
+/**
+ * enabling form validation OOP and universal way
+ *  
+ * @param {Object} settings 
+ */
+function enableValidation(settings){
+    const formList = Array.from(document.querySelectorAll(settings.formSelector));
+    formList.forEach( form => {
+        const formValidator = new FormValidator(settings,form);
+        const formName = form.name;
+        formValidator.enableValidation();
+        formValidators[formName] = formValidator;
+    });
+}
+
+function handleCardClick(obj){
+    popupPlaceViewImg.src = e.target.src;
+    popupPlaceViewImg.alt = e.target.alt;
+    popupPlaceViewCaption.textContent = e.target.alt;
+
+    openPopup(popupPlaceView);
+}
+
+/***********************/
+/* 5. EVENT LISTENERS  */
+/***********************/
 
 // POPUP user edit listeners
 userBtnEdit.addEventListener('click', openPopupUser);
@@ -157,9 +205,9 @@ popupNewPlaceForm.addEventListener('submit', submitPopupNewPlace);
 popupPlaceViewBtnClose.addEventListener('click', closePopupPlaceView);
 
 
-/*******************/
-/*FRONTEND HARDCODE*/
-/*******************/
+/***********************/
+/* 6. FRONTEND HARDCODE*/
+/***********************/
 
 // populating initial data for places
-initialCards.forEach(obj =>  apendPlace(createPlace(obj)));
+initialCards.forEach(obj =>  apendPlace(createPlace(obj, placeTemplateSelector)));
