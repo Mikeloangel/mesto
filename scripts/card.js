@@ -6,7 +6,7 @@ import {openPopupPlaceView} from './index.js'
 export class Card {
     /**
      * 
-     * @param {Object} data object with form settings
+     * @param {Object} data object with form settings (name and link)
      * @param {String} templateSelector selector name 
      */
     constructor(data,templateSelector){

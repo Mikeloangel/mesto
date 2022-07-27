@@ -14,6 +14,7 @@ import {
   } from './data.js';    
 
 import {initialCards} from './places.js';
+
 import {Card} from './card.js';
 import {FormValidator} from './FormValidator.js';
 
@@ -96,12 +97,10 @@ function closePopupNewPlace() {
 function submitPopupNewPlace(e) {
     e.preventDefault();
    
-    const newCard = new Card({
-            name: popupNewPlaceInputName.value,
-            link: popupNewPlaceInputUrl.value
-        },placeTemplateSelector);    
-
-    apendPlace(newCard.createPlace());
+    apendPlace(createPlace({
+        name: popupNewPlaceInputName.value,
+        link: popupNewPlaceInputUrl.value
+    }));
 
     popupNewPlaceForm.reset();
 
@@ -125,13 +124,18 @@ function closePopupPlaceView() {
 }
 
 
-/************************/
-/* PLACE ITEMS FUNCTIONS */
-/************************/
+/***********************/
+/* OTHER APP FUNCTIONS */
+/***********************/
 
-// add this beautifull place like a charm
+// inserting card into places container
 function apendPlace(newPlace) {
     placesContainer.prepend(newPlace);
+}
+
+// creating card
+function createPlace(obj){
+    return new Card(obj,placeTemplateSelector).createPlace();
 }
 
 
@@ -158,4 +162,4 @@ popupPlaceViewBtnClose.addEventListener('click', closePopupPlaceView);
 /*******************/
 
 // populating initial data for places
-initialCards.forEach(obj =>  apendPlace(new Card(obj,placeTemplateSelector).createPlace()));
+initialCards.forEach(obj =>  apendPlace(createPlace(obj)));

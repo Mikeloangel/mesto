@@ -4,8 +4,8 @@
 export class FormValidator{
     /**
      * 
-     * @param {Object} settings 
-     * @param {Object} formElement prototype from HTMLFormElement
+     * @param {Object} settings object with settings 
+     * @param {Object} formElement accepts HTMLFormElement
      */
     constructor(settings, formElement){
         this._formSelector = settings.formSelector; //       
@@ -67,8 +67,6 @@ export class FormValidator{
 
     revalidate(){
         this._toggleSumitButtonState();
-        this._inputList.forEach( inputElement => {
-            this._checkInputValidity(inputElement);
-        });
+        this._inputList.forEach(inputElement => this._checkInputValidity(inputElement));
     }
 }
