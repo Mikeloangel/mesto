@@ -179,9 +179,8 @@ function enableValidation(settings){
     const formList = Array.from(document.querySelectorAll(settings.formSelector));
     formList.forEach( form => {
         const formValidator = new FormValidator(settings,form);
-        const formName = form.name;
         formValidator.enableValidation();
-        formValidators[formName] = formValidator;
+        formValidators[form.name] = formValidator;
     });
 }
 
