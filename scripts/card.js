@@ -1,5 +1,3 @@
-import {openPopupPlaceView} from './index.js'
-
 /**
  * Class to create a Card object to insert in DOM
  */
@@ -8,11 +6,13 @@ export class Card {
      * 
      * @param {Object} data object with form settings (name and link)
      * @param {String} templateSelector selector name 
+     * @param {Functon} handleCardClick this function will be called to open card
      */
-    constructor(data,templateSelector){
+    constructor(data, templateSelector, handleCardClick){
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate(){
@@ -35,7 +35,13 @@ export class Card {
     }
 
     _openPopup(e){
-        openPopupPlaceView(e);
+        // вот это да, кайф =) функция как тип данных в JS это что то :-D 
+        // еще раз, спасибо, эту работу было делать оочень интересно! 
+        // °\(^▿^)/°
+        this._handleCardClick({
+            name: this._name,
+            link: this._link
+        });
     }
     
     createPlace(){

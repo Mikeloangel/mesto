@@ -128,10 +128,17 @@ function submitPopupNewPlace(e) {
 /* 3.4 CHILD POPUP: view place */
 /*******************************/
 
-export function openPopupPlaceView(e) {
-    popupPlaceViewImg.src = e.target.src;
-    popupPlaceViewImg.alt = e.target.alt;
-    popupPlaceViewCaption.textContent = e.target.alt;
+export function openPopupPlaceView(e) {    
+    handleCardClick({
+        name: e.target.name,
+        link: e.target.link
+    });
+}
+
+function handleCardClick(obj){
+    popupPlaceViewImg.src = obj.link;
+    popupPlaceViewImg.alt = obj.name;
+    popupPlaceViewCaption.textContent = obj.name;
 
     openPopup(popupPlaceView);
 }
@@ -139,7 +146,6 @@ export function openPopupPlaceView(e) {
 function closePopupPlaceView() {
     closePopup(popupPlaceView);
 }
-
 
 /**************************/
 /* 4. OTHER APP FUNCTIONS */
@@ -160,7 +166,7 @@ function apendPlace(newPlace) {
  * @returns {DOM node} 
  */
 function createPlace(obj, selector = '#place'){
-    return new Card(obj, selector).createPlace();
+    return new Card(obj, selector, handleCardClick).createPlace();
 }
 
 
@@ -179,13 +185,6 @@ function enableValidation(settings){
     });
 }
 
-function handleCardClick(obj){
-    popupPlaceViewImg.src = e.target.src;
-    popupPlaceViewImg.alt = e.target.alt;
-    popupPlaceViewCaption.textContent = e.target.alt;
-
-    openPopup(popupPlaceView);
-}
 
 /***********************/
 /* 5. EVENT LISTENERS  */
