@@ -37,7 +37,8 @@ export class Card {
     _openPopup(e){
         // вот это да, кайф =) функция как тип данных в JS это что то :-D 
         // еще раз, спасибо, эту работу было делать оочень интересно! 
-        // °\(^▿^)/°
+        // °\(^▿^)/° 
+        
         this._handleCardClick({
             name: this._name,
             link: this._link
