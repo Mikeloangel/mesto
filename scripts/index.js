@@ -38,8 +38,8 @@ import {FormValidator} from './FormValidator.js';
 /* 2. FORM VALIDATION OBJECT WAY */
 /*********************************/
 
-// какая же теперь красота, спасибо огромное за совет! ヽ(ヅ)ノ
 enableValidation(globalSettings);
+
 
 /*************************/
 /* 3.1 PARENT POPUP CODE */
@@ -129,17 +129,19 @@ function submitPopupNewPlace(e) {
 /* 3.4 CHILD POPUP: view place */
 /*******************************/
 
-export function openPopupPlaceView(e) {    
-    handleCardClick({
-        name: e.target.name,
-        link: e.target.link
-    });
-}
+// this function is not used, handleCardClick now actual
+// for the same purpose
+// function openPopupPlaceView(e) {    
+//     handleCardClick({
+//         name: e.target.name,
+//         link: e.target.link
+//     });
+// }
 
-function handleCardClick(obj){
-    popupPlaceViewImg.src = obj.link;
-    popupPlaceViewImg.alt = obj.name;
-    popupPlaceViewCaption.textContent = obj.name;
+function handleCardClick(){
+    popupPlaceViewImg.src = this._link;
+    popupPlaceViewImg.alt = this._name;
+    popupPlaceViewCaption.textContent = this._name;
 
     openPopup(popupPlaceView);
 }
