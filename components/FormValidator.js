@@ -1,7 +1,7 @@
 /**
  * Class to enable form validation
  */
-export class FormValidator{
+export default class FormValidator{
     /**
      * 
      * @param {Object} settings object with settings 

@@ -16,7 +16,8 @@ export const globalSettings = {
 export const formValidators = {}
 
 // containers and templates
-export const placesContainer = document.querySelector(".section-gallery__grid");
+export const placesContainerSelector = '.section-gallery__grid';
+export const placesContainer = document.querySelector(placesContainerSelector);
 export const placeTemplateSelector = '#place';
 
 // UI btns const

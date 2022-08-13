@@ -8,7 +8,7 @@
 // // 3.2. CHILD POPUP: user
 // // 3.3. CHILD POPUP: New Place
 // // 3.4. CHILD POPUP: view place 
-// 4. Other app functions
+// 4. SECTION: cards rendering
 // 5. Event listeners
 // 6. Frontend hardcode
 /******************/
@@ -19,19 +19,21 @@
 
 import {
     globalSettings, formValidators,
-    placesContainer, placeTemplateSelector,
+    placesContainerSelector, placesContainer, placeTemplateSelector,
     userBtnEdit, placeBtnNew,
     userName, userDescription,
     popupOpenedClassName,
     popupUser, popupUserBtnClose, popupUserForm, popupUserInputName, popupUserInputDescription,
     popupNewPlace, popupNewPlaceBtnClose, popupNewPlaceForm, popupNewPlaceInputName, popupNewPlaceInputUrl,
     popupPlaceView, popupPlaceViewBtnClose, popupPlaceViewImg, popupPlaceViewCaption
-  } from '../utils/data.js';    
+} from '../utils/data.js';
 
-import {initialCards} from '../utils/places.js';
+import initialCards from '../utils/places.js';
 
-import {Card} from '../components/card.js';
-import {FormValidator} from '../components/FormValidator.js';
+import Section from '../components/Section.js'
+import Card from '../components/card.js';
+import FormValidator from '../components/FormValidator.js';
+
 
 
 /*********************************/
@@ -40,10 +42,23 @@ import {FormValidator} from '../components/FormValidator.js';
 
 enableValidation(globalSettings);
 
+/**
+ * enabling form validation OOP and universal way
+ *  
+ * @param {Object} settings 
+ */
+ function enableValidation(settings) {
+    const formList = Array.from(document.querySelectorAll(settings.formSelector));
+    formList.forEach(form => {
+        const formValidator = new FormValidator(settings, form);
+        formValidator.enableValidation();
+        formValidators[form.name] = formValidator;
+    });
+}
 
 /*************************/
 /* 3.1 PARENT POPUP CODE */
-/*************************/ 
+/*************************/
 
 function openPopup(popup) {
     document.addEventListener('keydown', handlePopupCloseEvents);
@@ -79,7 +94,7 @@ function handlePopupCloseEvents(e) {
 function openPopupUser() {
     popupUserInputName.value = userName.textContent;
     popupUserInputDescription.value = userDescription.textContent;
-  
+
     formValidators[popupUserForm.name].revalidate();
 
     openPopup(popupUser);
@@ -113,8 +128,13 @@ function closePopupNewPlace() {
 
 function submitPopupNewPlace(e) {
     e.preventDefault();
-   
-    apendPlace(createPlace({
+
+    // apendPlace(createPlace({
+    //     name: popupNewPlaceInputName.value,
+    //     link: popupNewPlaceInputUrl.value
+    // }, placeTemplateSelector));
+
+    cardSection.addItem(createPlace({
         name: popupNewPlaceInputName.value,
         link: popupNewPlaceInputUrl.value
     }, placeTemplateSelector));
@@ -129,7 +149,9 @@ function submitPopupNewPlace(e) {
 /* 3.4 CHILD POPUP: view place */
 /*******************************/
 
-// this function is not used, handleCardClick now actual
+// this function is now OBSOLETE,
+//
+// handleCardClick now actual
 // for the same purpose
 // function openPopupPlaceView(e) {    
 //     handleCardClick({
@@ -138,7 +160,7 @@ function submitPopupNewPlace(e) {
 //     });
 // }
 
-function handleCardClick(link, name){
+function handleCardClick(link, name) {
     popupPlaceViewImg.src = link;
     popupPlaceViewImg.alt = name;
     popupPlaceViewCaption.textContent = name;
@@ -153,17 +175,35 @@ function closePopupPlaceView() {
     closePopup(popupPlaceView);
 }
 
-/**************************/
-/* 4. OTHER APP FUNCTIONS */
-/**************************/
+/*******************************/
+/* 4. SECTION: cards rendering */
+/*******************************/
+
+const cardSection = new Section(
+    {
+        items: initialCards,
+        renderer: (card) => {
+            const newCardElement = createPlace({
+                name: card.name,
+                link: card.link
+            }, placeTemplateSelector)
+            cardSection.addItem(newCardElement);
+        }
+    },
+    placesContainerSelector
+);
+
+cardSection.render();
 
 /**
+ * THIS function is now OBSOLETE
+ * 
  * inserting card into places container
  * @param {DOM Node} newPlace 
  */
-function apendPlace(newPlace) {
-    placesContainer.prepend(newPlace);
-}
+// function apendPlace(newPlace) {
+//     placesContainer.prepend(newPlace);
+// }
 
 /**
  * returns initalised and filled Card object based on obj data,
@@ -171,24 +211,10 @@ function apendPlace(newPlace) {
  * @param {Object} obj contains initial value for card and passes it to Card constructor (e.g. name, link )
  * @returns {DOM node} 
  */
-function createPlace(obj, selector = '#place'){
+function createPlace(obj, selector = '#place') {
     return new Card(obj, selector, handleCardClick).createPlace();
 }
 
-
-/**
- * enabling form validation OOP and universal way
- *  
- * @param {Object} settings 
- */
-function enableValidation(settings){
-    const formList = Array.from(document.querySelectorAll(settings.formSelector));
-    formList.forEach( form => {
-        const formValidator = new FormValidator(settings,form);
-        formValidator.enableValidation();
-        formValidators[form.name] = formValidator;
-    });
-}
 
 
 /***********************/
@@ -213,5 +239,6 @@ popupPlaceViewBtnClose.addEventListener('click', closePopupPlaceView);
 /* 6. FRONTEND HARDCODE*/
 /***********************/
 
+// OBSOLETE now this done in section object
 // populating initial data for places
-initialCards.forEach(obj =>  apendPlace(createPlace(obj, placeTemplateSelector)));
+// initialCards.forEach(obj =>  apendPlace(createPlace(obj, placeTemplateSelector)));
