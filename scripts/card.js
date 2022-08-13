@@ -23,7 +23,7 @@ export class Card {
     _setEventListeners(template){
         template.querySelector('.place__like').addEventListener('click', e => this._toggleLike(e.target));
         template.querySelector('.place__trash').addEventListener('click', e => this._removePlace(e.target.closest('.place__item')));
-        template.querySelector('.place__img').addEventListener('click', e => this._handleCardClick());
+        template.querySelector('.place__img').addEventListener('click', e => this._handleCardClick(this._link,this._name));
     }
 
     _toggleLike(likeElement){

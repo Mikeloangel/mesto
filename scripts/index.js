@@ -138,15 +138,18 @@ function submitPopupNewPlace(e) {
 //     });
 // }
 
-function handleCardClick(){
-    popupPlaceViewImg.src = this._link;
-    popupPlaceViewImg.alt = this._name;
-    popupPlaceViewCaption.textContent = this._name;
+function handleCardClick(link, name){
+    popupPlaceViewImg.src = link;
+    popupPlaceViewImg.alt = name;
+    popupPlaceViewCaption.textContent = name;
 
     openPopup(popupPlaceView);
 }
 
 function closePopupPlaceView() {
+    popupPlaceViewImg.src = '';
+    popupPlaceViewImg.alt = '';
+    popupPlaceViewCaption.textContent = '';
     closePopup(popupPlaceView);
 }
 
