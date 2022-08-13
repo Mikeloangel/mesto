@@ -33,12 +33,16 @@ import initialCards from '../utils/places.js';
 import Section from '../components/Section.js'
 import Card from '../components/card.js';
 import FormValidator from '../components/FormValidator.js';
+import Popup from '../components/Popup.js';
 
 
+// const usrP = new Popup({popupSelector:'.popup_edituser'});
+// usrP.open();
+// usrP.close();
 
-/*********************************/
-/* 2. FORM VALIDATION OBJECT WAY */
-/*********************************/
+/***********************/
+/* 2. FORM VALIDATION  */
+/***********************/
 
 enableValidation(globalSettings);
 
