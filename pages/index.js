@@ -26,12 +26,12 @@ import {
     popupUser, popupUserBtnClose, popupUserForm, popupUserInputName, popupUserInputDescription,
     popupNewPlace, popupNewPlaceBtnClose, popupNewPlaceForm, popupNewPlaceInputName, popupNewPlaceInputUrl,
     popupPlaceView, popupPlaceViewBtnClose, popupPlaceViewImg, popupPlaceViewCaption
-  } from './data.js';    
+  } from '../utils/data.js';    
 
-import {initialCards} from './places.js';
+import {initialCards} from '../utils/places.js';
 
-import {Card} from './card.js';
-import {FormValidator} from './FormValidator.js';
+import {Card} from '../components/card.js';
+import {FormValidator} from '../components/FormValidator.js';
 
 
 /*********************************/
