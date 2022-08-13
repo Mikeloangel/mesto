@@ -1,6 +1,6 @@
 {
   "name": "mesto",
-  "version": "8.0.0",
+  "version": "8.2.0",
   "description": "Awesome website to show beauty of places",
   "main": "./src/pages/index.js",
   "scripts": {
