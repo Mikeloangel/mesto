@@ -67,8 +67,7 @@ const popupUserEdit = new PopupWithForm(
     handleSubmit: (e) => {
       e.preventDefault();
 
-      //gets all named inputs and sets its values
-      const formValues = popupUserEdit._getInputValues();
+      const formValues = popupUserEdit.getInputValues();
 
       userInfo.setUserInfo({
         name:formValues['popup__user-name'],
@@ -78,10 +77,13 @@ const popupUserEdit = new PopupWithForm(
       popupUserEdit.close();
     },
     handleOpen: () => {
-      // const formValues = popupUserEdit._getInputValues();
       const uinfo = userInfo.getUserInfo();
-      popupUserEdit._form.querySelector('.popup__user-name').value = uinfo.name;
-      popupUserEdit._form.querySelector('.popup__user-description').value = uinfo.description;
+
+      //  ~(˘▾˘~) ~(˘▾˘)~ (~˘▾˘)~
+      popupUserEdit.setInputValues({
+        'popup__user-name': uinfo.name,
+        'popup__user-description': uinfo.description
+      })
 
       formValidators[popupUserEdit._form.name].revalidate();
     }
@@ -97,7 +99,7 @@ const popupAddCard = new PopupWithForm(
     handleSubmit: (e) => {
       e.preventDefault();
 
-      const formValues = popupAddCard._getInputValues();
+      const formValues = popupAddCard.getInputValues();
 
       cardSection.addItem(createPlace({
         name: formValues['popup__place-name'],

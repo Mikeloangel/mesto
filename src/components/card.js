@@ -18,13 +18,19 @@ export default class Card {
 
   _getTemplate() {
     const cardElement = document.querySelector(this._templateSelector).content.cloneNode(true);
+
+    this._imgElement = cardElement.querySelector('.place__img');
+    this._titleElement = cardElement.querySelector('.place__title');
+    this._likeElement = cardElement.querySelector('.place__like');
+    this._trashElement = cardElement.querySelector('.place__trash');
+
     return cardElement;
   }
 
   _setEventListeners(template) {
-    template.querySelector('.place__like').addEventListener('click', e => this._toggleLike(e.target));
-    template.querySelector('.place__trash').addEventListener('click', e => this._removePlace(e.target.closest('.place__item')));
-    template.querySelector('.place__img').addEventListener('click', e => this._handleCardClick(this._link, this._name));
+    this._likeElement.addEventListener('click', e => this._toggleLike(e.target));
+    this._trashElement.addEventListener('click', e => this._removePlace(e.target.closest('.place__item')));
+    this._imgElement.addEventListener('click', e => this._handleCardClick(this._link, this._name));
   }
 
   _toggleLike(likeElement) {
@@ -39,12 +45,9 @@ export default class Card {
   createPlace() {
     const newPlace = this._getTemplate();
 
-    const imgItem = newPlace.querySelector('.place__img');
-    const titleItem = newPlace.querySelector('.place__title');
-
-    imgItem.src = this._link;
-    imgItem.alt = this._name;
-    titleItem.textContent = this._name;
+    this._imgElement.src = this._link;
+    this._imgElement.alt = this._name;
+    this._titleElement.textContent = this._name;
 
     this._setEventListeners(newPlace);
 
