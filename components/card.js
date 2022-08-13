@@ -33,6 +33,7 @@ export default class Card {
 
   _removePlace(placeElement) {
     placeElement.remove();
+    placeElement = null;
   }
 
   createPlace() {
