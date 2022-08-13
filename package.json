@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "8.0.0",
+  "description": "Awesome website to show beauty of places",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mikeloangel/mesto.git"
+  },
+  "author": "Mikhail Varushichev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mikeloangel/mesto/issues"
+  },
+  "homepage": "https://github.com/Mikeloangel/mesto#readme"
+}
