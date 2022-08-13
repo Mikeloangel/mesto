@@ -1,2 +1,4 @@
 .DS_Store
 /utils-old
+/node_modules
+/dist
