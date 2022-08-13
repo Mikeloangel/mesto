@@ -33,10 +33,10 @@ import initialCards from '../utils/places.js';
 import Section from '../components/Section.js'
 import Card from '../components/card.js';
 import FormValidator from '../components/FormValidator.js';
-import Popup from '../components/Popup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 
-// const usrP = new Popup({popupSelector:'.popup_edituser'});
+// const usrP = new PopupWithImage({popupSelector:'.popup_edituser'});
 // usrP.open();
 // usrP.close();
 
@@ -153,31 +153,27 @@ function submitPopupNewPlace(e) {
 /* 3.4 CHILD POPUP: view place */
 /*******************************/
 
-// this function is now OBSOLETE,
-//
-// handleCardClick now actual
-// for the same purpose
-// function openPopupPlaceView(e) {    
-//     handleCardClick({
-//         name: e.target.name,
-//         link: e.target.link
-//     });
+const popupImage = new PopupWithImage({popupSelector:'.popup_viewplace'});
+
+function handleCardClick(link, name) {    
+    popupImage.open({link,name});
+}
+
+// THIS function is now OBSOLETE
+// function handleCardClick(link, name) {
+//     // popupPlaceViewImg.src = link;
+//     // popupPlaceViewImg.alt = name;
+//     // popupPlaceViewCaption.textContent = name;
+    
+//     // openPopup(popupPlaceView);
 // }
-
-function handleCardClick(link, name) {
-    popupPlaceViewImg.src = link;
-    popupPlaceViewImg.alt = name;
-    popupPlaceViewCaption.textContent = name;
-
-    openPopup(popupPlaceView);
-}
-
-function closePopupPlaceView() {
-    popupPlaceViewImg.src = '';
-    popupPlaceViewImg.alt = '';
-    popupPlaceViewCaption.textContent = '';
-    closePopup(popupPlaceView);
-}
+// THIS function is now OBSOLETE
+// function closePopupPlaceView() {
+//     popupPlaceViewImg.src = '';
+//     popupPlaceViewImg.alt = '';
+//     popupPlaceViewCaption.textContent = '';
+//     closePopup(popupPlaceView);
+// }
 
 /*******************************/
 /* 4. SECTION: cards rendering */
@@ -235,8 +231,9 @@ placeBtnNew.addEventListener('click', openPopupNewPlace);
 popupNewPlaceBtnClose.addEventListener('click', closePopupNewPlace);
 popupNewPlaceForm.addEventListener('submit', submitPopupNewPlace);
 
+// THIS event listeners now OBSOLETE
 // POPUP view place listeners
-popupPlaceViewBtnClose.addEventListener('click', closePopupPlaceView);
+// popupPlaceViewBtnClose.addEventListener('click', closePopupPlaceView);
 
 
 /***********************/
