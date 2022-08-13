@@ -13,6 +13,7 @@
 /********************/
 /* 1. Import Export */
 /********************/
+import './index.css';
 
 import {
   globalSettings, formValidators,
