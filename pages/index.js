@@ -5,8 +5,9 @@
 // 2. Enabling Form Validation
 // 3. Popups
 // 4. SECTION: cards rendering
-// 5. Event listeners
-// 6. Frontend hardcode
+// 5. User Info
+// 6. Event listeners
+// 7. Frontend hardcode
 /******************/
 
 /********************/
@@ -18,10 +19,10 @@ import {
   placesContainerSelector,
   placeTemplateSelector,
   userBtnEdit, placeBtnNew,
-  userName, userDescription,
 } from '../utils/data.js';
 
 import initialCards from '../utils/places.js';
+import initialUser from '../utils/user.js'
 
 import Section from '../components/Section.js'
 import Card from '../components/card.js';
@@ -29,6 +30,8 @@ import FormValidator from '../components/FormValidator.js';
 
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+
+import UserInfo from '../components/UserInfo.js';
 
 
 /***********************/
@@ -62,13 +65,24 @@ const popupUserEdit = new PopupWithForm(
     popupSelector: '.popup_edituser',
     handleSubmit: (e) => {
       e.preventDefault();
+
+      //gets all named inputs and sets its values
       const formValues = popupUserEdit._getInputValues();
 
-      userName.textContent = formValues['popup__user-name'];
-      userDescription.textContent = formValues['popup__user-description'];
+      userInfo.setUserInfo({
+        name:formValues['popup__user-name'],
+        description:formValues['popup__user-description']
+      })
 
       popupUserEdit.close();
-      formValidators[popupUserEdit._form.name].revalidate(true);
+    },
+    handleOpen: () => {
+      // const formValues = popupUserEdit._getInputValues();
+      const uinfo = userInfo.getUserInfo();
+      popupUserEdit._form.querySelector('.popup__user-name').value = uinfo.name;
+      popupUserEdit._form.querySelector('.popup__user-description').value = uinfo.description;
+
+      formValidators[popupUserEdit._form.name].revalidate();
     }
   }
 );
@@ -137,8 +151,17 @@ function createPlace(obj, selector = '#place') {
   return new Card(obj, selector, handleCardClick).createPlace();
 }
 
+/*****************/
+/* 5. User Info  */
+/*****************/
+
+const userInfo =  new UserInfo({
+  nameSelector:'.section-user__name',
+  descriptionSelector: '.section-user__description'
+});
+
 /***********************/
-/* 5. EVENT LISTENERS  */
+/* 6. EVENT LISTENERS  */
 /***********************/
 
 // user edit btn listener
@@ -150,5 +173,9 @@ placeBtnNew.addEventListener('click', popupAddCard.open.bind(popupAddCard));
 
 
 /***********************/
-/* 6. FRONTEND HARDCODE*/
+/* 7. FRONTEND HARDCODE*/
 /***********************/
+userInfo.setUserInfo({
+  name: initialUser.name,
+  description: initialUser.description
+})

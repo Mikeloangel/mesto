@@ -15,17 +15,12 @@ export const globalSettings = {
 // list of form validators objects
 export const formValidators = {}
 
-// containers and templates
+// Selectors
 export const placesContainerSelector = '.section-gallery__grid';
 export const placeTemplateSelector = '#place';
 
 // UI btns const
 export const userBtnEdit = document.querySelector('.section-user__edit');
 export const placeBtnNew = document.querySelector('.section-user__addpost');
-
-
-// user section const
-export const userName = document.querySelector('.section-user__name');
-export const userDescription = document.querySelector('.section-user__description');
 
 
