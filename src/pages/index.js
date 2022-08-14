@@ -77,12 +77,12 @@ const popupUserEdit = new PopupWithForm(
       popupUserEdit.close();
     },
     handleOpen: () => {
-      const uinfo = userInfo.getUserInfo();
+      const {name, description} = userInfo.getUserInfo();
 
       //  ~(˘▾˘~) ~(˘▾˘)~ (~˘▾˘)~
       popupUserEdit.setInputValues({
-        'popup__user-name': uinfo.name,
-        'popup__user-description': uinfo.description
+        'popup__user-name': name,
+        'popup__user-description': description
       })
 
       formValidators[popupUserEdit._form.name].revalidate();
@@ -151,7 +151,7 @@ cardSection.render();
  * @returns {DOM node}
  */
 function createPlace(obj, selector = '#place') {
-  return new Card(obj, selector, handleCardClick).createPlace();
+  return new Card(obj, selector, handleCardClick).createCard();
 }
 
 /*****************/

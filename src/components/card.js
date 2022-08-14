@@ -16,41 +16,39 @@ export default class Card {
     this._handleCardClick = handleCardClick;
   }
 
-  _getTemplate() {
-    const cardElement = document.querySelector(this._templateSelector).content.cloneNode(true);
+  _setTemplate() {
+    this._cardElement = document.querySelector(this._templateSelector).content.cloneNode(true);
 
-    this._imgElement = cardElement.querySelector('.place__img');
-    this._titleElement = cardElement.querySelector('.place__title');
-    this._likeElement = cardElement.querySelector('.place__like');
-    this._trashElement = cardElement.querySelector('.place__trash');
-
-    return cardElement;
+    this._imgElement = this._cardElement.querySelector('.place__img');
+    this._titleElement = this._cardElement.querySelector('.place__title');
+    this._likeElement = this._cardElement.querySelector('.place__like');
+    this._trashElement = this._cardElement.querySelector('.place__trash');
   }
 
-  _setEventListeners(template) {
-    this._likeElement.addEventListener('click', e => this._toggleLike(e.target));
-    this._trashElement.addEventListener('click', e => this._removePlace(e.target.closest('.place__item')));
-    this._imgElement.addEventListener('click', e => this._handleCardClick(this._link, this._name));
+  _setEventListeners() {
+    this._likeElement.addEventListener('click', this._toggleLike.bind(this));
+    this._trashElement.addEventListener('click', e => this._removeCard(e.target.closest('.place__item')));
+    this._imgElement.addEventListener('click', () => this._handleCardClick(this._link, this._name));
   }
 
-  _toggleLike(likeElement) {
-    likeElement.classList.toggle('place__like_active');
+  _toggleLike() {
+    this._likeElement.classList.toggle('place__like_active');
   }
 
-  _removePlace(placeElement) {
-    placeElement.remove();
-    placeElement = null;
+  _removeCard(cardElement) {
+    cardElement.remove();
+    cardElement = null;
   }
 
-  createPlace() {
-    const newPlace = this._getTemplate();
+  createCard() {
+    this._setTemplate();
 
     this._imgElement.src = this._link;
     this._imgElement.alt = this._name;
     this._titleElement.textContent = this._name;
 
-    this._setEventListeners(newPlace);
+    this._setEventListeners();
 
-    return newPlace;
+    return this._cardElement;
   }
 }
