@@ -17,7 +17,8 @@ export default class Card {
   }
 
   _setTemplate() {
-    this._cardElement = document.querySelector(this._templateSelector).content.cloneNode(true);
+    // this._cardElement = document.querySelector(this._templateSelector).content.cloneNode(true);
+    this._cardElement = document.querySelector(this._templateSelector).content.cloneNode(true).querySelector('.place__item');
 
     this._imgElement = this._cardElement.querySelector('.place__img');
     this._titleElement = this._cardElement.querySelector('.place__title');
@@ -27,7 +28,8 @@ export default class Card {
 
   _setEventListeners() {
     this._likeElement.addEventListener('click', this._toggleLike.bind(this));
-    this._trashElement.addEventListener('click', e => this._removeCard(e.target.closest('.place__item')));
+    // this._trashElement.addEventListener('click', e => this._removeCard(e.target.closest('.place__item')));
+    this._trashElement.addEventListener('click', this._removeCard.bind(this));
     this._imgElement.addEventListener('click', () => this._handleCardClick(this._link, this._name));
   }
 
@@ -35,9 +37,14 @@ export default class Card {
     this._likeElement.classList.toggle('place__like_active');
   }
 
-  _removeCard(cardElement) {
-    cardElement.remove();
-    cardElement = null;
+  // _removeCard(cardElement) {
+  //   cardElement.remove();
+  //   cardElement = null;
+  // }
+
+  _removeCard() {
+    this._cardElement.remove()
+    this._cardElement=null;
   }
 
   createCard() {
