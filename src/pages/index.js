@@ -70,14 +70,14 @@ const popupUserEdit = new PopupWithForm(
       const formValues = popupUserEdit.getInputValues();
 
       userInfo.setUserInfo({
-        name:formValues['popup__user-name'],
-        description:formValues['popup__user-description']
+        name: formValues['popup__user-name'],
+        description: formValues['popup__user-description']
       })
 
       popupUserEdit.close();
     },
     handleOpen: () => {
-      const {name, description} = userInfo.getUserInfo();
+      const { name, description } = userInfo.getUserInfo();
 
       //  ~(˘▾˘~) ~(˘▾˘)~ (~˘▾˘)~
       popupUserEdit.setInputValues({
@@ -158,8 +158,8 @@ function createPlace(obj, selector = '#place') {
 /* 5. User Info  */
 /*****************/
 
-const userInfo =  new UserInfo({
-  nameSelector:'.section-user__name',
+const userInfo = new UserInfo({
+  nameSelector: '.section-user__name',
   descriptionSelector: '.section-user__description'
 });
 
@@ -182,3 +182,5 @@ userInfo.setUserInfo({
   name: initialUser.name,
   description: initialUser.description
 })
+
+

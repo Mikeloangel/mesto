@@ -18,6 +18,7 @@ export default class Card {
 
   _setTemplate() {
     // this._cardElement = document.querySelector(this._templateSelector).content.cloneNode(true);
+    // getting reference item from #document-fragment to use it in _removeCard()
     this._cardElement = document.querySelector(this._templateSelector).content.cloneNode(true).querySelector('.place__item');
 
     this._imgElement = this._cardElement.querySelector('.place__img');
