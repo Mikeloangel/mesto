@@ -22,8 +22,8 @@ import {
   userBtnEdit, placeBtnNew,
 } from '../utils/data.js';
 
-import initialCards from '../utils/places.js';
-import initialUser from '../utils/user.js'
+// import initialCards from '../utils/places.js';
+const initialCards =  [];
 
 import Section from '../components/Section.js'
 import Card from '../components/card.js';
@@ -33,6 +33,19 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/api.js'
+
+
+/*******************************/
+/*******************************/
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-49',
+  headers: {
+    authorization: 'f965250c-63b8-497e-85ae-bfe5bf7bc71a',
+    'Content-Type': 'application/json'
+  }
+});
 
 
 /***********************/
@@ -79,7 +92,6 @@ const popupUserEdit = new PopupWithForm(
     handleOpen: () => {
       const { name, description } = userInfo.getUserInfo();
 
-      //  ~(˘▾˘~) ~(˘▾˘)~ (~˘▾˘)~
       popupUserEdit.setInputValues({
         'popup__user-name': name,
         'popup__user-description': description
@@ -122,7 +134,6 @@ function handleCardClick(link, name) {
   popupImage.open({ link, name });
 }
 
-
 /*******************************/
 /* 4. SECTION: cards rendering */
 /*******************************/
@@ -160,8 +171,21 @@ function createPlace(obj, selector = '#place') {
 
 const userInfo = new UserInfo({
   nameSelector: '.section-user__name',
-  descriptionSelector: '.section-user__description'
+  descriptionSelector: '.section-user__description',
+  avaSelector: '.section-user__pic'
 });
+
+api.getUserMe()
+  .then(res => res.ok ? res.json() : Promise.reject(res.status))
+  .then(udata => {
+    userInfo.setUserInfo(udata);
+  })
+  .catch(err => {
+    api.handleError(err);
+    userInfo.setUserInfo({})
+  });
+
+
 
 /***********************/
 /* 6. EVENT LISTENERS  */
@@ -178,9 +202,5 @@ placeBtnNew.addEventListener('click', popupAddCard.open.bind(popupAddCard));
 /***********************/
 /* 7. FRONTEND HARDCODE*/
 /***********************/
-userInfo.setUserInfo({
-  name: initialUser.name,
-  description: initialUser.description
-})
 
 
