@@ -9,7 +9,7 @@ export default class Card {
    * @param {Functon} handleCardClick this function will be called to open card
    */
 
-  constructor({ name, link, _id, likes, createdAt, owner }, templateSelector, handleCardClick, handleCardDelete, currentUser) {
+  constructor({ name, link, _id, likes, createdAt, owner }, templateSelector, handleCardClick, handleCardDelete, currentUser, handleLikeClick) {
     this._name = name;
     this._link = link;
     this._id = _id;
@@ -17,11 +17,19 @@ export default class Card {
     this._createdAt = createdAt;
     this._owner = owner;
 
+    this._currentUser = currentUser;
+
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleCardDelete = handleCardDelete;
+    this._handleLike = handleLikeClick;
 
     this.isOwner = this._owner._id === currentUser._id;
+    this.updateIsLikedByOwner();
+  }
+
+  updateIsLikedByOwner(){
+    this.isLikedbyOwner = this._likes.some(like => like._id === this._currentUser._id);
   }
 
   _setTemplate() {
@@ -36,6 +44,10 @@ export default class Card {
     if (!this.isOwner) {
       this._trashElement.remove();
     }
+
+    if(this.isLikedbyOwner){
+      this._putLike();
+    }
   }
 
   _setEventListeners() {
@@ -44,13 +56,26 @@ export default class Card {
     if (this.isOwner) this._trashElement.addEventListener('click', (e) => this._handleCardDelete(this));
   }
 
+  _putLike(){
+    this._likeElement.classList.add('place__like_active')
+  }
+
   _toggleLike() {
+    this._handleLike(this._id, this.isLikedbyOwner ? 'DELETE' : 'PUT'  , this.updateLikeInfo.bind(this));
     this._likeElement.classList.toggle('place__like_active');
   }
 
   removeCard() {
     this._cardElement.remove()
     this._cardElement = null;
+  }
+
+  //this function goes as call back on click event for like element
+  updateLikeInfo(data){
+    console.log(data)
+    this._likes = data.likes;
+    this._likeCounterElement.innerText = data.likes.length;
+    this.updateIsLikedByOwner();
   }
 
   getId(){

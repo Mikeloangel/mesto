@@ -165,8 +165,6 @@ function handleCardClick(link, name) {
   popupImage.open({ link, name });
 }
 
-
-
 const popupConfirmation = new PopupWithConfirmation({
   popupSelector: '.popup_confirm',
   handleSubmit: (cardObject) => {
@@ -212,7 +210,23 @@ cardSection.render();
  * @returns {DOM node}
  */
 function createPlace(obj, selector = '#place') {
-  return new Card(obj, selector, handleCardClick, handleCardDelete, userInfo.getUserInfo()).createCard();
+  return new Card(obj, selector, handleCardClick, handleCardDelete, userInfo.getUserInfo(), handleCardLike).createCard();
+}
+
+function handleCardLike(id, method, cb){
+  if(method==='PUT'){
+    api.putLike(id)
+      .then(res => res.ok ? res.json() : Promise.reject(res.status) )
+      .then( data => cb(data))
+      .catch(err => api.handleError(err))
+  }
+
+  if(method==='DELETE'){
+    api.deleteLike(id)
+      .then(res => res.ok ? res.json() : Promise.reject(res.status) )
+      .then( data => cb(data))
+      .catch(err => api.handleError(err))
+  }
 }
 
 /*****************/
