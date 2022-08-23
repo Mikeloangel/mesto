@@ -8,7 +8,7 @@ export default class UserInfo {
   getUserInfo() {
     return {
       name: this._nameElement.innerText,
-      description: this._aboutElement.innerText,
+      about: this._aboutElement.innerText,
       avatar: this._avatarElement.src,
       id: this._id,
       cohort: this._cohort,

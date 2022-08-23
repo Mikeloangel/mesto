@@ -93,11 +93,11 @@ const popupUserEdit = new PopupWithForm(
       popupUserEdit.close();
     },
     handleOpen: () => {
-      const { name, description } = userInfo.getUserInfo();
+      const { name, about } = userInfo.getUserInfo();
 
       popupUserEdit.setInputValues({
         'popup__user-name': name,
-        'popup__user-description': description
+        'popup__user-description': about
       })
 
       formValidators[popupUserEdit._form.name].revalidate();
@@ -116,10 +116,17 @@ const popupAddCard = new PopupWithForm(
 
       const formValues = popupAddCard.getInputValues();
 
-      cardSection.addItem(createPlace({
+      const newCardCredentials = {
         name: formValues['popup__place-name'],
         link: formValues['popup__place-url']
-      }, placeTemplateSelector));
+      }
+
+      api.postNewCard(newCardCredentials)
+        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(data => {
+          cardSection.addItem(createPlace(data, placeTemplateSelector));
+        })
+        .catch(err => api.handleError(err))
 
       popupAddCard.close();
       formValidators[popupAddCard._form.name].revalidate(true);
