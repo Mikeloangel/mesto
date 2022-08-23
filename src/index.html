@@ -85,7 +85,6 @@
           </label>
           <button class="popup__submit" type="submit">Создать</button>
         </form>
-
       </div>
     </div>
 
@@ -100,6 +99,21 @@
         </figure>
       </div>
     </div>
+
+    <!-- <div class="popup popup_opened popup_confirm "> -->
+    <div class="popup  popup_confirm ">
+      <div class="popup__content">
+        <button class="popup__btn-close" title="Закрыть форму" type="button">
+          <img alt="Закрыть" class="popup__btn-close-img" src="<%=require('./images/btn-close.svg')%>">
+        </button>
+        <h2 class="popup__title">Sure?</h2>
+
+        <form class="popup__form" name="popup__form_confirm" novalidate>
+          <button class="popup__submit" type="submit">Да</button>
+        </form>
+      </div>
+    </div>
+
   </div>
 
   <template id="place">
@@ -109,7 +123,10 @@
         <img alt="Плэйс" class="place__img" src="#">
         <div class="place__body">
           <h2 class="place__title"></h2>
-          <button class="place__like" title="Лайк!" type="button"></button>
+          <div class="place__like-container">
+            <button class="place__like" title="Лайк!" type="button"></button>
+            <div class="place__like-counter">0</div>
+          </div>
         </div>
       </article>
     </li>

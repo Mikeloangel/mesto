@@ -1,7 +1,7 @@
 .popup__content{
     --bg-color: var(--coloron-primary, #888);
-    
-    max-width: 430px;
+
+    min-width: 430px;
     padding: 34px 36px 37px 36px;
     margin: 0 auto;
     box-sizing: border-box;
@@ -16,7 +16,7 @@
 
 @media screen and (max-width:555px) {
     .popup__content{
-        max-width: max(180px,calc(100% - 38px));
+        min-width: max(180px,calc(100% - 38px));
         padding: 25px 22px;
     }
 }

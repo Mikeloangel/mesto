@@ -27,6 +27,7 @@ export default class Card {
     this._imgElement = this._cardElement.querySelector('.place__img');
     this._titleElement = this._cardElement.querySelector('.place__title');
     this._likeElement = this._cardElement.querySelector('.place__like');
+    this._likeCounterElement = this._cardElement.querySelector('.place__like-counter');
     this._trashElement = this._cardElement.querySelector('.place__trash');
   }
 
@@ -51,6 +52,7 @@ export default class Card {
     this._imgElement.src = this._link;
     this._imgElement.alt = this._name;
     this._titleElement.textContent = this._name;
+    this._likeCounterElement.innerText = this._likes.length;
 
     this._setEventListeners();
 
