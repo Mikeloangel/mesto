@@ -97,6 +97,7 @@ const popupUserEdit = new PopupWithForm(
     popupSelector: '.popup_edituser',
     handleSubmit: (e) => {
       e.preventDefault();
+      popupUserEdit.buttonSubmitting(true);
 
       const formValues = popupUserEdit.getInputValues();
       const userData = {
@@ -106,12 +107,12 @@ const popupUserEdit = new PopupWithForm(
 
       api.pathchUserMe(userData)
         .then(res => res.ok ? res.json() : Promise.reject(res.status))
-        .then(data => {
-          userInfo.setUserInfo(data);
-        })
-        .catch(err => api.handleError(err));
-
-      popupUserEdit.close();
+        .then(data => userInfo.setUserInfo(data))
+        .catch(err => api.handleError(err))
+        .finally(() => {
+          popupUserEdit.close();
+          popupUserEdit.buttonSubmitting(false)
+        });
     },
     handleOpen: () => {
       const { name, about } = userInfo.getUserInfo();
@@ -121,7 +122,7 @@ const popupUserEdit = new PopupWithForm(
         'popup__user-description': about
       })
 
-      formValidators[popupUserEdit._form.name].revalidate();
+      formValidators[popupUserEdit._formElement.name].revalidate();
     }
   }
 );
@@ -135,6 +136,8 @@ const popupAddCard = new PopupWithForm(
     handleSubmit: (e) => {
       e.preventDefault();
 
+      popupAddCard.buttonSubmitting(true);
+
       const formValues = popupAddCard.getInputValues();
 
       const newCardCredentials = {
@@ -144,16 +147,17 @@ const popupAddCard = new PopupWithForm(
 
       api.postNewCard(newCardCredentials)
         .then(res => res.ok ? res.json() : Promise.reject(res.status))
-        .then(data => {
-          cardSection.addItem(createPlace(data, placeTemplateSelector));
-        })
+        .then(data => cardSection.addItem(createPlace(data, placeTemplateSelector)))
         .catch(err => api.handleError(err))
+        .finally(()=>{
+          popupAddCard.buttonSubmitting(false);
+          popupAddCard.close();
+          formValidators[popupAddCard._formElement.name].revalidate(true);
+        })
 
-      popupAddCard.close();
-      formValidators[popupAddCard._form.name].revalidate(true);
     },
     handleOpen: () => {
-      formValidators[popupAddCard._form.name].revalidate(true);
+      formValidators[popupAddCard._formElement.name].revalidate(true);
     }
   }
 );
@@ -168,18 +172,23 @@ function handleCardClick(link, name) {
   popupImage.open({ link, name });
 }
 
+//Popup with confirmation to delete card
 const popupConfirmation = new PopupWithConfirmation({
   popupSelector: '.popup_confirm',
   handleSubmit: (cardObject) => {
+    popupConfirmation.buttonSubmitting(true);
+
     api.deleteCard(cardObject.getId())
       .then(res => res.ok ? res.json() : Promise.reject(res.status))
       .then(() => {
         cardObject.removeCard();
-        popupConfirmation.close();
       }).catch(err => {
         api.handleError(err);
+      })
+      .finally(()=>{
+        popupConfirmation.close();
+        popupConfirmation.buttonSubmitting(false);
       });
-
   }
 });
 popupConfirmation.setEventListeners();
@@ -195,18 +204,22 @@ const popupUserEditAvatar = new PopupWithForm({
   handleSubmit: (e)=>{
     e.preventDefault();
 
+    popupUserEditAvatar.buttonSubmitting(true);
+
     const newLink = popupUserEditAvatar.getInputValues()['popup__avatar-link'];
 
     api.patchUserAvatar(newLink)
       .then(res => res.ok ? res.json() : Promise.reject(res.status))
       .then(data => {
         userInfo.setAvatar(data.avatar);
-        popupUserEditAvatar.close();
       })
       .catch(err => api.handleError(err))
+      .finally(()=>{
+        popupUserEditAvatar.close();
+        popupUserEditAvatar.buttonSubmitting(false);
+      });
 
-  },
-  handleOpen: ()=>{}
+  }
 })
 popupUserEditAvatar.setEventListeners();
 

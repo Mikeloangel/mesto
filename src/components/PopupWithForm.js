@@ -6,8 +6,10 @@ export default class PopupWithForm extends Popup {
 
     this._handleSubmit = handleSubmit;
     this._handleOpen = handleOpen;
-    this._form = this._popup.querySelector('.popup__form');
-    this._inputList = this._form.querySelectorAll('.popup__form-input');
+    this._formElement = this._popup.querySelector('.popup__form');
+    this._inputList = this._formElement.querySelectorAll('.popup__form-input');
+    this._formButtonElement = this._formElement.querySelector('.popup__submit');
+    this._formButtonDefaultText = this._formButtonElement.textContent;
   }
 
   getInputValues() {
@@ -20,14 +22,18 @@ export default class PopupWithForm extends Popup {
     this._inputList.forEach( input => input.value = data[input.name]);
   }
 
+  buttonSubmitting(inProcess){
+    this._formButtonElement.textContent = inProcess ? 'Сохранение...' : this._formButtonDefaultText;
+  }
+
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener('submit', this._handleSubmit);
+    this._formElement.addEventListener('submit', this._handleSubmit);
   }
 
   close() {
     super.close();
-    this._form.reset();
+    this._formElement.reset();
   }
 
   open(){
