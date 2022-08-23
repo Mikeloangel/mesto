@@ -39,7 +39,7 @@
 @import url(../blocks/popup/_viewplace/popup_viewplace.css);
 @import url(../blocks/popup/__form-error/popup__form-error.css);
 @import url(../blocks/popup/__form-error/_visible/popup__form-error_visible.css);
-
+@import url(../blocks/popup/__message/popup__message.css);
 
 
 /* 3.0 Sections css files */

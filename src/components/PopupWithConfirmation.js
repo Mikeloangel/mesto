@@ -33,7 +33,7 @@ export default class PopupWithConfirmation extends Popup {
     })
   }
 
-  open(keepObject) {
+  open(keepObject = null) {
     this._keepObject = keepObject;
     super.open();
   }

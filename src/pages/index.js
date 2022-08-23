@@ -1,7 +1,7 @@
 /******************/
 /**** CONTENTS ****/
 //
-// 1. Import modules
+// 1. Api and initial data
 // 2. Enabling Form Validation
 // 3. Popups
 // 4. SECTION: cards rendering
@@ -29,15 +29,13 @@ import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
+import PopupWithNotification from '../components/PopupWithNotification.js';
 
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/api.js'
-import { data } from 'autoprefixer';
 
 
-/*******************************/
-/*******************************/
-
+/* 1. instantiates Api and loads initial data for user info and cards */
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-49',
   headers: {
@@ -46,37 +44,25 @@ const api = new Api({
   }
 });
 
-const userPromise = api.getUserMe();
-const cardsPromise = api.getInitialCards();
 
-userPromise
-  .then(res => res.ok ? res.json() : Promise.reject(res.status))
+//Loads user info and then initial cards
+api.getUserMe()
+  .then(res => res.ok ? res.json() : Promise.reject(`Sorry can't load user ${res.status}`))
   .then(udata => {
     userInfo.setUserInfo(udata);
-    return cardsPromise;
+    //returns new Promise to load cards after user info is loaded
+    return api.getInitialCards();
   })
-  .then( res => res.ok ? res.json() : Promise.reject(res.status))
-  .then(data =>{
-        cardSection.concatItems(data);
-        cardSection.render();
-      })
-  .catch(err => {
-    api.handleError(err);
-    userInfo.setUserInfo({})
-  });
+  .then(res => res.ok ? res.json() : Promise.reject(`Sorry can't load initial cards ${res.status}`))
+  .then(data => {
+    cardSection.concatItems(data);
+    cardSection.render();
+  })
+  .catch(err => api.handleError(err, handleApiError));
 
-
-/***********************/
-/* 2. FORM VALIDATION  */
-/***********************/
-
+/* 2. Enables form validation */
 enableValidation(globalSettings);
 
-/**
- * enabling form validation
- *
- * @param {Object} settings
- */
 function enableValidation(settings) {
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
   formList.forEach(form => {
@@ -87,9 +73,7 @@ function enableValidation(settings) {
 }
 
 
-/*************/
 /* 3 POPUPS  */
-/*************/
 
 //User edit popup
 const popupUserEdit = new PopupWithForm(
@@ -106,9 +90,9 @@ const popupUserEdit = new PopupWithForm(
       }
 
       api.pathchUserMe(userData)
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(res => res.ok ? res.json() : Promise.reject(`Sorry can't update user info ${res.status}`))
         .then(data => userInfo.setUserInfo(data))
-        .catch(err => api.handleError(err))
+        .catch(err => api.handleError(err, handleApiError))
         .finally(() => {
           popupUserEdit.close();
           popupUserEdit.buttonSubmitting(false)
@@ -146,10 +130,10 @@ const popupAddCard = new PopupWithForm(
       }
 
       api.postNewCard(newCardCredentials)
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(res => res.ok ? res.json() : Promise.reject(`Sorry can't add new card ${res.status}`))
         .then(data => cardSection.addItem(createPlace(data, placeTemplateSelector)))
-        .catch(err => api.handleError(err))
-        .finally(()=>{
+        .catch(err => api.handleError(err, handleApiError))
+        .finally(() => {
           popupAddCard.buttonSubmitting(false);
           popupAddCard.close();
           formValidators[popupAddCard._formElement.name].revalidate(true);
@@ -162,7 +146,6 @@ const popupAddCard = new PopupWithForm(
   }
 );
 popupAddCard.setEventListeners();
-
 
 //View card
 const popupImage = new PopupWithImage({ popupSelector: '.popup_viewplace' });
@@ -179,29 +162,26 @@ const popupConfirmation = new PopupWithConfirmation({
     popupConfirmation.buttonSubmitting(true);
 
     api.deleteCard(cardObject.getId())
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .then(() => {
-        cardObject.removeCard();
-      }).catch(err => {
-        api.handleError(err);
-      })
-      .finally(()=>{
+      .then(res => res.ok ? res.json() : Promise.reject(`Sorry can't delete card ${res.status}`))
+      .then(() => cardObject.removeCard())
+      .catch(err => api.handleError(err, handleApiError))
+      .finally(() => {
         popupConfirmation.close();
         popupConfirmation.buttonSubmitting(false);
       });
   }
 });
 popupConfirmation.setEventListeners();
-popupConfirmation.setPopup('Вы уверены?','Да')
+popupConfirmation.setPopup('Вы уверены?', 'Да')
 
-function handleCardDelete(cardObject){
+function handleCardDelete(cardObject) {
   popupConfirmation.open(cardObject);
 }
 
 //Edit avatar
 const popupUserEditAvatar = new PopupWithForm({
   popupSelector: '.popup_editavatar',
-  handleSubmit: (e)=>{
+  handleSubmit: (e) => {
     e.preventDefault();
 
     popupUserEditAvatar.buttonSubmitting(true);
@@ -209,12 +189,10 @@ const popupUserEditAvatar = new PopupWithForm({
     const newLink = popupUserEditAvatar.getInputValues()['popup__avatar-link'];
 
     api.patchUserAvatar(newLink)
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .then(data => {
-        userInfo.setAvatar(data.avatar);
-      })
-      .catch(err => api.handleError(err))
-      .finally(()=>{
+      .then(res => res.ok ? res.json() : Promise.reject(`Sorry can't update user avatar ${res.status}`))
+      .then(data => userInfo.setAvatar(data.avatar))
+      .catch(err => api.handleError(err, handleApiError))
+      .finally(() => {
         popupUserEditAvatar.close();
         popupUserEditAvatar.buttonSubmitting(false);
       });
@@ -222,9 +200,18 @@ const popupUserEditAvatar = new PopupWithForm({
 })
 popupUserEditAvatar.setEventListeners();
 
-/*******************************/
-/* 4. SECTION: cards rendering */
-/*******************************/
+// Popup Error Handlers
+const popupShowError = new PopupWithNotification({ popupSelector: '.popup_errors' })
+popupShowError.setEventListeners();
+popupShowError.setTitle('Ошибка')
+
+function handleApiError(responce) {
+  popupShowError.setMessage(responce)
+  popupShowError.open();
+}
+
+
+/* 4. Section with cards  */
 const cardSection = new Section(
   {
     items: [],
@@ -235,8 +222,6 @@ const cardSection = new Section(
   },
   placesContainerSelector
 );
-
-cardSection.render();
 
 
 /**
@@ -249,25 +234,24 @@ function createPlace(obj, selector = '#place') {
   return new Card(obj, selector, handleCardClick, handleCardDelete, userInfo.getUserInfo(), handleCardLike).createCard();
 }
 
-function handleCardLike(id, method, cb){
-  if(method==='PUT'){
+function handleCardLike(id, method, cb) {
+  if (method === 'PUT') {
     api.putLike(id)
-      .then(res => res.ok ? res.json() : Promise.reject(res.status) )
-      .then( data => cb(data))
-      .catch(err => api.handleError(err))
+      .then(res => res.ok ? res.json() : Promise.reject(`Sorry can't put like ${res.status}`))
+      .then(data => cb(data))
+      .catch(err => api.handleError(err, handleApiError))
   }
 
-  if(method==='DELETE'){
+  if (method === 'DELETE') {
     api.deleteLike(id)
-      .then(res => res.ok ? res.json() : Promise.reject(res.status) )
-      .then( data => cb(data))
-      .catch(err => api.handleError(err))
+      .then(res => res.ok ? res.json() : Promise.reject(`Sorry can't delete like, it's awesome ${res.status}`))
+      .then(data => cb(data))
+      .catch(err => api.handleError(err, handleApiError))
   }
 }
 
-/*****************/
+
 /* 5. User Info  */
-/*****************/
 
 const userInfo = new UserInfo({
   nameSelector: '.section-user__name',
@@ -275,20 +259,12 @@ const userInfo = new UserInfo({
   avaSelector: '.section-user__pic'
 });
 
-/***********************/
+
 /* 6. EVENT LISTENERS  */
-/***********************/
 
 // user edit btn listener
 userBtnEdit.addEventListener('click', popupUserEdit.open.bind(popupUserEdit));
-userBtnEditAvatar.addEventListener('click',popupUserEditAvatar.open.bind(popupUserEditAvatar));
+userBtnEditAvatar.addEventListener('click', popupUserEditAvatar.open.bind(popupUserEditAvatar));
 
 // new card listener
 placeBtnNew.addEventListener('click', popupAddCard.open.bind(popupAddCard));
-
-
-/***********************/
-/* 7. FRONTEND HARDCODE*/
-/***********************/
-
-

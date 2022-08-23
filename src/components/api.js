@@ -10,9 +10,12 @@ export default class Api {
       fetch(`${this._baseUrl}${route}`,{ method, headers: this._headers });
   }
 
-  handleError(responce) {
-    console.error(`Error: ${responce}`);
+  handleError(responce, cb=null) {
+    console.error(`Api error: ${responce}`);
+    if (cb) cb(responce)
   }
+
+  //API ROUTES
 
   getInitialCards = () => this._getFetchRequest('/cards','GET');
 
@@ -30,3 +33,4 @@ export default class Api {
 
   patchUserAvatar = url => this._getFetchRequest(`/users/me/avatar`,'PATCH',{avatar:url});
 }
+// handleApiError
