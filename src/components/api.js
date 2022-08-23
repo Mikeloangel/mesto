@@ -14,11 +14,17 @@ export default class Api {
     console.error(`Error: ${responce}`);
   }
 
-  getInitialCards = () => this._getFetchRequest('/cards','GET')
+  getInitialCards = () => this._getFetchRequest('/cards','GET');
 
   getUserMe = () => this._getFetchRequest('/users/me', 'GET');
 
   pathchUserMe = body => this._getFetchRequest('/users/me','PATCH',body);
 
-  postNewCard = body => this._getFetchRequest('/cards','POST',body)
+  postNewCard = body => this._getFetchRequest('/cards','POST',body);
+
+  deleteCard = id => this._getFetchRequest(`/cards/${id}`,'DELETE');
+
+  putLike = id => this._getFetchRequest(`/cards/${id}/likes`,'PUT');
+
+  deleteLike = id =>this._getFetchRequest(`/cards/${id}/likes`,'DELETE');
 }

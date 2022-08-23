@@ -28,9 +28,11 @@ import FormValidator from '../components/FormValidator.js';
 
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/api.js'
+import { data } from 'autoprefixer';
 
 
 /*******************************/
@@ -43,6 +45,25 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
+
+const userPromise = api.getUserMe();
+const cardsPromise = api.getInitialCards();
+
+userPromise
+  .then(res => res.ok ? res.json() : Promise.reject(res.status))
+  .then(udata => {
+    userInfo.setUserInfo(udata);
+    return cardsPromise;
+  })
+  .then( res => res.ok ? res.json() : Promise.reject(res.status))
+  .then(data =>{
+        cardSection.concatItems(data);
+        cardSection.render();
+      })
+  .catch(err => {
+    api.handleError(err);
+    userInfo.setUserInfo({})
+  });
 
 
 /***********************/
@@ -144,18 +165,32 @@ function handleCardClick(link, name) {
   popupImage.open({ link, name });
 }
 
+
+
+const popupConfirmation = new PopupWithConfirmation({
+  popupSelector: '.popup_confirm',
+  handleSubmit: (cardObject) => {
+    api.deleteCard(cardObject.getId())
+      .then(res => res.ok ? res.json() : Promise.reject(res.status))
+      .then(() => {
+        cardObject.removeCard();
+        popupConfirmation.close();
+      }).catch(err => {
+        api.handleError(err);
+      });
+
+  }
+});
+popupConfirmation.setEventListeners();
+popupConfirmation.setPopup('Вы уверены?','Да')
+
+function handleCardDelete(cardObject){
+  popupConfirmation.open(cardObject);
+}
+
 /*******************************/
 /* 4. SECTION: cards rendering */
 /*******************************/
-api.getInitialCards()
-  .then( res => res.ok ? res.json() : Promise.reject(res.status))
-  .then(data =>{
-    cardSection.concatItems(data);
-    cardSection.render();
-  }).catch(err => {
-    api.handleError(err);
-  });
-
 const cardSection = new Section(
   {
     items: [],
@@ -177,7 +212,7 @@ cardSection.render();
  * @returns {DOM node}
  */
 function createPlace(obj, selector = '#place') {
-  return new Card(obj, selector, handleCardClick).createCard();
+  return new Card(obj, selector, handleCardClick, handleCardDelete, userInfo.getUserInfo()).createCard();
 }
 
 /*****************/
@@ -189,18 +224,6 @@ const userInfo = new UserInfo({
   descriptionSelector: '.section-user__description',
   avaSelector: '.section-user__pic'
 });
-
-api.getUserMe()
-  .then(res => res.ok ? res.json() : Promise.reject(res.status))
-  .then(udata => {
-    userInfo.setUserInfo(udata);
-  })
-  .catch(err => {
-    api.handleError(err);
-    userInfo.setUserInfo({})
-  });
-
-
 
 /***********************/
 /* 6. EVENT LISTENERS  */
