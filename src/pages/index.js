@@ -218,7 +218,6 @@ const popupUserEditAvatar = new PopupWithForm({
         popupUserEditAvatar.close();
         popupUserEditAvatar.buttonSubmitting(false);
       });
-
   }
 })
 popupUserEditAvatar.setEventListeners();
