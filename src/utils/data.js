@@ -21,6 +21,7 @@ export const placeTemplateSelector = '#place';
 
 // UI btns const
 export const userBtnEdit = document.querySelector('.section-user__edit');
+export const userBtnEditAvatar = document.querySelector('.section-user__pic-edit');
 export const placeBtnNew = document.querySelector('.section-user__addpost');
 
 

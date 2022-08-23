@@ -19,7 +19,7 @@ import {
   globalSettings, formValidators,
   placesContainerSelector,
   placeTemplateSelector,
-  userBtnEdit, placeBtnNew,
+  userBtnEdit, userBtnEditAvatar, placeBtnNew,
 } from '../utils/data.js';
 
 import Section from '../components/Section.js'
@@ -151,6 +151,9 @@ const popupAddCard = new PopupWithForm(
 
       popupAddCard.close();
       formValidators[popupAddCard._form.name].revalidate(true);
+    },
+    handleOpen: () => {
+      formValidators[popupAddCard._form.name].revalidate(true);
     }
   }
 );
@@ -185,6 +188,27 @@ popupConfirmation.setPopup('Вы уверены?','Да')
 function handleCardDelete(cardObject){
   popupConfirmation.open(cardObject);
 }
+
+//Edit avatar
+const popupUserEditAvatar = new PopupWithForm({
+  popupSelector: '.popup_editavatar',
+  handleSubmit: (e)=>{
+    e.preventDefault();
+
+    const newLink = popupUserEditAvatar.getInputValues()['popup__avatar-link'];
+
+    api.patchUserAvatar(newLink)
+      .then(res => res.ok ? res.json() : Promise.reject(res.status))
+      .then(data => {
+        userInfo.setAvatar(data.avatar);
+        popupUserEditAvatar.close();
+      })
+      .catch(err => api.handleError(err))
+
+  },
+  handleOpen: ()=>{}
+})
+popupUserEditAvatar.setEventListeners();
 
 /*******************************/
 /* 4. SECTION: cards rendering */
@@ -245,7 +269,7 @@ const userInfo = new UserInfo({
 
 // user edit btn listener
 userBtnEdit.addEventListener('click', popupUserEdit.open.bind(popupUserEdit));
-
+userBtnEditAvatar.addEventListener('click',popupUserEditAvatar.open.bind(popupUserEditAvatar));
 
 // new card listener
 placeBtnNew.addEventListener('click', popupAddCard.open.bind(popupAddCard));

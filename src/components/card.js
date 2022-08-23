@@ -72,7 +72,6 @@ export default class Card {
 
   //this function goes as call back on click event for like element
   updateLikeInfo(data){
-    console.log(data)
     this._likes = data.likes;
     this._likeCounterElement.innerText = data.likes.length;
     this.updateIsLikedByOwner();

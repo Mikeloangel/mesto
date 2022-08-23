@@ -49,6 +49,9 @@
 
 /*   SECTION: USER INFO*/
 @import url(../blocks/section-user/section-user.css);
+@import url(../blocks/section-user/__pic-container/section-user__pic-container.css);
+@import url(../blocks/section-user/__pic-edit/section-user__pic-edit.css);
+@import url(../blocks/section-user/__btn-edit-pic/section-user__btn-edit-pic.css);
 @import url(../blocks/section-user/__pic/section-user__pic.css);
 @import url(../blocks/section-user/__info/section-user__info.css);
 @import url(../blocks/section-user/__container/section-user__container.css);
@@ -58,6 +61,7 @@
 @import url(../blocks/section-user/__edit-btn/section-user__edit-btn.css);
 @import url(../blocks/section-user/__addpost/section-user__addpost.css);
 
+
 /*   SECTION: USER GALLERY*/
 @import url(../blocks/section-gallery/section-gallery.css);
 @import url(../blocks/section-gallery/__grid/section-gallery__grid.css);
@@ -66,6 +70,8 @@
 /*   SECTION: FOOTER*/
 @import url(../blocks/section-footer/section-footer.css);
 @import url(../blocks/section-footer/__copyright/section-footer__copyright.css);
+
+
 
 
 /* *{outline: 1px dashed #a66;} */

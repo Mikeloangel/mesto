@@ -27,4 +27,6 @@ export default class Api {
   putLike = id => this._getFetchRequest(`/cards/${id}/likes`,'PUT');
 
   deleteLike = id =>this._getFetchRequest(`/cards/${id}/likes`,'DELETE');
+
+  patchUserAvatar = url => this._getFetchRequest(`/users/me/avatar`,'PATCH',{avatar:url});
 }

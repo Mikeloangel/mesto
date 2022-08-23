@@ -8,8 +8,9 @@
 }
 
 @media screen and (max-width: 760px) {
-    .section-user{        
+    .section-user{
         flex-direction: column;
         padding-bottom: 36px;
     }
 }
+
