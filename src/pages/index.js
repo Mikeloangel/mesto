@@ -22,9 +22,6 @@ import {
   userBtnEdit, placeBtnNew,
 } from '../utils/data.js';
 
-// import initialCards from '../utils/places.js';
-const initialCards =  [];
-
 import Section from '../components/Section.js'
 import Card from '../components/card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -137,15 +134,20 @@ function handleCardClick(link, name) {
 /*******************************/
 /* 4. SECTION: cards rendering */
 /*******************************/
+api.getInitialCards()
+  .then( res => res.ok ? res.json() : Promise.reject(res.status))
+  .then(data =>{
+    cardSection.concatItems(data);
+    cardSection.render();
+  }).catch(err => {
+    api.handleError(err);
+  });
 
 const cardSection = new Section(
   {
-    items: initialCards,
+    items: [],
     renderer: (card) => {
-      const newCardElement = createPlace({
-        name: card.name,
-        link: card.link
-      }, placeTemplateSelector)
+      const newCardElement = createPlace(card, placeTemplateSelector)
       cardSection.addItem(newCardElement);
     }
   },

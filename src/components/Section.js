@@ -7,6 +7,10 @@ export default class Section {
     this._renderer = renderer;
   }
 
+  concatItems(items){
+    this._items = this._items.concat(items);
+  }
+
   render() {
     this._items.forEach(item => this._renderer(item));
   }
