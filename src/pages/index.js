@@ -78,11 +78,17 @@ const popupUserEdit = new PopupWithForm(
       e.preventDefault();
 
       const formValues = popupUserEdit.getInputValues();
-
-      userInfo.setUserInfo({
+      const userData = {
         name: formValues['popup__user-name'],
-        description: formValues['popup__user-description']
-      })
+        about: formValues['popup__user-description']
+      }
+
+      api.pathchUserMe(userData)
+        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(data => {
+          userInfo.setUserInfo(data);
+        })
+        .catch(err => api.handleError(err));
 
       popupUserEdit.close();
     },

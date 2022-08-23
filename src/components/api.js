@@ -19,4 +19,6 @@ export default class Api {
   getUserMe = () => this._getFetchRequest('/users/me', 'GET');
 
   pathchUserMe = body => this._getFetchRequest('/users/me','PATCH',body);
+
+  postNewCard = body => this._getFetchRequest('/cards','POST',body)
 }

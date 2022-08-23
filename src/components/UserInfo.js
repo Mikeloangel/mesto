@@ -23,7 +23,7 @@ export default class UserInfo {
       this._avatarElement.src = avatar;
     }
 
-    this._id = id;
-    this._cohort = cohort;
+    this._id = id ? id : this._id;
+    this._cohort = cohort ? cohort : this._cohort;
   }
 }
