@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const isPproduction = process.env.TARGET_ENV === 'prod';
+const isProduction = process.env.TARGET_ENV === 'prod';
 
 module.exports = {
   entry: { main: './src/pages/index.js' },
@@ -28,8 +28,18 @@ module.exports = {
         exclude: '/node_modules/'
       },
       {
-        test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
-        type: 'asset/resource'
+        test: /\.(png|svg|jpg|gif)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[hash][ext][query]'
+        }
+      },
+      {
+        test: /\.(woff(2)?|eot|ttf|otf)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[hash][ext][query]'
+        }
       },
       {
         test: /\.css$/,
@@ -48,5 +58,5 @@ module.exports = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin()
   ],
-  devtool: !isPproduction && 'source-map'
+  devtool: !isProduction && 'source-map'
 }

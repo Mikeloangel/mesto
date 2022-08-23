@@ -22,7 +22,7 @@ export default class PopupWithForm extends Popup {
     this._inputList.forEach( input => input.value = data[input.name]);
   }
 
-  buttonSubmitting(inProcess){
+  handleSubmitButton(inProcess){
     this._formButtonElement.textContent = inProcess ? 'Сохранение...' : this._formButtonDefaultText;
   }
 

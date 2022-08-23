@@ -10,8 +10,8 @@ export default class UserInfo {
       name: this._nameElement.innerText,
       about: this._aboutElement.innerText,
       avatar: this._avatarElement.src,
-      _id: this._id,
-      cohort: this._cohort,
+     _id: this._id,
+     cohort: this._cohort,
     }
   }
 
@@ -19,13 +19,13 @@ export default class UserInfo {
     this._nameElement.innerText = name;
     this._aboutElement.innerText = about;
 
-    this.setAvatar(avatar);
+    this.setAvatar(avatar,name);
 
     this._id = _id ? _id : this._id;
     this._cohort = cohort ? cohort : this._cohort;
   }
 
-  setAvatar(avatar) {
+  setAvatar(avatar, name) {
     if (avatar) {
       this._avatarElement.alt = name;
       this._avatarElement.src = avatar;

@@ -4,33 +4,46 @@ export default class Api {
     this._headers = headers;
   }
 
-  _getFetchRequest(route, method, body=null) {
-    return body ?
-      fetch(`${this._baseUrl}${route}`,{ method, headers: this._headers, body: JSON.stringify(body) }) :
-      fetch(`${this._baseUrl}${route}`,{ method, headers: this._headers });
+  async _getJSON(res){
+    if(res.ok) return res.json();
+
+    const isJSON = res.headers.get('content-type')?.includes('application/json');
+    const data = isJSON ? await res.json() : null;
+    const error = (data && data.message) || res.status;
+
+    return Promise.reject(error);
   }
 
-  handleError(responce, cb=null) {
-    console.error(`Api error: ${responce}`);
-    if (cb) cb(responce)
+  _getRouteRequest(route, method, body=null) {
+    return body ?
+      fetch(`${this._baseUrl}${route}`,{ method, headers: this._headers, body: JSON.stringify(body) })
+        .then(this._getJSON) :
+      fetch(`${this._baseUrl}${route}`,{ method, headers: this._headers })
+        .then(this._getJSON);
+
+  }
+
+  handleError(response, cb=null) {
+    console.error(`Api error: ${response}`);
+    if (typeof cb === 'function') cb(response)
   }
 
   //API ROUTES
 
-  getInitialCards = () => this._getFetchRequest('/cards','GET');
+  getInitialCards = () => this._getRouteRequest('/cards','GET');
 
-  getUserMe = () => this._getFetchRequest('/users/me', 'GET');
+  getUserMe = () => this._getRouteRequest('/users/me', 'GET');
 
-  pathchUserMe = body => this._getFetchRequest('/users/me','PATCH',body);
+  pathchUserMe = body => this._getRouteRequest('/users/me','PATCH',body);
 
-  postNewCard = body => this._getFetchRequest('/cards','POST',body);
+  postNewCard = body => this._getRouteRequest('/cards','POST',body);
 
-  deleteCard = id => this._getFetchRequest(`/cards/${id}`,'DELETE');
+  deleteCard = id => this._getRouteRequest(`/cards/${id}`,'DELETE');
 
-  putLike = id => this._getFetchRequest(`/cards/${id}/likes`,'PUT');
+  putLike = id => this._getRouteRequest(`/cards/${id}/likes`,'PUT');
 
-  deleteLike = id =>this._getFetchRequest(`/cards/${id}/likes`,'DELETE');
+  deleteLike = id =>this._getRouteRequest(`/cards/${id}/likes`,'DELETE');
 
-  patchUserAvatar = url => this._getFetchRequest(`/users/me/avatar`,'PATCH',{avatar:url});
+  patchUserAvatar = url => this._getRouteRequest(`/users/me/avatar`,'PATCH',{avatar:url});
 }
-// handleApiError
+

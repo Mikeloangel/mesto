@@ -3,7 +3,7 @@
 /*********************/
 
 // form validation settings object
-export const globalSettings = {
+export const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__form-input',
   submitButtonSelector: '.popup__submit',

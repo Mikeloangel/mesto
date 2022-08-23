@@ -14,7 +14,6 @@ export default class Card {
     this._link = link;
     this._id = _id;
     this._likes = likes;
-    this._createdAt = createdAt;
     this._owner = owner;
 
     this._currentUser = currentUser;
@@ -25,11 +24,17 @@ export default class Card {
     this._handleLike = handleLikeClick;
 
     this.isOwner = this._owner._id === currentUser._id;
-    this.updateIsLikedByOwner();
+
   }
 
-  updateIsLikedByOwner(){
-    this.isLikedbyOwner = this._likes.some(like => like._id === this._currentUser._id);
+  updateLike(){
+    this.isLiked = this._likes.some(like => like._id === this._currentUser._id);
+
+    if(this.isLiked){
+      this._likeElement.classList.add('place__like_active')
+    }else{
+      this._likeElement.classList.remove('place__like_active')
+    }
   }
 
   _setTemplate() {
@@ -45,9 +50,7 @@ export default class Card {
       this._trashElement.remove();
     }
 
-    if(this.isLikedbyOwner){
-      this._putLike();
-    }
+    this.updateLike();
   }
 
   _setEventListeners() {
@@ -56,13 +59,8 @@ export default class Card {
     if (this.isOwner) this._trashElement.addEventListener('click', (e) => this._handleCardDelete(this));
   }
 
-  _putLike(){
-    this._likeElement.classList.add('place__like_active')
-  }
-
   _toggleLike() {
-    this._handleLike(this._id, this.isLikedbyOwner ? 'DELETE' : 'PUT'  , this.updateLikeInfo.bind(this));
-    this._likeElement.classList.toggle('place__like_active');
+    this._handleLike(this , this.updateLikeInfo.bind(this));
   }
 
   removeCard() {
@@ -71,10 +69,10 @@ export default class Card {
   }
 
   //this function goes as call back on click event for like element
-  updateLikeInfo(data){
-    this._likes = data.likes;
-    this._likeCounterElement.innerText = data.likes.length;
-    this.updateIsLikedByOwner();
+  updateLikeInfo(likes){
+    this._likes = likes;
+    this._likeCounterElement.innerText = likes.length;
+    this.updateLike();
   }
 
   getId(){
