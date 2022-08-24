@@ -89,7 +89,7 @@ const popupUserEdit = new PopupWithForm(
     popupSelector: '.popup_edituser',
     handleSubmit: (e) => {
       e.preventDefault();
-      popupUserEdit.handleSubmitButton(true);
+      popupUserEdit.changeButtonTextOnProcess(true);
 
       const formValues = popupUserEdit.getInputValues();
       const userData = {
@@ -103,7 +103,7 @@ const popupUserEdit = new PopupWithForm(
           popupUserEdit.close();
         })
         .catch(err => api.handleError(err, handleApiError))
-        .finally(() => popupUserEdit.handleSubmitButton(false));
+        .finally(() => popupUserEdit.changeButtonTextOnProcess(false));
     },
     handleOpen: () => {
       const { name, about } = userInfo.getUserInfo();
@@ -127,7 +127,7 @@ const popupAddCard = new PopupWithForm(
     handleSubmit: (e) => {
       e.preventDefault();
 
-      popupAddCard.handleSubmitButton(true);
+      popupAddCard.changeButtonTextOnProcess(true);
 
       const formValues = popupAddCard.getInputValues();
 
@@ -143,7 +143,7 @@ const popupAddCard = new PopupWithForm(
         })
         .catch(err => api.handleError(err, handleApiError))
         .finally(() => {
-          popupAddCard.handleSubmitButton(false);
+          popupAddCard.changeButtonTextOnProcess(false);
           formValidators[popupAddCard._formElement.name].revalidate(true);
         })
 
@@ -168,7 +168,7 @@ function handleCardClick(link, name) {
 const popupConfirmation = new PopupWithConfirmation({
   popupSelector: '.popup_confirm',
   handleSubmit: (cardObject) => {
-    popupConfirmation.handleSubmitButton(true);
+    popupConfirmation.changeButtonTextOnProcess(true);
 
     api.deleteCard(cardObject.getId())
       .then(() => {
@@ -176,7 +176,7 @@ const popupConfirmation = new PopupWithConfirmation({
         popupConfirmation.close();
       })
       .catch(err => api.handleError(err, handleApiError))
-      .finally(() => popupConfirmation.handleSubmitButton(false));
+      .finally(() => popupConfirmation.changeButtonTextOnProcess(false));
   }
 });
 popupConfirmation.setEventListeners();
@@ -194,7 +194,7 @@ const popupUserEditAvatar = new PopupWithForm({
   handleSubmit: (e) => {
     e.preventDefault();
 
-    popupUserEditAvatar.handleSubmitButton(true);
+    popupUserEditAvatar.changeButtonTextOnProcess(true);
 
     const newLink = popupUserEditAvatar.getInputValues()['popup__avatar-link'];
 
@@ -204,7 +204,7 @@ const popupUserEditAvatar = new PopupWithForm({
         popupUserEditAvatar.close();
       })
       .catch(err => api.handleError(err, handleApiError))
-      .finally(() => popupUserEditAvatar.handleSubmitButton(false));
+      .finally(() => popupUserEditAvatar.changeButtonTextOnProcess(false));
   }
 })
 popupUserEditAvatar.setEventListeners();

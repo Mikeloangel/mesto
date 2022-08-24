@@ -20,7 +20,7 @@ export default class PopupWithConfirmation extends Popup {
     this._buttonElement.textContent = this._formButtonDefaultText;
   }
 
-  handleSubmitButton(inProcess){
+  changeButtonTextOnProcess(inProcess){
     this._buttonElement.textContent = inProcess ? 'Сохранение...' : this._formButtonDefaultText;
   }
 
