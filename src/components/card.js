@@ -9,32 +9,19 @@ export default class Card {
    * @param {Functon} handleCardClick this function will be called to open card
    */
 
-  constructor({ name, link, _id, likes, createdAt, owner }, templateSelector, handleCardClick, handleCardDelete, currentUser, handleLikeClick) {
+  constructor({ name, link, _id, likes, owner }, templateSelector, handleCardClick, handleCardDelete, handleLikeClick, userId) {
     this._name = name;
     this._link = link;
     this._id = _id;
     this._likes = likes;
-    this._owner = owner;
-
-    this._currentUser = currentUser;
 
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleCardDelete = handleCardDelete;
     this._handleLike = handleLikeClick;
 
-    this.isOwner = this._owner._id === currentUser._id;
-
-  }
-
-  updateLike(){
-    this.isLiked = this._likes.some(like => like._id === this._currentUser._id);
-
-    if(this.isLiked){
-      this._likeElement.classList.add('place__like_active')
-    }else{
-      this._likeElement.classList.remove('place__like_active')
-    }
+    this._currentUserId = userId;
+    this.isOwner = this._currentUserId === owner._id;
   }
 
   _setTemplate() {
@@ -48,19 +35,16 @@ export default class Card {
 
     if (!this.isOwner) {
       this._trashElement.remove();
+      this._trashElement = null;
     }
 
-    this.updateLike();
+    this.renderLike();
   }
 
   _setEventListeners() {
-    this._likeElement.addEventListener('click', this._toggleLike.bind(this));
+    this._likeElement.addEventListener('click', (e) => this._handleLike(this));
     this._imgElement.addEventListener('click', () => this._handleCardClick(this._link, this._name));
     if (this.isOwner) this._trashElement.addEventListener('click', (e) => this._handleCardDelete(this));
-  }
-
-  _toggleLike() {
-    this._handleLike(this , this.updateLikeInfo.bind(this));
   }
 
   removeCard() {
@@ -68,14 +52,23 @@ export default class Card {
     this._cardElement = null;
   }
 
-  //this function goes as call back on click event for like element
-  updateLikeInfo(likes){
+  updateLikeInfo(likes) {
     this._likes = likes;
     this._likeCounterElement.innerText = likes.length;
-    this.updateLike();
+    this.renderLike();
   }
 
-  getId(){
+  renderLike() {
+    this.isLiked = this._likes.some(like => like._id === this._currentUserId);
+
+    if (this.isLiked) {
+      this._likeElement.classList.add('place__like_active')
+    } else {
+      this._likeElement.classList.remove('place__like_active')
+    }
+  }
+
+  getId() {
     return this._id;
   }
 

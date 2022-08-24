@@ -7,6 +7,7 @@ export default class Api {
   async _getJSON(res){
     if(res.ok) return res.json();
 
+    //getting proper error message from JSON response {'message':''}
     const isJSON = res.headers.get('content-type')?.includes('application/json');
     const data = isJSON ? await res.json() : null;
     const error = (data && data.message) || res.status;
@@ -36,7 +37,7 @@ export default class Api {
 
   pathchUserMe = body => this._getRouteRequest('/users/me','PATCH',body);
 
-  postNewCard = body => this._getRouteRequest('/cards','POST',body);
+  postCard = body => this._getRouteRequest('/cards','POST',body);
 
   deleteCard = id => this._getRouteRequest(`/cards/${id}`,'DELETE');
 

@@ -6,7 +6,7 @@ export default class PopupWithConfirmation extends Popup {
 
     this._titleElement = this._popup.querySelector('.popup__title');
     this._form = this._popup.querySelector('.popup__form');
-    this._buttonElement = this._popup.querySelector('.popup__submit');
+    this._buttonElement = this._form.querySelector('.popup__submit');
     this._formButtonDefaultText = this._buttonElement.textContent;
 
     this.setPopup(title,buttonLabel);

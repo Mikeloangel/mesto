@@ -7,7 +7,6 @@
 // 4. SECTION: cards rendering
 // 5. User Info
 // 6. Event listeners
-// 7. Frontend hardcode
 /******************/
 
 /********************/
@@ -34,6 +33,9 @@ import PopupWithNotification from '../components/PopupWithNotification.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js'
 
+// current user id will be recieved on Api request
+let currentUserId = undefined;
+
 
 /* 1. instantiates Api and loads initial data for user info and cards */
 const api = new Api({
@@ -44,19 +46,26 @@ const api = new Api({
   }
 });
 
+// спасибо, теперь еще больше красоты =)
+// сложно с именованием, если так пойдет вижу недельные совещания как назвать поле в БД =)
+// o͡͡͡╮༼ ʘ̆ ۝ ʘ̆ ༽╭o͡͡͡
+// спасибо! =)
 
 //Loads user info and then initial cards
 const userPromise = api.getUserMe();
 const initialCardsPromise = api.getInitialCards();
 
-Promise.all([userPromise,initialCardsPromise])
-  .then(list =>{
-    const [udata,cardList] = list;
+Promise.all([userPromise, initialCardsPromise])
+  .then(list => {
+    const [udata, cardList] = list;
     userInfo.setUserInfo(udata);
+
+    currentUserId = udata._id;
+
     cardSection.concatItems(cardList.reverse());
     cardSection.render();
   })
-  .catch(err => api.handleError(err,handleApiError))
+  .catch(err => api.handleError(err, handleApiError))
 
 
 /* 2. Enables form validation */
@@ -127,7 +136,7 @@ const popupAddCard = new PopupWithForm(
         link: formValues['popup__place-url']
       }
 
-      api.postNewCard(newCardCredentials)
+      api.postCard(newCardCredentials)
         .then(data => {
           cardSection.addItem(createPlace(data, placeTemplateSelector))
           popupAddCard.close();
@@ -150,6 +159,7 @@ popupAddCard.setEventListeners();
 const popupImage = new PopupWithImage({ popupSelector: '.popup_viewplace' });
 popupImage.setEventListeners();
 
+//cb function for Card constructor
 function handleCardClick(link, name) {
   popupImage.open({ link, name });
 }
@@ -172,6 +182,8 @@ const popupConfirmation = new PopupWithConfirmation({
 popupConfirmation.setEventListeners();
 popupConfirmation.setPopup('Вы уверены?', 'Да')
 
+
+// cb function for Card constructor
 function handleCardDelete(cardObject) {
   popupConfirmation.open(cardObject);
 }
@@ -213,7 +225,7 @@ const cardSection = new Section(
   {
     items: [],
     renderer: (card) => {
-      const newCardElement = createPlace(card, placeTemplateSelector)
+      const newCardElement = createPlace(card)
       cardSection.addItem(newCardElement);
     }
   },
@@ -224,21 +236,32 @@ const cardSection = new Section(
 /**
  * returns initalised and filled Card object based on obj data,
  *
- * @param {Object} obj contains initial value for card and passes it to Card constructor (e.g. name, link )
+ * @param {Object} cardSettings contains initial value for card and passes it to Card constructor (e.g. name, link )
  * @returns {DOM node}
  */
-function createPlace(obj, selector = '#place') {
-  return new Card(obj, selector, handleCardClick, handleCardDelete, userInfo.getUserInfo(), handleCardLike).createCard();
+function createPlace(cardSettings, selector = '#place') {
+  // return new Card(obj, selector, handleCardClick, handleCardDelete, userInfo.getUserInfo(), handleCardLike).createCard();
+  const newCard = new Card(
+    cardSettings,
+    selector,
+    handleCardClick,
+    handleCardDelete,
+    handleCardLike,
+    // userInfo.getUserId()
+    currentUserId
+  );
+
+  return newCard.createCard();
 }
 
-function handleCardLike(cardObject, onRequestCompleted) {
+function handleCardLike(cardObject) {
   if (cardObject.isLiked) {
     api.deleteLike(cardObject.getId())
-      .then(data => onRequestCompleted(data.likes))
+      .then(data => cardObject.updateLikeInfo(data.likes))
       .catch(err => api.handleError(err, handleApiError))
-  }else{
+  } else {
     api.putLike(cardObject.getId())
-      .then(data => onRequestCompleted(data.likes))
+      .then(data => cardObject.updateLikeInfo(data.likes))
       .catch(err => api.handleError(err, handleApiError))
   }
 }
@@ -249,7 +272,7 @@ function handleCardLike(cardObject, onRequestCompleted) {
 const userInfo = new UserInfo({
   nameSelector: '.section-user__name',
   descriptionSelector: '.section-user__description',
-  avaSelector: '.section-user__pic'
+  avatarSelector: '.section-user__pic'
 });
 
 
