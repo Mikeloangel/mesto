@@ -6,7 +6,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    
+
     background-color: var(--back-color);
 
 
@@ -14,7 +14,6 @@
     align-items: center;
     justify-content: center;
 
-    /* display: none; */
     visibility: hidden;
     opacity: 0;
 

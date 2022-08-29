@@ -1,11 +1,11 @@
-.popup__form-error{ /*SPAN*/
+.popup__form-error{
     --color: var(--color-error, pink);
 
     display: inline-block;
     margin: 5px 0;
     padding: 0;
     box-sizing: border-box;
-    
+
     min-height: 32px;
     width: 100%;
 
@@ -14,5 +14,5 @@
     line-height: 1.25;
     color: var(--color);
 
-    opacity: 0;   
+    opacity: 0;
 }

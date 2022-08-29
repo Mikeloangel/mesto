@@ -2,7 +2,7 @@
 /* Usefull Variables */
 /*********************/
 
-// form validation settings object
+// form validation settings
 export const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__form-input',
