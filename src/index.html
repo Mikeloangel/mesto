@@ -5,10 +5,40 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <style>
+    /* disables animation before dom loaded */
+    .preloader {
+      transition: none !important;
+      -webkit-transition: none !important;
+      -moz-transition: none !important;
+      -ms-transition: none !important;
+      -o-transition: none !important;
+    }
+  </style>
+  <!-- FUOC fallback -->
+  <style>
+    html {
+      visibility: hidden;
+      opacity: 0;
+      background-color: black;
+    }
+  </style>
+  <script>
+    // disables transition effects to trigger before load and FUOC fallback
+    const handlePreloader = () => {
+      document.querySelector('.preloader').classList.remove('preloader');
+      const html = document.querySelector('html');
+      html.style.opacity = 1;
+      html.style.visibility = 'visible';
+    }
+
+    document.addEventListener('DOMContentLoaded', handlePreloader);
+
+  </script>
   <title>Mesto Russia</title>
 </head>
 
-<body>
+<body class="preloader">
   <div class="root">
     <header class="section section-header">
       <div class="section-header__logo"></div>
@@ -19,7 +49,8 @@
         <div class="section-user__pic-container">
           <img alt="User" class="section-user__pic" src="<%=require('./images/upic-blanc.jpg')%>">
           <div class="section-user__pic-edit">
-            <img src="<%=require('./images/btn-edit-user.svg')%>" alt="Сменмить аватарку" class="section-user__btn-edit-pic">
+            <img src="<%=require('./images/btn-edit-user.svg')%>" alt="Сменмить аватарку"
+              class="section-user__btn-edit-pic">
           </div>
         </div>
 
@@ -28,7 +59,8 @@
             <h1 class="section-user__name"></h1>
             <button class="btn-edit section-user__edit" title="Редактировать профиль" name="section-user__edit-btn"
               type="button">
-              <img alt="Редактировать профиль" class="btn-edit__img section-user__edit-btn" src="<%=require('./images/btn-edit.svg')%>">
+              <img alt="Редактировать профиль" class="btn-edit__img section-user__edit-btn"
+                src="<%=require('./images/btn-edit.svg')%>">
             </button>
           </div>
           <p class="section-user__description"></p>
